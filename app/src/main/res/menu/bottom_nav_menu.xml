@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_tuner"
+        android:icon="@drawable/ic_baseline_music_note_24"
+        android:title="@string/title_tuner" />
+
+    <item
+        android:id="@+id/navigation_metronome"
+        android:icon="@drawable/ic_baseline_speed_24"
+        android:title="@string/title_metronome" />
+
+    <item
+        android:id="@+id/navigation_chords"
+        android:icon="@drawable/ic_baseline_queue_music_24"
+        android:title="@string/title_chords" />
+
+    <item
+        android:id="@+id/navigation_sgc"
+        android:icon="@drawable/ic_baseline_calculate_24"
+        android:title="@string/title_sgc" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/title_settings" />
+
+</menu>

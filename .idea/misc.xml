@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ihegy/OneDrive/Desktop/Egyetem/MI MSc/AlexiGuitarTuner/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/ihegy/OneDrive/Desktop/Egyetem/MI MSc/AlexiGuitarTuner/app/src/main/res/layout/fragment_chord_table.xml" value="0.1" />
+        <entry key="..\:/Users/ihegy/OneDrive/Desktop/Egyetem/MI MSc/AlexiGuitarTuner/app/src/main/res/layout/fragment_metronome.xml" value="0.3484375" />
+        <entry key="..\:/Users/ihegy/OneDrive/Desktop/Egyetem/MI MSc/AlexiGuitarTuner/app/src/main/res/layout/fragment_s_g_c.xml" value="0.3484375" />
+        <entry key="..\:/Users/ihegy/OneDrive/Desktop/Egyetem/MI MSc/AlexiGuitarTuner/app/src/main/res/layout/fragment_tuner.xml" value="0.22" />
+        <entry key="..\:/Users/ihegy/OneDrive/Desktop/Egyetem/MI MSc/AlexiGuitarTuner/app/src/main/res/menu/bottom_nav_menu.xml" value="0.271875" />
+        <entry key="..\:/Users/ihegy/OneDrive/Desktop/Egyetem/MI MSc/AlexiGuitarTuner/app/src/main/res/xml/root_preferences.xml" value="0.3625" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

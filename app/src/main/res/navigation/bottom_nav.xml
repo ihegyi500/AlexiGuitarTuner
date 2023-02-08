@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav"
+    app:startDestination="@+id/navigation_tuner">
+
+    <fragment
+        android:id="@+id/navigation_tuner"
+        android:name="com.example.alexiguitartuner.feat_tuner.presentation.TunerFragment"
+        android:label="@string/title_tuner"
+        tools:layout="@layout/fragment_tuner" />
+
+    <fragment
+        android:id="@+id/navigation_metronome"
+        android:name="com.example.alexiguitartuner.feat_metronome.presentation.MetronomeFragment"
+        android:label="@string/title_metronome"
+        tools:layout="@layout/fragment_metronome" />
+
+    <fragment
+        android:id="@+id/navigation_chords"
+        android:name="com.example.alexiguitartuner.feat_chordtable.presentation.ChordTableFragment"
+        android:label="@string/title_chords"
+        tools:layout="@layout/fragment_chord_table" />
+
+    <fragment
+        android:id="@+id/navigation_sgc"
+        android:name="com.example.alexiguitartuner.feat_sgc.presentation.SGCFragment"
+        android:label="@string/title_sgc"
+        tools:layout="@layout/fragment_s_g_c" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.alexiguitartuner.commons.presentation.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@xml/root_preferences" />
+
+</navigation>

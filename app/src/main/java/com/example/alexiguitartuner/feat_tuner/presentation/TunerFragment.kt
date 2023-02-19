@@ -9,20 +9,23 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.alexiguitartuner.databinding.FragmentTunerBinding
+import com.example.alexiguitartuner.feat_tuner.data.TunerDataSource
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-
+@AndroidEntryPoint
 class TunerFragment : Fragment() {
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.RECORD_AUDIO
     }
 
-    private lateinit var tunerViewModel: TunerViewModel
+    private val tunerViewModel : TunerViewModel by viewModels()
 
     private lateinit var permissionLauncher : ActivityResultLauncher<String>
 
@@ -62,7 +65,6 @@ class TunerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         permissionLauncher.launch(REQUIRED_PERMISSION)
-        tunerViewModel = ViewModelProvider(this)[TunerViewModel::class.java]
     }
 
     private fun renderFragment() {
@@ -70,20 +72,32 @@ class TunerFragment : Fragment() {
 
         lifecycleScope.launchWhenStarted {
             tunerViewModel.detectedHz.collectLatest {
-                binding.tvTuner.text = it.toString()
+                binding.tvFrequency.text = it.toString()
             }
         }
 
-        binding.btnStart.setOnClickListener {
-            tunerViewModel.startPitchGeneration(400.0)
+        binding.btnE.setOnClickListener {
+            tunerViewModel.startPitchGeneration(82.41)
         }
 
-        binding.btnStart2.setOnClickListener {
-            tunerViewModel.startPitchGeneration(450.0)
+        binding.btnA.setOnClickListener {
+            tunerViewModel.startPitchGeneration(110.00)
         }
 
-        binding.btnStop.setOnClickListener {
-            tunerViewModel.stopPitchGeneration()
+        binding.btnD.setOnClickListener {
+            tunerViewModel.startPitchGeneration(146.83)
+        }
+
+        binding.btnG.setOnClickListener {
+            tunerViewModel.startPitchGeneration(196.00)
+        }
+
+        binding.btnB.setOnClickListener {
+            tunerViewModel.startPitchGeneration(246.94)
+        }
+
+        binding.btnE2.setOnClickListener {
+            tunerViewModel.startPitchGeneration(329.63)
         }
     }
 

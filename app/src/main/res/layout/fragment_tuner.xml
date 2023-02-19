@@ -7,41 +7,80 @@
     tools:context=".feat_tuner.presentation.TunerFragment">
 
 
+
     <TextView
-        android:id="@+id/tvTuner"
+        android:id="@+id/tvPitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello, this is Tuner Fragment!"
+        android:text=""
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnStart"
-        android:layout_width="90dp"
-        android:layout_height="70dp"
-        android:text="Start"
-
+        android:id="@+id/btnE"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:text="E"
+        android:layout_marginStart="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFrequency" />
 
     <Button
-        android:id="@+id/btnStart2"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
-        android:text="Start2"
+        android:id="@+id/btnA"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:text="A"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnStop"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btnE"
+        app:layout_constraintTop_toTopOf="@+id/btnE" />
 
     <Button
-        android:id="@+id/btnStop"
-        android:layout_width="80dp"
-        android:layout_height="70dp"
-        android:text="Stop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/btnD"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:text="D"
+
+        app:layout_constraintStart_toEndOf="@+id/btnA"
+        app:layout_constraintTop_toTopOf="@+id/btnA" />
+
+    <Button
+        android:id="@+id/btnG"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:text="G"
+
+        app:layout_constraintStart_toEndOf="@+id/btnD"
+        app:layout_constraintTop_toTopOf="@+id/btnD" />
+
+    <Button
+        android:id="@+id/btnB"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:text="B"
+
+        app:layout_constraintStart_toEndOf="@+id/btnG"
+        app:layout_constraintTop_toTopOf="@+id/btnG" />
+
+    <Button
+        android:id="@+id/btnE2"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:text="E"
+
+        app:layout_constraintStart_toEndOf="@+id/btnB"
+        app:layout_constraintTop_toTopOf="@+id/btnB" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

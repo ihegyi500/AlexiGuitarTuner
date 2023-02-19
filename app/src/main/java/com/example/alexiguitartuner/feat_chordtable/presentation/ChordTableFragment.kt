@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.databinding.FragmentChordTableBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChordTableFragment : Fragment() {
 
     private lateinit var viewModel: ChordTableViewModel

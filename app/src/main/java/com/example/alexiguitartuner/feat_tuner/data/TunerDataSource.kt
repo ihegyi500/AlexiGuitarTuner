@@ -23,4 +23,12 @@ object TunerDataSource {
         Pitch("B",15.433853)
     )
 
+    fun findPitchByFrequency(frequency : Double) : String {
+        for (pitch : Pitch in pitchList){
+            if(pitch.frequency == frequency)
+                return pitch.name
+        }
+        return ""
+    }
+
 }

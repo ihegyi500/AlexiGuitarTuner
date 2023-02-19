@@ -19,4 +19,13 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Metronome string resources -->
+    <string name="remove_note">Remove note</string>
+    <string name="add_note">Add note</string>
+    <string name="image_of_current_rhythm">image_of_current_rhythm</string>
+    <string name="image_of_all_rhythm">image_of_all_rhythm</string>
+    <string name="bpm">BPM</string>
+    <string name="stop">stop</string>
+    <string name="start">start</string>
 </resources>

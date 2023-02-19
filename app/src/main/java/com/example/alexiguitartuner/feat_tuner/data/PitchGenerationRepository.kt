@@ -18,7 +18,8 @@ class PitchGenerationRepository {
 
     private var audioTrack : AudioTrack? = null
 
-    private var frequency = 0.0
+    private var currentFrequency = 0.0
+    private var previousFrequency = 0.0
 
     private var isPlaying: Boolean = false
 
@@ -51,7 +52,7 @@ class PitchGenerationRepository {
 
     private fun generateAudioTrack(frequency: Double) {
         val frame = ShortArray(buffLength)
-        val twoPi: Double = 8.0 * atan(1.0)
+        val twoPi: Double = 4.0 * atan(1.0)
         var phase = 0.0
 
         while (isPlaying) {
@@ -67,28 +68,37 @@ class PitchGenerationRepository {
     }
 
     fun startPitchGeneration() {
-        if(isPlaying)
+        if(isPlaying){
             stopPitchGeneration()
+            if (currentFrequency != previousFrequency)
+                playAudioTrack()
+        }
+        else
+            playAudioTrack()
+    }
+
+    private fun playAudioTrack() {
+        isPlaying = true
         GlobalScope.launch(Dispatchers.IO) {
-            isPlaying = true
             initAudioTrack()
             audioTrack?.play()
-            generateAudioTrack(frequency)
-            Log.d("PITCH","AudioTrack is started: ${audioTrack?.state}")
+            generateAudioTrack(currentFrequency)
+            Log.d("PITCH", "AudioTrack is started: ${audioTrack?.state}")
         }
     }
 
     fun stopPitchGeneration() {
-        if(isPlaying){
+        if (audioTrack != null && audioTrack?.state == 1) {
             isPlaying = false
             audioTrack?.stop()
             audioTrack?.release()
-            Log.d("PITCH","AudioTrack is stopped: ${audioTrack?.state}")
         }
+        Log.d("PITCH","AudioTrack is stopped: ${audioTrack?.state}")
     }
 
     fun setSelectedFrequency(frequency: Double) {
-        this.frequency = frequency
+        previousFrequency = currentFrequency
+        this.currentFrequency = frequency
     }
 
 }

@@ -3,7 +3,6 @@ package com.example.alexiguitartuner.feat_metronome.data
 import android.media.AudioManager
 import android.media.ToneGenerator
 import android.util.Log
-import com.example.alexiguitartuner.feat_metronome.domain.MetronomePitch
 import com.example.alexiguitartuner.feat_metronome.domain.Rhythm
 import com.example.alexiguitartuner.feat_metronome.domain.Tone
 import kotlinx.coroutines.*

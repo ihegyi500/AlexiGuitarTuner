@@ -1,4 +1,4 @@
-package com.example.alexiguitartuner.feat_tuner.data
+package com.example.alexiguitartuner.feat_tuner.domain
 
 class AudioProcessingThread(target: Runnable?) : Thread(target) {
 

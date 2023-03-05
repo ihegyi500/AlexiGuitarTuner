@@ -4,14 +4,14 @@ import androidx.room.*
 
 @Entity
 data class Tuning (
-    @PrimaryKey(autoGenerate = true) val tuningId : Int,
+    @PrimaryKey(autoGenerate = true) val tuningId : Long,
     val name : String,
-    val instrumentId : Int
+    val instrumentId : Long,
 )
 
 @Entity(primaryKeys = ["tuningId", "name"])
 data class PitchTuningCrossRef(
-    val tuningId: Int,
+    val tuningId: Long,
     val name: String
 )
 
@@ -23,4 +23,13 @@ data class TuningWithPitches(
         associateBy = Junction(PitchTuningCrossRef::class)
     )
     val pitches: List<Pitch>
+)
+
+data class TuningWithChords(
+    @Embedded val tuning: Tuning,
+    @Relation(
+        parentColumn = "tuningId",
+        entityColumn = "tuningId"
+    )
+    val chordList: List<Chord>
 )

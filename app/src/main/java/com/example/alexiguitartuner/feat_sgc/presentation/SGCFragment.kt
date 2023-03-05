@@ -1,17 +1,22 @@
 package com.example.alexiguitartuner.feat_sgc.presentation
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.alexiguitartuner.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.alexiguitartuner.databinding.FragmentSGCBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SGCFragment : Fragment() {
 
-    private lateinit var viewModel: SGCViewModel
+    private val viewModel: SGCViewModel by viewModels()
+    private lateinit var stringListAdapter : StringListAdapter
 
     private var _binding: FragmentSGCBinding? = null
     private val binding get() = _binding!!
@@ -24,6 +29,33 @@ class SGCFragment : Fragment() {
         _binding = FragmentSGCBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        renderFragment()
+    }
+
+    private fun renderFragment() {
+        stringListAdapter = StringListAdapter(this.requireContext(), viewModel)
+        binding.stringListRecyclerView.adapter = stringListAdapter
+
+        lifecycleScope.launch {
+            viewModel.listOfStrings.collectLatest {
+                stringListAdapter.submitList(it)
+            }
+        }
+
+        binding.fabAddString.setOnClickListener {
+            viewModel.insertString()
+        }
+
+        binding.fabUpdateList.setOnClickListener {
+            viewModel.setIsSaved(true)
+
+
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

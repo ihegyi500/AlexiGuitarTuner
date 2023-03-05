@@ -4,12 +4,19 @@ import android.util.Log
 import be.tarsos.dsp.AudioDispatcher
 import be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone
 import be.tarsos.dsp.pitch.PitchProcessor
+import com.example.alexiguitartuner.commons.data.db.AppDatabase
+import com.example.alexiguitartuner.commons.data.db.ChordDAO
 import com.example.alexiguitartuner.feat_tuner.domain.AudioProcessingThread
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class PitchDetectionRepository() {
+
+class PitchDetectionRepository @Inject constructor(
+    private val chordDAO: ChordDAO
+) {
+
     private var audioProcessThread: AudioProcessingThread? = null
     private var audioDispatcher: AudioDispatcher? = null
 
@@ -37,6 +44,9 @@ class PitchDetectionRepository() {
             audioProcessThread?.start()
             Log.d("HERTZ",
                 "Thread is running: ${audioProcessThread?.isRunning}, , ${audioDispatcher?.isStopped}")
+            GlobalScope.launch(Dispatchers.IO) {
+                chordDAO.getChordWithChordTables()
+            }
         }
     }
 

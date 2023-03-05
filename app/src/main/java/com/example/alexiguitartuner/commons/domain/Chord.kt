@@ -5,14 +5,14 @@ import java.io.Serializable
 
 @Entity
 data class Chord(
-    @PrimaryKey(autoGenerate = true) val chordId : Int,
+    @PrimaryKey(autoGenerate = true) val chordId : Long,
     val name : String,
-    val instrumentId : Int
+    val tuningId : Long
 )
 
 @Entity(primaryKeys = ["chordId", "name"])
 data class PitchChordCrossRef(
-    val chordId: Int,
+    val chordId: Long,
     val name: String
 )
 

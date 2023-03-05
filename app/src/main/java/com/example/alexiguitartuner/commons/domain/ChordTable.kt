@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ChordTable(
-    @PrimaryKey(autoGenerate = true) val chordTableId : Int,
+    @PrimaryKey(autoGenerate = true) val chordTableId : Long,
     val chordId : Int,
     val position : Short,
     val pitchPos : List<Int>

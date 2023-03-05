@@ -5,18 +5,9 @@ import java.io.Serializable
 
 @Entity
 data class Instrument(
-    @PrimaryKey(autoGenerate = true) val instrumentId : Int,
+    @PrimaryKey(autoGenerate = true) val instrumentId : Long,
     val name : String,
     val numberOfStrings : Int
-)
-
-data class InstrumentWithChords(
-    @Embedded val instrument: Instrument,
-    @Relation(
-        parentColumn = "instrumentId",
-        entityColumn = "instrumentId"
-    )
-    val chordList: List<Chord>
 )
 
 data class InstrumentWithTunings(

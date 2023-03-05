@@ -36,7 +36,7 @@ class SGCFragment : Fragment() {
     }
 
     private fun renderFragment() {
-        stringListAdapter = StringListAdapter(this.requireContext(), viewModel)
+        stringListAdapter = StringListAdapter(viewModel)
         binding.stringListRecyclerView.adapter = stringListAdapter
 
         lifecycleScope.launch {
@@ -47,12 +47,6 @@ class SGCFragment : Fragment() {
 
         binding.fabAddString.setOnClickListener {
             viewModel.insertString()
-        }
-
-        binding.fabUpdateList.setOnClickListener {
-            viewModel.setIsSaved(true)
-
-
         }
     }
 

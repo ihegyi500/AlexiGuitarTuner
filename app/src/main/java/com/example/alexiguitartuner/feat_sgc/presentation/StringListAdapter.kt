@@ -1,40 +1,25 @@
 package com.example.alexiguitartuner.feat_sgc.presentation
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.transition.AutoTransition
-import android.transition.TransitionManager
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doOnTextChanged
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.commons.domain.InstrumentString
 import com.example.alexiguitartuner.databinding.StringlistRowBinding
-import com.example.alexiguitartuner.feat_chordtable.presentation.ChordTableViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collectLatest
 
 class StringListAdapter(
-    private val context: Context,
     private val sgcViewModel : SGCViewModel
 ) : ListAdapter<InstrumentString, StringListAdapter.ViewHolder>(InstrumentStringDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(context)
-        val binding: StringlistRowBinding = DataBindingUtil.inflate(layoutInflater,
-            R.layout.stringlist_row,
-            parent, false)
-        binding.adapter = this
+        val binding: StringlistRowBinding = StringlistRowBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false)
         return ViewHolder(binding)
     }
 
@@ -46,55 +31,56 @@ class StringListAdapter(
     inner class ViewHolder(
         private val binding: StringlistRowBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        /*val tuningAdapter : ArrayAdapter<String> = ArrayAdapter(
-            this@StringListAdapter.context,
-            android.R.layout.simple_spinner_dropdown_item
-        )
-        val selectedChordAdapter : ArrayAdapter<String> = ArrayAdapter(
-            this@StringListAdapter.context,
-            android.R.layout.simple_spinner_dropdown_item
-        )*/
 
         fun bind(instrumentString: InstrumentString) {
-            binding.instrumentString = instrumentString
+            binding.tvNumber.text = instrumentString.stringNumber.toString()
+            binding.etName.setText(instrumentString.name)
+            binding.etScaleLength.setText(instrumentString.scaleLength.toString())
+            binding.etTension.setText(instrumentString.tension.toString())
+
+            binding.fabDelete.setOnClickListener {
+                sgcViewModel.deleteString(instrumentString)
+            }
 
             binding.etName.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    //binding.tvGauge.text = sgcViewModel.calculateGauge(stringToCalculate)
-                    sgcViewModel.setIsSaved(false)
-                    binding.tvGauge.text = binding.etName.text
-
-                }
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun afterTextChanged(p0: Editable?) { updateString(binding,instrumentString) }
             })
-/*
 
-            GlobalScope.launch(Dispatchers.IO) {
-                    sgcViewModel.isSaved.collectLatest {
-                        if (it) {
-                            try {
-                                sgcViewModel.updateString(InstrumentString(
-                                    binding.tvNumber.text.toString().toInt(),
-                                    binding.etName.text.toString(),
-                                    binding.etScaleLength.text.toString().toDouble(),
-                                    binding.etTension.text.toString().toDouble()
-                                ))
-                                Log.d("isSaved", "Called from adapter")
-                            } catch (e : Exception) {
-                                Log.d("isSaved", "error: $e")
-                            }
-                        }
-                    }
-                }
-            */
-            }
+            binding.etScaleLength.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun afterTextChanged(p0: Editable?) { updateString(binding,instrumentString) }
+            })
+
+            binding.etTension.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun afterTextChanged(p0: Editable?) { updateString(binding,instrumentString) }
+            })
+
         }
-
-    fun deleteString(string: InstrumentString) {
-        sgcViewModel.deleteString(string)
     }
 
+    fun updateString(binding : StringlistRowBinding, instrumentString: InstrumentString) {
+        val doublePattern = Regex("^[1-9]?[0-9].[0-9]$")
+        val namePattern = Regex("^[A-H][b#]?[0-9]$")
+
+        if (namePattern.containsMatchIn(binding.etName.text.toString()) &&
+            doublePattern.containsMatchIn(binding.etScaleLength.text.toString()) &&
+            doublePattern.containsMatchIn(binding.etTension.text.toString())) {
+
+            binding.tvGauge.text = sgcViewModel.calculateStringGauge(instrumentString)
+
+            sgcViewModel.updateString(InstrumentString(
+                binding.tvNumber.text.toString().toInt(),
+                binding.etName.text.toString(),
+                binding.etScaleLength.text.toString().toDouble(),
+                binding.etTension.text.toString().toDouble()
+            ))
+        }
+    }
 }
 
 class InstrumentStringDiffCallback : DiffUtil.ItemCallback<InstrumentString>() {

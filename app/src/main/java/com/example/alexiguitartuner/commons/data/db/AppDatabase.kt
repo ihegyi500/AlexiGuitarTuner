@@ -24,6 +24,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val instrumentDAO : InstrumentDAO
     abstract val tuningDAO : TuningDAO
     abstract val stringDAO : StringDAO
+    abstract val pitchDAO : PitchDAO
+
 
     companion object {
         const val DATABASE_NAME = "alexiGuitarTuner_db"

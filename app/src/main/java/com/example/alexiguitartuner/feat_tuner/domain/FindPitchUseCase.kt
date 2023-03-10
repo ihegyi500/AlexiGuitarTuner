@@ -1,5 +1,6 @@
 package com.example.alexiguitartuner.feat_tuner.domain
 
+import android.util.Log
 import com.example.alexiguitartuner.commons.domain.Pitch
 import com.example.alexiguitartuner.feat_tuner.data.TunerDataSource
 import javax.inject.Inject
@@ -9,8 +10,12 @@ class FindPitchUseCase @Inject constructor(
     private val tunerDataSource: TunerDataSource
 ) {
     operator fun invoke(frequency : Double) : String  {
-        if(tunerDataSource.pitchList.isEmpty())
+        if(tunerDataSource.pitchList.isEmpty()) {
             tunerDataSource.initializePitchList()
+            tunerDataSource.pitchList.forEach {
+                Log.d("list", "$it\n")
+            }
+        }
         var res = "-"
         for (pitch : Pitch in tunerDataSource.pitchList) {
             if(frequency > pitch.frequency - TunerDataSource.PITCH_DIFF

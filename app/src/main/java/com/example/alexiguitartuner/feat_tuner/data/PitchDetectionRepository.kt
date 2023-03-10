@@ -14,7 +14,7 @@ import kotlin.math.roundToInt
 
 
 class PitchDetectionRepository @Inject constructor(
-    private val chordDAO: ChordDAO
+    private val database: AppDatabase
 ) {
 
     private var audioProcessThread: AudioProcessingThread? = null
@@ -44,9 +44,9 @@ class PitchDetectionRepository @Inject constructor(
             audioProcessThread?.start()
             Log.d("HERTZ",
                 "Thread is running: ${audioProcessThread?.isRunning}, , ${audioDispatcher?.isStopped}")
-            GlobalScope.launch(Dispatchers.IO) {
+            /*GlobalScope.launch(Dispatchers.IO) {
                 chordDAO.getChordWithChordTables()
-            }
+            }*/
         }
     }
 

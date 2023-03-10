@@ -40,7 +40,7 @@ class SGCViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) { sgcRepository.deleteString(string) }
     }
 
-    fun calculateStringGauge(string: InstrumentString) : String = stringGaugeUseCase(string)
+    suspend fun calculateStringGauge(string: InstrumentString) : String = stringGaugeUseCase(string)
 
     private fun getInstrumentString() {
         getInstrumentStringJob?.cancel()

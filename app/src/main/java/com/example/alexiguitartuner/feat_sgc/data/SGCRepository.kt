@@ -19,11 +19,15 @@ class SGCRepository @Inject constructor(
         appDatabase.stringDAO.insertString(
             InstrumentString(
                 stringNumber,
-                "C0",
+                "E4",
                 25.5,
                 18.0
             )
         )
+    }
+
+    suspend fun getFrequencyOfPitch(name : String) : Double {
+        return appDatabase.pitchDAO.getFrequencyOfPitch(name)
     }
 
     suspend fun updateString(string: InstrumentString) {

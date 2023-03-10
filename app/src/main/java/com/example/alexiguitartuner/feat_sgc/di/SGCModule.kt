@@ -21,7 +21,7 @@ object SGCModule {
 
     @Provides
     @Singleton
-    fun provideCalculateStringGaugeUseCase() : CalculateStringGaugeUseCase {
-        return CalculateStringGaugeUseCase()
+    fun provideCalculateStringGaugeUseCase(sgcRepository: SGCRepository) : CalculateStringGaugeUseCase {
+        return CalculateStringGaugeUseCase(sgcRepository)
     }
 }

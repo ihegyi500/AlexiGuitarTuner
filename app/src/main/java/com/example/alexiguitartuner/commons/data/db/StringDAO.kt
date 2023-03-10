@@ -26,15 +26,6 @@ interface StringDAO {
     @Query("SELECT COUNT(*) FROM InstrumentString")
     fun getCountOfInstrumentStrings():Int
 
-    @Query("UPDATE InstrumentString SET name = :name WHERE stringNumber = :stringNumber")
-    suspend fun setName(stringNumber: Int, name: String)
-
-    @Query("UPDATE InstrumentString SET scaleLength = :scaleLength WHERE stringNumber = :stringNumber")
-    suspend fun setScaleLength(stringNumber: Int, scaleLength: Double)
-
-    @Query("UPDATE InstrumentString SET tension = :tension WHERE stringNumber = :stringNumber")
-    suspend fun setTension(stringNumber: Int, tension: Double)
-
     @Query("UPDATE InstrumentString SET stringNumber = stringNumber - 1 WHERE stringNumber > :stringNumber")
     suspend fun decrementRemainingStringNumbers(stringNumber: Int)
 

@@ -50,6 +50,8 @@ class RhythmView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         paintCurrentNote.style = Paint.Style.FILL
         paintCurrentNote.strokeWidth = 5f
 
+
+
         GlobalScope.launch {
             metronomeRepository.rhythmListIterator.collect {
                 invalidate()

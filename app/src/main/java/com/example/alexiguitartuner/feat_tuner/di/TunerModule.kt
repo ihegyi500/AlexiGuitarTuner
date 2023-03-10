@@ -24,8 +24,10 @@ object TunerModule {
 
     @Provides
     @Singleton
-    fun providePitchDetectionRepository(db:AppDatabase) : PitchDetectionRepository {
-        return PitchDetectionRepository(db.chordDAO)
+    fun providePitchDetectionRepository(
+        database:AppDatabase
+    ) : PitchDetectionRepository {
+        return PitchDetectionRepository(database)
     }
 
     @Provides

@@ -19,8 +19,6 @@ class StringListAdapter(
     private val sgcViewModel : SGCViewModel
 ) : ListAdapter<InstrumentString, StringListAdapter.ViewHolder>(InstrumentStringDiffCallback()) {
 
-    lateinit var bufferString : InstrumentString
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: StringlistRowBinding = StringlistRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -39,7 +37,7 @@ class StringListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(instrumentString: InstrumentString) {
-            bufferString = instrumentString
+            var bufferString = instrumentString
             binding.tvNumber.text = instrumentString.stringNumber.toString()
             binding.etName.setText(instrumentString.name)
             binding.etScaleLength.setText(instrumentString.scaleLength.toString())
@@ -88,7 +86,7 @@ class StringListAdapter(
 
     fun validateString(binding : StringlistRowBinding) : Boolean {
         val doublePattern = Regex("^[1-9]?[0-9](.[0-9])?$")
-        val namePattern = Regex("^[A-H][b#]?[0-9]$")
+        val namePattern = Regex("^[A-H][b#]?[0-8]$")
 
         return namePattern.containsMatchIn(binding.etName.text.toString()) &&
             doublePattern.containsMatchIn(binding.etScaleLength.text.toString()) &&

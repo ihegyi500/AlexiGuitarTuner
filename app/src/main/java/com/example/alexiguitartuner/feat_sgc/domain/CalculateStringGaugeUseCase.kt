@@ -15,11 +15,11 @@ class CalculateStringGaugeUseCase(
 
     suspend operator fun invoke(instrumentString: InstrumentString) : String {
         val freq = sgcRepository.getFrequencyOfPitch(instrumentString.name)
-        if(freq == 0.0)
-            return "Pitch not found!"
+        return if(freq == 0.0)
+            "Pitch not found!"
         else {
             val unitWeight = calculateUnitWeight(instrumentString, freq)
-            return String.format("%.4f", calculateStringGauge(unitWeight)) + "in"
+            String.format("%.4f", calculateStringGauge(unitWeight)) + "in"
         }
     }
 

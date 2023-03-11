@@ -22,6 +22,7 @@ object DatabaseModule {
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME,
         ).fallbackToDestructiveMigration()
+         .createFromAsset("alexiGuitarTuner_db.db")
          .build()
     }
 }

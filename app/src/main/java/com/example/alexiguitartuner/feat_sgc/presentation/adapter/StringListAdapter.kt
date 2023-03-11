@@ -1,18 +1,16 @@
-package com.example.alexiguitartuner.feat_sgc.presentation
+package com.example.alexiguitartuner.feat_sgc.presentation.adapter
 
 import android.annotation.SuppressLint
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alexiguitartuner.commons.domain.InstrumentString
 import com.example.alexiguitartuner.databinding.StringlistRowBinding
+import com.example.alexiguitartuner.feat_sgc.presentation.SGCViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class StringListAdapter(
@@ -43,7 +41,9 @@ class StringListAdapter(
             binding.etScaleLength.setText(instrumentString.scaleLength.toString())
             binding.etTension.setText(instrumentString.tension.toString())
 
-            GlobalScope.launch(Dispatchers.Main) { binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString) }
+            CoroutineScope(Dispatchers.Main).launch {
+                binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+            }
 
             binding.fabDelete.setOnClickListener {
                 sgcViewModel.deleteString(instrumentString)
@@ -54,7 +54,9 @@ class StringListAdapter(
                     val currentName = binding.etName.text.toString()
                     if (validateString(binding) && currentName != instrumentString.name) {
                         bufferString = instrumentString.copy(name = currentName)
-                        GlobalScope.launch(Dispatchers.Main) { binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString) }
+                        CoroutineScope(Dispatchers.Main).launch {
+                            binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+                        }
                         sgcViewModel.updateString(bufferString)
                     }
                 }
@@ -65,7 +67,9 @@ class StringListAdapter(
                     val currentScaleLength = binding.etScaleLength.text.toString().toDouble()
                     if (validateString(binding) && currentScaleLength != instrumentString.scaleLength) {
                         bufferString = instrumentString.copy(scaleLength = currentScaleLength)
-                        GlobalScope.launch(Dispatchers.Main) { binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString) }
+                        CoroutineScope(Dispatchers.Main).launch {
+                            binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+                        }
                         sgcViewModel.updateString(bufferString)
                     }
                 }
@@ -76,7 +80,9 @@ class StringListAdapter(
                     val currentTension = binding.etTension.text.toString().toDouble()
                     if (validateString(binding) && currentTension != instrumentString.tension) {
                         bufferString = instrumentString.copy(tension = currentTension)
-                        GlobalScope.launch(Dispatchers.Main) { binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString) }
+                        CoroutineScope(Dispatchers.Main).launch {
+                            binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+                        }
                         sgcViewModel.updateString(bufferString)
                     }
                 }

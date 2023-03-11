@@ -28,4 +28,7 @@
     <string name="bpm">BPM</string>
     <string name="stop">stop</string>
     <string name="start">start</string>
+    <!-- SGC Info-->
+    <string name="info">This String Gauge Calculator helps You to select the best guitar strings for Your needs.</string>
+    <string name="accept">GOT IT</string>
 </resources>

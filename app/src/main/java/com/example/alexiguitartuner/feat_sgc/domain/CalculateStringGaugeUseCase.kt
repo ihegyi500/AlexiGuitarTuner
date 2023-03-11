@@ -2,7 +2,6 @@ package com.example.alexiguitartuner.feat_sgc.domain
 
 import com.example.alexiguitartuner.commons.domain.InstrumentString
 import com.example.alexiguitartuner.feat_sgc.data.SGCRepository
-import javax.inject.Inject
 import kotlin.math.pow
 
 class CalculateStringGaugeUseCase(

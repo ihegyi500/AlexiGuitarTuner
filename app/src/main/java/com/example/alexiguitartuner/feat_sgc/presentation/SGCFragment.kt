@@ -1,7 +1,6 @@
 package com.example.alexiguitartuner.feat_sgc.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.alexiguitartuner.databinding.FragmentSGCBinding
+import com.example.alexiguitartuner.feat_sgc.presentation.adapter.StringListAdapter
+import com.example.alexiguitartuner.feat_sgc.presentation.dialog.SGCInfoDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SGCFragment : Fragment() {
+
+    companion object {
+        const val DIALOGTAG = "SGC_Info_Dialog"
+    }
 
     private val viewModel: SGCViewModel by viewModels()
     private lateinit var stringListAdapter : StringListAdapter
@@ -48,6 +53,10 @@ class SGCFragment : Fragment() {
 
         binding.fabAddString.setOnClickListener {
             viewModel.insertString()
+        }
+
+        binding.fabShowInfo.setOnClickListener {
+            SGCInfoDialog().show(childFragmentManager,DIALOGTAG)
         }
     }
 

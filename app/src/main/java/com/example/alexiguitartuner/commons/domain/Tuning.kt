@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Entity
 data class Tuning (
-    @PrimaryKey(autoGenerate = true) val tuningId : Long,
+    @PrimaryKey val tuningId : Long,
     val name : String,
     val instrumentId : Long,
 )

@@ -5,7 +5,7 @@ import java.io.Serializable
 
 @Entity
 data class Instrument(
-    @PrimaryKey(autoGenerate = true) val instrumentId : Long,
+    @PrimaryKey val instrumentId : Long,
     val name : String,
     val numberOfStrings : Int
 )

@@ -9,12 +9,13 @@ tools:context=".feat_sgc.presentation.SGCFragment">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stringListRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.9"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabShowInfo"
@@ -22,7 +23,7 @@ tools:context=".feat_sgc.presentation.SGCFragment">
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/fabAddString"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_baseline_question_mark_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

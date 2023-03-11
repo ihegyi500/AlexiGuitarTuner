@@ -5,7 +5,7 @@ import java.io.Serializable
 
 @Entity
 data class Chord(
-    @PrimaryKey(autoGenerate = true) val chordId : Long,
+    @PrimaryKey val chordId : Long,
     val name : String,
     val tuningId : Long
 )

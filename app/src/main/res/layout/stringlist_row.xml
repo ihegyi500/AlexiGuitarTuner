@@ -31,8 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_et"
+                android:textSize="18sp"
                 android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,6 @@
                 android:layout_marginStart="10dp"
                 android:background="@drawable/background_et"
                 android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvNumber"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +53,6 @@
                 android:layout_marginStart="10dp"
                 android:background="@drawable/background_et"
                 android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/etName"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,18 +63,25 @@
                 android:layout_marginStart="10dp"
                 android:background="@drawable/background_et"
                 android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/etScaleLength"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvGaugeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="String gauge: "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNumber" />
 
             <TextView
                 android:id="@+id/tvGauge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/etTension"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/tvGaugeText"
+                app:layout_constraintTop_toBottomOf="@+id/tvNumber" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabDelete"

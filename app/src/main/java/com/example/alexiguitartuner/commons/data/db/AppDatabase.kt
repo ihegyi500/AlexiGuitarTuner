@@ -16,7 +16,8 @@ import com.example.alexiguitartuner.commons.domain.converter.Converters
         Tuning::class,
         PitchTuningCrossRef::class,
         Instrument::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 

@@ -10,11 +10,11 @@ data class Instrument(
     val numberOfStrings : Int
 )
 
-data class InstrumentWithTunings(
+/*data class InstrumentWithTuningsAndChords(
     @Embedded val instrument: Instrument,
     @Relation(
         parentColumn = "instrumentId",
         entityColumn = "instrumentId"
     )
-    val tuningList: List<Tuning>
-)
+    val tuningWithChordsList: List<TuningWithChords>
+)*/

@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class SGCFragment : Fragment() {
 
     companion object {
-        const val DIALOGTAG = "SGC_Info_Dialog"
+        const val DIALOG_TAG = "SGC_Info_Dialog"
     }
 
     private val viewModel: SGCViewModel by viewModels()
@@ -56,7 +56,7 @@ class SGCFragment : Fragment() {
         }
 
         binding.fabShowInfo.setOnClickListener {
-            SGCInfoDialog().show(childFragmentManager,DIALOGTAG)
+            SGCInfoDialog().show(childFragmentManager,DIALOG_TAG)
         }
     }
 

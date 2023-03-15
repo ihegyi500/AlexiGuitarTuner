@@ -72,7 +72,7 @@ class MetronomeService : LifecycleService() {
                 this,
                 0,
                 notificationIntent,
-                0)
+                PendingIntent.FLAG_MUTABLE)
         }
 
         val stopSelf = Intent(this, MetronomeService::class.java)
@@ -82,7 +82,7 @@ class MetronomeService : LifecycleService() {
             this,
             0,
             stopSelf,
-            PendingIntent.FLAG_CANCEL_CURRENT)
+            PendingIntent.FLAG_MUTABLE)
 
 
         val stopAction = Notification.Action.Builder(

@@ -15,6 +15,6 @@ interface TuningDAO {
 
     @Transaction
     @Query("SELECT * FROM Tuning")
-    suspend fun getTuningWithChords(): List<TuningWithChords>
+    fun getTuningWithChords(): List<TuningWithChords>
 
 }

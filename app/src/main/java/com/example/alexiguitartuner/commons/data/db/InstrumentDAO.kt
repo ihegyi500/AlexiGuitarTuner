@@ -3,13 +3,12 @@ package com.example.alexiguitartuner.commons.data.db
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import com.example.alexiguitartuner.commons.domain.InstrumentWithTunings
 
 @Dao
 interface InstrumentDAO {
 
-    @Transaction
+    /*@Transaction
     @Query("SELECT * FROM Instrument")
-    fun getInstrumentWithTunings(): List<InstrumentWithTunings>
-
+    suspend fun getInstrumentWithTuningsAndChords(): List<InstrumentWithTuningsAndChords>
+*/
 }

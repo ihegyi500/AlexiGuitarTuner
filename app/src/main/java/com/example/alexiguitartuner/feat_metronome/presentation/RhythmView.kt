@@ -17,10 +17,8 @@ import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepository
 import com.example.alexiguitartuner.feat_metronome.domain.Tone
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,9 +48,7 @@ class RhythmView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         paintCurrentNote.style = Paint.Style.FILL
         paintCurrentNote.strokeWidth = 5f
 
-
-
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.Main).launch {
             metronomeRepository.rhythmListIterator.collect {
                 invalidate()
             }

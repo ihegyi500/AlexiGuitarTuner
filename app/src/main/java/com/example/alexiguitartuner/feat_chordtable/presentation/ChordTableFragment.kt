@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.alexiguitartuner.R
@@ -37,6 +38,9 @@ class ChordTableFragment : Fragment() {
     }
 
     private fun renderFragment() {
+        //binding.actInstrument.setAdapter()
+        //binding.actTuning.setAdapter()
+        //binding.actChord.setAdapter()
 
     }
 

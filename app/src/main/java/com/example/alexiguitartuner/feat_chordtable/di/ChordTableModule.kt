@@ -14,7 +14,11 @@ object ChordTableModule {
 
     @Provides
     @Singleton
-    fun provideChordTableRepository(appDatabase: AppDatabase) : ChordTableRepository{
+    fun provideChordTableRepository(
+        appDatabase: AppDatabase
+    ) : ChordTableRepository{
         return ChordTableRepository(appDatabase)
     }
+
+
 }

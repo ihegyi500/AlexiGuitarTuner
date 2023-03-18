@@ -3,6 +3,7 @@ package com.example.alexiguitartuner.commons.data.db
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import com.example.alexiguitartuner.commons.domain.Tuning
 import com.example.alexiguitartuner.commons.domain.TuningWithChords
 import com.example.alexiguitartuner.commons.domain.TuningWithPitches
 

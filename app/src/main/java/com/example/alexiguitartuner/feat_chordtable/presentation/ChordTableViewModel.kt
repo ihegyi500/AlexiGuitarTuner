@@ -16,6 +16,18 @@ class ChordTableViewModel @Inject constructor(
     private val chordTableRepository: ChordTableRepository
 ) : ViewModel() {
 
-    //suspend fun getInstrumentsWithTuningsAndChords() = chordTableRepository.getInstrumentsWithTuningsAndChords()
+
+
+    suspend fun getInstrumentsWithTuningsAndChords() =
+        chordTableRepository.getInstrumentsWithTuningsAndChords()
+
+    suspend fun getInstrumentNames() =
+        chordTableRepository.getInstrumentNames()
+
+    suspend fun getTuningsByInstrument(instrumentName : String) : List<String> =
+        chordTableRepository.getTuningsByInstrument(instrumentName)
+
+    suspend fun getChordsByTuning(instrumentName : String, tuningName : String) : List<String> =
+        chordTableRepository.getChordsByTuning(instrumentName,tuningName)
 
 }

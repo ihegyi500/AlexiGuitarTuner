@@ -6,8 +6,6 @@ import javax.inject.Inject
 class ChordTableRepository @Inject constructor(
     private val appDatabase: AppDatabase
 ){
-    suspend fun getInstrumentsWithTuningsAndChords() = appDatabase.instrumentDAO.getInstrumentsWithTuningsAndChords()
-
     suspend fun getInstrumentNames() = appDatabase.instrumentDAO.getInstrumentNames()
 
     suspend fun getTuningsByInstrument(instrumentName : String) : List<String> {
@@ -31,5 +29,9 @@ class ChordTableRepository @Inject constructor(
                 }
             }
         return nameList
+    }
+
+    suspend fun getPitchListByPosition(){
+
     }
 }

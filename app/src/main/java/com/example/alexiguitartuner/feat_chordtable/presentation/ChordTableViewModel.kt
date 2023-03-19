@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,18 +17,59 @@ class ChordTableViewModel @Inject constructor(
     private val chordTableRepository: ChordTableRepository
 ) : ViewModel() {
 
+    private var _chordTableUIState = MutableStateFlow(ChordTableUIState())
+    val chordTableUIState : StateFlow<ChordTableUIState> = _chordTableUIState.asStateFlow()
 
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            val updatedInstrumentList = chordTableRepository.getInstrumentNames()
+            val updatedTuningList = chordTableRepository.getTuningsByInstrument(updatedInstrumentList.first())
+            val updatedChordList = chordTableRepository.getChordsByTuning(
+                updatedInstrumentList.first(),
+                updatedTuningList.first()
+            )
 
-    suspend fun getInstrumentsWithTuningsAndChords() =
-        chordTableRepository.getInstrumentsWithTuningsAndChords()
+            _chordTableUIState.update {
+                it.copy(listOfInstruments = updatedInstrumentList,
+                    listOfTunings = updatedTuningList,
+                    listOfChords = updatedChordList,
+                    selectedInstrument = updatedInstrumentList.first(),
+                    selectedTuning = if(updatedTuningList.isNotEmpty()) updatedTuningList.first() else "",
+                    selectedChord = if(updatedChordList.isNotEmpty()) updatedChordList.first() else "")
+            }
+        }
+    }
 
-    suspend fun getInstrumentNames() =
-        chordTableRepository.getInstrumentNames()
-
-    suspend fun getTuningsByInstrument(instrumentName : String) : List<String> =
-        chordTableRepository.getTuningsByInstrument(instrumentName)
-
-    suspend fun getChordsByTuning(instrumentName : String, tuningName : String) : List<String> =
-        chordTableRepository.getChordsByTuning(instrumentName,tuningName)
-
+    fun updateTuningListByInstrument(instrumentName : String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val updatedTuningList = chordTableRepository.getTuningsByInstrument(instrumentName)
+            val updatedChordList = chordTableRepository.getChordsByTuning(
+                instrumentName,
+                if(updatedTuningList.isNotEmpty()) updatedTuningList.first() else "")
+            _chordTableUIState.update {
+                it.copy(
+                    listOfTunings = updatedTuningList,
+                    listOfChords = updatedChordList,
+                    selectedTuning = if(updatedTuningList.isNotEmpty()) updatedTuningList.first() else "",
+                    selectedChord = if(updatedChordList.isNotEmpty()) updatedChordList.first() else ""
+                )
+            }
+        }
+    }
+    fun getChordsByTuning(instrumentName : String, tuningName : String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val updatedChordList = chordTableRepository.getChordsByTuning(
+                instrumentName,
+                tuningName
+            )
+            _chordTableUIState.update {
+                it.copy(
+                    listOfChords = updatedChordList,
+                    selectedInstrument = instrumentName,
+                    selectedTuning = tuningName,
+                    selectedChord = if(updatedChordList.isNotEmpty()) updatedChordList.first() else ""
+                )
+            }
+        }
+    }
 }

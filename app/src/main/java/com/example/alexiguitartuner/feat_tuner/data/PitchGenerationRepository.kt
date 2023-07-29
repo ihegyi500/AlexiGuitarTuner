@@ -1,20 +1,19 @@
 package com.example.alexiguitartuner.feat_tuner.data
 
-import android.media.AudioAttributes
-import android.media.AudioFormat
-import android.media.AudioTrack
-import android.util.Log
+import android.media.*
 import kotlinx.coroutines.*
-import kotlin.math.atan
 import kotlin.math.sin
-
 
 class PitchGenerationRepository {
 
     companion object {
         const val SAMPLE_RATE = 44100
+        const val CHANNEL_CONFIG = AudioFormat.CHANNEL_OUT_STEREO
+        const val AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT
         const val AMPLITUDE = 32767
     }
+
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)
 
     private var audioTrack : AudioTrack? = null
 
@@ -25,8 +24,8 @@ class PitchGenerationRepository {
 
     private val buffLength: Int = AudioTrack.getMinBufferSize(
         SAMPLE_RATE,
-        AudioFormat.CHANNEL_OUT_STEREO,
-        AudioFormat.ENCODING_PCM_16BIT
+        CHANNEL_CONFIG,
+        AUDIO_FORMAT
     )
 
     private fun initAudioTrack() {
@@ -37,8 +36,8 @@ class PitchGenerationRepository {
 
         val audioFormat = AudioFormat.Builder()
             .setSampleRate(SAMPLE_RATE)
-            .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
-            .setChannelMask(AudioFormat.CHANNEL_OUT_STEREO)
+            .setEncoding(AUDIO_FORMAT)
+            .setChannelMask(CHANNEL_CONFIG)
             .build()
 
         audioTrack = AudioTrack(
@@ -50,9 +49,9 @@ class PitchGenerationRepository {
         )
     }
 
-    private fun generateAudioTrack(frequency: Double) {
+    private fun generateAudioTrack(frequency: Double) = coroutineScope.launch {
         val frame = ShortArray(buffLength)
-        val twoPi: Double = 4.0 * atan(1.0)
+        val twoPi: Double = 2.0 * Math.PI
         var phase = 0.0
 
         while (isPlaying) {
@@ -64,41 +63,32 @@ class PitchGenerationRepository {
                 }
             }
             audioTrack?.write(frame, 0, buffLength)
+            delay(1)
         }
     }
 
-    fun startPitchGeneration() {
-        if(isPlaying){
-            stopPitchGeneration()
-            if (currentFrequency != previousFrequency)
-                playAudioTrack()
-        }
-        else
-            playAudioTrack()
-    }
-
-    private fun playAudioTrack() {
-        isPlaying = true
-        GlobalScope.launch(Dispatchers.IO) {
+    fun startPitchGeneration(frequency: Double) {
+        previousFrequency = currentFrequency
+        if(!isPlaying || frequency != previousFrequency) {
+            if (frequency != previousFrequency) {
+                stopPitchGeneration()
+                currentFrequency = frequency
+            }
+            isPlaying = true
             initAudioTrack()
             audioTrack?.play()
             generateAudioTrack(currentFrequency)
-            Log.d("PITCH", "AudioTrack is started: ${audioTrack?.state}")
+        }
+        else {
+            stopPitchGeneration()
         }
     }
 
     fun stopPitchGeneration() {
-        if (audioTrack != null && audioTrack?.state == 1) {
-            isPlaying = false
-            audioTrack?.stop()
-            audioTrack?.release()
-        }
-        Log.d("PITCH","AudioTrack is stopped: ${audioTrack?.state}")
+        isPlaying = false
+        coroutineScope.coroutineContext.cancelChildren()
+        audioTrack?.stop()
+        audioTrack?.release()
+        audioTrack = null
     }
-
-    fun setSelectedFrequency(frequency: Double) {
-        previousFrequency = currentFrequency
-        this.currentFrequency = frequency
-    }
-
 }

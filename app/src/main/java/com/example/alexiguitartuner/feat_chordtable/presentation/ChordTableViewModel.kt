@@ -19,7 +19,7 @@ class ChordTableViewModel @Inject constructor(
 
     private var _chordTableUIState = MutableStateFlow(ChordTableUIState())
     val chordTableUIState : StateFlow<ChordTableUIState> = _chordTableUIState.asStateFlow()
-
+/*
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val updatedInstrumentList = chordTableRepository.getInstrumentNames()
@@ -45,11 +45,13 @@ class ChordTableViewModel @Inject constructor(
             val updatedTuningList = chordTableRepository.getTuningsByInstrument(instrumentName)
             val updatedChordList = chordTableRepository.getChordsByTuning(
                 instrumentName,
-                if(updatedTuningList.isNotEmpty()) updatedTuningList.first() else "")
+                if(updatedTuningList.isNotEmpty()) updatedTuningList.first() else ""
+            )
             _chordTableUIState.update {
                 it.copy(
                     listOfTunings = updatedTuningList,
                     listOfChords = updatedChordList,
+                    selectedInstrument = instrumentName,
                     selectedTuning = if(updatedTuningList.isNotEmpty()) updatedTuningList.first() else "",
                     selectedChord = if(updatedChordList.isNotEmpty()) updatedChordList.first() else ""
                 )
@@ -65,11 +67,13 @@ class ChordTableViewModel @Inject constructor(
             _chordTableUIState.update {
                 it.copy(
                     listOfChords = updatedChordList,
-                    selectedInstrument = instrumentName,
                     selectedTuning = tuningName,
                     selectedChord = if(updatedChordList.isNotEmpty()) updatedChordList.first() else ""
                 )
             }
         }
     }
+
+*/
+
 }

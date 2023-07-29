@@ -2,6 +2,7 @@ package com.example.alexiguitartuner.feat_metronome.data
 
 import android.media.AudioManager
 import android.media.ToneGenerator
+import android.os.Handler
 import android.util.Log
 import com.example.alexiguitartuner.feat_metronome.domain.Rhythm
 import com.example.alexiguitartuner.feat_metronome.domain.Tone
@@ -9,6 +10,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.util.Timer
+import java.util.TimerTask
 import kotlin.system.measureTimeMillis
 
 class MetronomeRepository() {
@@ -49,22 +52,25 @@ class MetronomeRepository() {
         setBPM(bpm.value)
     }
 
-    fun playMetronome(){
+    fun playMetronome() {
         Log.d("Metronome", "${rhythmList.value[rhythmListIterator.value].value}")
         if (!isPlaying) {
             isPlaying = true
-            metronomePlayerJob = GlobalScope.launch(Dispatchers.Default) {
+            metronomePlayerJob = CoroutineScope(Dispatchers.Default).launch {
                 while (isPlaying) {
-                    val time = measureTimeMillis {
-                        toneGenerator.startTone(rhythmList.value[rhythmListIterator.value].value, TONE_LENGTH)
+                    //val time = measureTimeMillis {
+                        toneGenerator.startTone(
+                            rhythmList.value[rhythmListIterator.value].value,
+                            TONE_LENGTH
+                        )
                         toneGenerator.stopTone()
                         Log.d("try", "Metronome is running: ${rhythmListIterator.value}")
                         if (rhythmListIterator.value == (rhythmList.value.size - 1))
                             _rhythmListIterator.value = 0
                         else
                             _rhythmListIterator.value++
-                    }
-                    delay(tempo - time)
+                    //}
+                    delay(tempo/* - time*/)
                 }
             }
         }

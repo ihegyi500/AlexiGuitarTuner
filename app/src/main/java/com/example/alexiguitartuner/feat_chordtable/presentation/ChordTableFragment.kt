@@ -1,5 +1,6 @@
 package com.example.alexiguitartuner.feat_chordtable.presentation
 
+import android.opengl.Visibility
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -56,19 +57,19 @@ class ChordTableFragment : Fragment() {
         binding.actInstrument.apply {
             setAdapter(adapterOfInstruments)
             setOnItemClickListener { _, _, pos, _ ->
-                viewModel.updateTuningListByInstrument(
+                /*viewModel.updateTuningListByInstrument(
                     adapterOfInstruments.getItem(pos)!!
-                )
+                )*/
             }
         }
 
         binding.actTuning.apply {
             setAdapter(adapterOfTunings)
             setOnItemClickListener { _, _, pos, _ ->
-                viewModel.getChordsByTuning(
+                /*viewModel.getChordsByTuning(
                     viewModel.chordTableUIState.value.selectedInstrument,
                     adapterOfTunings.getItem(pos)!!
-                )
+                )*/
             }
         }
 
@@ -97,6 +98,15 @@ class ChordTableFragment : Fragment() {
                     binding.actInstrument.setText(it.selectedInstrument,false)
                     binding.actTuning.setText(it.selectedTuning,false)
                     binding.actChord.setText(it.selectedChord,false)
+
+                    when(it.selectedChord){
+                        "" -> {
+                            binding.chordTableView.visibility = View.INVISIBLE
+                        }
+                        else -> {
+                            binding.chordTableView.visibility = View.VISIBLE
+                        }
+                    }
                 }
             }
         }

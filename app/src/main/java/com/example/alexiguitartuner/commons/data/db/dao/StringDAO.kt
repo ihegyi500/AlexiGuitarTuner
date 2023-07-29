@@ -1,4 +1,4 @@
-package com.example.alexiguitartuner.commons.data.db
+package com.example.alexiguitartuner.commons.data.db.dao
 
 import androidx.room.*
 import com.example.alexiguitartuner.commons.domain.InstrumentString
@@ -21,10 +21,10 @@ interface StringDAO {
     suspend fun deleteString(string: InstrumentString)
 
     @Query("SELECT * FROM InstrumentString ORDER BY stringNumber DESC LIMIT 1")
-    fun getLastElement(): InstrumentString
+    suspend fun getLastElement(): InstrumentString
 
     @Query("SELECT COUNT(*) FROM InstrumentString")
-    fun getCountOfInstrumentStrings():Int
+    suspend fun getCountOfInstrumentStrings():Int
 
     @Query("UPDATE InstrumentString SET stringNumber = stringNumber - 1 WHERE stringNumber > :stringNumber")
     suspend fun decrementRemainingStringNumbers(stringNumber: Int)

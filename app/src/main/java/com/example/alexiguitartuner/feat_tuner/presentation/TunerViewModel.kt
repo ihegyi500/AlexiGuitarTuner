@@ -2,10 +2,13 @@ package com.example.alexiguitartuner.feat_tuner.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.alexiguitartuner.commons.domain.Pitch
+import com.example.alexiguitartuner.feat_tuner.data.ButtonGenerationRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchDetectionRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchGenerationRepository
 import com.example.alexiguitartuner.feat_tuner.domain.FindPitchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +20,8 @@ import javax.inject.Inject
 class TunerViewModel @Inject constructor(
     private val findPitchUseCase: FindPitchUseCase,
     private val pitchGenerationRepository: PitchGenerationRepository,
-    private val pitchDetectionRepository: PitchDetectionRepository
+    private val pitchDetectionRepository: PitchDetectionRepository,
+    private val buttonGenerationRepository: ButtonGenerationRepository
     ) : ViewModel() {
 
     private var _detectedHz = MutableStateFlow(0.0)
@@ -32,6 +36,7 @@ class TunerViewModel @Inject constructor(
                 _detectedHz.value = it
                 _detectedPitch.value = findPitchUseCase(it)
             }
+
         }
     }
 
@@ -44,12 +49,13 @@ class TunerViewModel @Inject constructor(
     }
 
     fun startPitchGeneration(frequency:Double) {
-        pitchGenerationRepository.setSelectedFrequency(frequency)
-        pitchGenerationRepository.startPitchGeneration()
+        pitchGenerationRepository.startPitchGeneration(frequency)
     }
 
     fun stopPitchGeneration() {
         pitchGenerationRepository.stopPitchGeneration()
     }
+
+    fun getPitchesOfLastTuning() : Flow<List<Pitch>> = buttonGenerationRepository.getPitchesOfLastTuning()
 
 }

@@ -5,7 +5,6 @@ import be.tarsos.dsp.AudioDispatcher
 import be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone
 import be.tarsos.dsp.pitch.PitchProcessor
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
-import com.example.alexiguitartuner.commons.data.db.ChordDAO
 import com.example.alexiguitartuner.feat_tuner.domain.AudioProcessingThread
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -29,8 +28,8 @@ class PitchDetectionRepository @Inject constructor(
         44100F,
         4096
     ) { pitchDetectionResult, _ ->
-        val pitch = pitchDetectionResult.pitch.toDouble()
         GlobalScope.launch(Dispatchers.Default) {
+            val pitch = pitchDetectionResult.pitch.toDouble()
             _detectedHz.value = (pitch * 100.0).roundToInt() / 100.0
             //Log.d("HERTZ","Hertz is: ${_detectedHz.value}")
         }

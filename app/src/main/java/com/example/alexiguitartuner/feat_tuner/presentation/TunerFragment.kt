@@ -3,10 +3,11 @@ package com.example.alexiguitartuner.feat_tuner.presentation
 import android.Manifest
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -15,10 +16,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.alexiguitartuner.databinding.FragmentTunerBinding
-import com.example.alexiguitartuner.feat_tuner.data.TunerDataSource
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -76,7 +75,7 @@ class TunerFragment : Fragment() {
 
         tunerViewModel.startAudioProcessing()
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     tunerViewModel.detectedHz.collectLatest {
@@ -89,10 +88,30 @@ class TunerFragment : Fragment() {
                         binding.tvPitch.text = it
                     }
                 }
+
+                launch {
+                    tunerViewModel.getPitchesOfLastTuning().collect{
+                        binding.llButtons.removeAllViews() // Clear existing buttons, if any
+                        val buttonLayoutParams = LinearLayout.LayoutParams(
+                            0,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            1.0f
+                        )
+                        for (i in it) {
+                            val button = Button(requireContext())
+                            button.text = i.name
+                            button.setOnClickListener {
+                                tunerViewModel.startPitchGeneration(i.frequency)
+                            }
+                            button.layoutParams = buttonLayoutParams
+                            binding.llButtons.addView(button)
+                        }
+                    }
+                }
             }
         }
 
-        binding.btnE.setOnClickListener {
+        /*binding.btnE.setOnClickListener {
             tunerViewModel.startPitchGeneration(82.41)
         }
 
@@ -114,7 +133,7 @@ class TunerFragment : Fragment() {
 
         binding.btnE2.setOnClickListener {
             tunerViewModel.startPitchGeneration(329.63)
-        }
+        }*/
     }
 
     override fun onPause() {

@@ -1,36 +1,11 @@
 package com.example.alexiguitartuner.commons.domain
 
-import androidx.room.*
-import java.io.Serializable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
-data class Chord(
+data class Chord (
     @PrimaryKey val chordId : Long,
     val name : String,
     val tuningId : Long
-)
-
-@Entity(primaryKeys = ["chordId", "name"])
-data class PitchChordCrossRef(
-    val chordId: Long,
-    val name: String
-)
-
-data class ChordWithPitches(
-    @Embedded val chord: Chord,
-    @Relation(
-        parentColumn = "chordId",
-        entityColumn = "name",
-        associateBy = Junction(PitchChordCrossRef::class)
-    )
-    val pitches: List<Pitch>
-)
-
-data class ChordWithChordTables(
-    @Embedded val chord: Chord,
-    @Relation(
-        parentColumn = "chordId",
-        entityColumn = "chordId"
-    )
-    val chordTableList: List<ChordTable>
 )

@@ -51,6 +51,7 @@ class RhythmView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         CoroutineScope(Dispatchers.Main).launch {
             metronomeRepository.rhythmListIterator.collect {
                 invalidate()
+                Log.d("RHYTHM","RhythmView changed!")
             }
         }
     }

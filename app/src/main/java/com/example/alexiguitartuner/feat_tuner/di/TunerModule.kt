@@ -1,9 +1,8 @@
 package com.example.alexiguitartuner.feat_tuner.di
 
-import be.tarsos.dsp.AudioDispatcher
-import be.tarsos.dsp.io.android.AudioDispatcherFactory
 import be.tarsos.dsp.io.android.AudioDispatcherFactory.*
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
+import com.example.alexiguitartuner.feat_tuner.data.ButtonGenerationRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchDetectionRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchGenerationRepository
 import com.example.alexiguitartuner.feat_tuner.data.TunerDataSource
@@ -11,11 +10,7 @@ import com.example.alexiguitartuner.feat_tuner.domain.FindPitchUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -42,6 +37,14 @@ object TunerModule {
     @Singleton
     fun providePitchGenerationRepository() : PitchGenerationRepository {
         return PitchGenerationRepository()
+    }
+
+    @Provides
+    @Singleton
+    fun provideButtonGenerationRepository(
+        database:AppDatabase
+    ) : ButtonGenerationRepository {
+        return ButtonGenerationRepository(database)
     }
 
     @Provides

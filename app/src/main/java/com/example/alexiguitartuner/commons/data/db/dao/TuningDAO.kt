@@ -8,10 +8,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TuningDAO {
     @Query("SELECT * FROM Tuning WHERE tuningId = :tuningId")
-    suspend fun getTuningById(tuningId: Long): Tuning
-    @Query("SELECT * FROM Tuning t " +
-            "INNER JOIN Instrument i ON t.instrumentId = i.instrumentId " +
-            "WHERE i.instrumentId = :instrumentId")
-    fun getTuningsOfAnInstrument(instrumentId: Long): Flow<List<Tuning>>
+    suspend fun getTuningById(tuningId: Long?): Tuning
+    @Query("SELECT * FROM Tuning WHERE instrumentId = :instrumentId")
+    fun getTuningsByInstrument(instrumentId: Long?): Flow<List<Tuning>>
 
 }

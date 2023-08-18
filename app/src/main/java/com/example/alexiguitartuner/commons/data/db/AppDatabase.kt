@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.alexiguitartuner.commons.data.db.dao.ChordDAO
+import com.example.alexiguitartuner.commons.data.db.dao.ChordTableDAO
 import com.example.alexiguitartuner.commons.data.db.dao.InstrumentDAO
 import com.example.alexiguitartuner.commons.data.db.dao.PitchDAO
 import com.example.alexiguitartuner.commons.data.db.dao.StringDAO
@@ -21,7 +22,6 @@ import com.example.alexiguitartuner.commons.domain.converter.Converters
         Tuning::class,
         Instrument::class,
         UserSettings::class,
-        PitchChordCrossRef::class,
         PitchTuningCrossRef::class],
     version = 1,
     exportSchema = false
@@ -29,6 +29,7 @@ import com.example.alexiguitartuner.commons.domain.converter.Converters
 abstract class AppDatabase : RoomDatabase() {
 
     abstract val chordDAO : ChordDAO
+    abstract val chordTableDAO : ChordTableDAO
     abstract val instrumentDAO : InstrumentDAO
     abstract val tuningDAO : TuningDAO
     abstract val stringDAO : StringDAO

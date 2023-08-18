@@ -6,8 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import com.example.alexiguitartuner.commons.domain.Pitch
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.TreeSet
 
@@ -18,21 +17,18 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
     companion object {
         private const val PITCH_R = 30
         private const val MARGIN = 50
-        private const val STRING_NUM = 6
         private const val FRET_NUM = 5
     }
 
-    private val placeholderList = listOf(0,0,1,2,2,0)
+    private var pitchPositions = emptyList<Int>().toMutableList()
+    private var pitchNames = emptyList<String>().toMutableList()
+
+    private var numberOfStrings = 0
 
     private var paintBackground: Paint = Paint()
     private var paintPitch: Paint = Paint()
     private var paintPitchOpenString: Paint = Paint()
     private var paintText: Paint = Paint()
-
-    private val chordTableViewModel by lazy {
-        ViewModelProvider(
-            findViewTreeViewModelStoreOwner()!!)[ChordTableViewModel::class.java]
-    }
 
     private var fretHeight : Float = 0f
     private var neckWidth : Float = 0f
@@ -42,11 +38,13 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
         paintBackground.style = Paint.Style.STROKE
         paintBackground.strokeWidth = 10f
 
-        paintPitch.color = Color.argb(100,55,0,179)//Color.GRAY
+        //paintPitch.color = Color.argb(100,55,0,179)
+        paintPitch.color = Color.GREEN
         paintPitch.style = Paint.Style.FILL_AND_STROKE
         paintPitch.strokeWidth = 5f
 
-        paintPitchOpenString.color = Color.argb(100,55,0,179)//Color.GRAY
+        //paintPitchOpenString.color = Color.argb(100,55,0,179)
+        paintPitchOpenString.color = Color.GREEN
         paintPitchOpenString.style = Paint.Style.STROKE
         paintPitchOpenString.strokeWidth = 5f
         
@@ -57,30 +55,30 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.drawRect(0F,0F, width.toFloat(), height.toFloat(),paintBackground)
-
-        fretHeight = (4 * height / 5).toFloat()
-        neckWidth = (4 * width / 5 - MARGIN).toFloat()
-
-        drawGuitarNeck(canvas)
-        drawPitches(canvas)
+        if (pitchPositions.isNotEmpty()) {
+            fretHeight = (4 * height / 5).toFloat()
+            neckWidth = (4 * width / 5 - MARGIN).toFloat()
+            drawGuitarNeck(canvas)
+            drawPitches(canvas)
+        }
     }
     private fun drawGuitarNeck(canvas: Canvas?) {
 
         val iterator = getFretNumberTreeSet().iterator()
 
         //horizontal lines
-        for (i in 0 until STRING_NUM) {
+        for (i in 0 until numberOfStrings) {
             canvas?.drawLine(
                 width.toFloat() / 5,
-                MARGIN + i * fretHeight / STRING_NUM,
+                MARGIN + i * fretHeight / numberOfStrings,
                 width.toFloat() - MARGIN,
-                MARGIN + i * fretHeight / STRING_NUM,
+                MARGIN + i * fretHeight / numberOfStrings,
                 paintBackground
             )
             canvas?.drawText(
-                "E0",
-                width.toFloat() / 15,
-                MARGIN + i * fretHeight / STRING_NUM + paintText.textSize / 3,
+                if(pitchNames.isNotEmpty()) pitchNames[i] else "",
+                width.toFloat() / 20,
+                MARGIN + i * fretHeight / numberOfStrings + paintText.textSize / 3,
                 paintText
             )
         }
@@ -91,7 +89,7 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
                 (width.toFloat() / 5) + i * neckWidth / FRET_NUM,
                 MARGIN.toFloat(),
                 (width.toFloat() / 5) + i * neckWidth / FRET_NUM,
-                MARGIN + (STRING_NUM - 1) * fretHeight / STRING_NUM,//fretHeight - MARGIN,
+                MARGIN + (numberOfStrings - 1) * fretHeight / numberOfStrings,
                 paintBackground
             )
             if(i < FRET_NUM) {
@@ -112,11 +110,11 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
         var pitchX: Float
         var pitchY: Float
 
-        for(i in placeholderList.indices) {
-            when (placeholderList[i]) {
+        for(i in pitchPositions.indices) {
+            when (pitchPositions[i]) {
                 -1 -> {
                     pitchX = width.toFloat() / 5
-                    pitchY = MARGIN + i * fretHeight / STRING_NUM
+                    pitchY = MARGIN + i * fretHeight / numberOfStrings
                     canvas?.drawLine(
                         pitchX - PITCH_R.toFloat(),
                         pitchY - PITCH_R.toFloat(),
@@ -134,7 +132,7 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
                 }
                 0 -> {
                     pitchX = width.toFloat() / 5
-                    pitchY = MARGIN + i * fretHeight / STRING_NUM
+                    pitchY = MARGIN + i * fretHeight / numberOfStrings
                     canvas?.drawCircle(
                         pitchX,
                         pitchY,
@@ -146,7 +144,7 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
                     pitchX = (width / 5) +
                              (neckWidth / FRET_NUM / 2) +
                              (pitchCorrector(i) - 1) * (neckWidth / FRET_NUM)
-                    pitchY = MARGIN + i * fretHeight / STRING_NUM
+                    pitchY = MARGIN + i * fretHeight / numberOfStrings
                     canvas?.drawCircle(
                         pitchX,
                         pitchY,
@@ -158,11 +156,11 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
         }
     }
     private fun getFretNumberTreeSet() : TreeSet<Int> {
-        var treeSet : TreeSet<Int> = TreeSet(placeholderList)
+        var treeSet : TreeSet<Int> = TreeSet(pitchPositions.toList())
         treeSet.remove(-1)
         treeSet.remove(0)
 
-        if(treeSet.last() <= FRET_NUM)
+        if(treeSet.isEmpty() || treeSet.last() <= FRET_NUM)
             treeSet = TreeSet(listOf(1,2,3,4,5))
         else {
             val first = treeSet.first()
@@ -173,5 +171,16 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
         return treeSet
     }
 
-    private fun pitchCorrector(i : Int) = getFretNumberTreeSet().indexOf(placeholderList[i]) + 1
+    private fun pitchCorrector(i : Int) = getFretNumberTreeSet().indexOf(pitchPositions[i]) + 1
+
+    fun setPitchList(pitchNames: List<Pitch>, pitchPositions: List<Int>) {
+        this.pitchNames.clear()
+        pitchNames.sortedByDescending { it.frequency }.forEach { pitch ->
+            this.pitchNames.add(pitch.name)
+        }
+        this.pitchPositions.clear()
+        this.pitchPositions.addAll(pitchPositions)
+        numberOfStrings = pitchNames.size
+
+    }
 }

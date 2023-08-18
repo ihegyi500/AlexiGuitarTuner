@@ -1,30 +1,21 @@
 package com.example.alexiguitartuner.feat_chordtable.presentation
 
-import android.opengl.Visibility
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import androidx.core.view.isVisible
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.databinding.FragmentChordTableBinding
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ChordTableFragment : Fragment() {
@@ -48,68 +39,106 @@ class ChordTableFragment : Fragment() {
         renderFragment()
     }
 
+
     private fun renderFragment() {
 
-        val adapterOfInstruments = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, ArrayList<String>())
-        val adapterOfTunings = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, ArrayList<String>())
-        val adapterOfChords = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, ArrayList<String>())
+        lateinit var adapterOfInstruments : ArrayAdapter<String>
+        lateinit var adapterOfTunings : ArrayAdapter<String>
+        lateinit var adapterOfChords : ArrayAdapter<String>
 
-        binding.actInstrument.apply {
-            setAdapter(adapterOfInstruments)
-            setOnItemClickListener { _, _, pos, _ ->
-                /*viewModel.updateTuningListByInstrument(
-                    adapterOfInstruments.getItem(pos)!!
-                )*/
+        binding.actInstrument.setOnItemClickListener { _, _, pos, _ ->
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    viewModel.selectInstrument(viewModel.uiState.value.instrumentList[pos])
+                }
             }
         }
 
-        binding.actTuning.apply {
-            setAdapter(adapterOfTunings)
-            setOnItemClickListener { _, _, pos, _ ->
-                /*viewModel.getChordsByTuning(
-                    viewModel.chordTableUIState.value.selectedInstrument,
-                    adapterOfTunings.getItem(pos)!!
-                )*/
+        binding.actTuning.setOnItemClickListener { _, _, pos, _ ->
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    viewModel.selectTuning(viewModel.uiState.value.tuningList[pos])
+                }
             }
         }
 
-        binding.actChord.apply {
-            setAdapter(adapterOfChords)
-            setOnItemClickListener { _, _, pos, _ ->
-                //viewModel.getTuningsByInstrument(adapterOfInstruments.getItem(pos)!!)
+        binding.actChord.setOnItemClickListener { _, _, pos, _ ->
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    viewModel.selectChord(viewModel.uiState.value.chordList[pos])
+                }
+            }
+        }
+
+        binding.fabIncrementPos.setOnClickListener {
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    viewModel.increaseChordTablePosition()
+                }
+            }
+        }
+
+        binding.fabDecrementPos.setOnClickListener {
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    viewModel.decreaseChordTablePosition()
+                }
             }
         }
 
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.chordTableUIState.collect {
-                    adapterOfInstruments.clear()
-                    adapterOfInstruments.addAll(it.listOfInstruments)
-                    adapterOfInstruments.notifyDataSetChanged()
-
-                    adapterOfTunings.clear()
-                    adapterOfTunings.addAll(it.listOfTunings)
-                    adapterOfTunings.notifyDataSetChanged()
-
-                    adapterOfChords.clear()
-                    adapterOfChords.addAll(it.listOfChords)
-                    adapterOfChords.notifyDataSetChanged()
-
-                    binding.actInstrument.setText(it.selectedInstrument,false)
-                    binding.actTuning.setText(it.selectedTuning,false)
-                    binding.actChord.setText(it.selectedChord,false)
-
-                    when(it.selectedChord){
-                        "" -> {
-                            binding.chordTableView.visibility = View.INVISIBLE
+                launch {
+                    adapterOfInstruments = ArrayAdapter(this@ChordTableFragment.requireContext(), android.R.layout.simple_spinner_item, ArrayList<String>())
+                    binding.actInstrument.setAdapter(adapterOfInstruments)
+                    viewModel.uiState.collectLatest { state ->
+                        state.instrumentList.also { list ->
+                            adapterOfInstruments.clear()
+                            adapterOfInstruments.addAll(list.map { it.name })
+                            adapterOfInstruments.notifyDataSetChanged()
                         }
-                        else -> {
-                            binding.chordTableView.visibility = View.VISIBLE
+                        binding.actInstrument.setText(state.selectedInstrument?.name, false)
+                    }
+                }
+                launch {
+                    adapterOfTunings = ArrayAdapter(this@ChordTableFragment.requireContext(), android.R.layout.simple_spinner_item, ArrayList<String>())
+                    binding.actTuning.setAdapter(adapterOfTunings)
+                    viewModel.uiState.collectLatest { state ->
+                        state.tuningList.also { list ->
+                            adapterOfTunings.clear()
+                            adapterOfTunings.addAll(list.map { it.name })
+                            adapterOfTunings.notifyDataSetChanged()
+                        }
+                        binding.actTuning.setText(state.selectedTuning?.name, false)
+                    }
+                }
+                launch {
+                    adapterOfChords = ArrayAdapter(this@ChordTableFragment.requireContext(), android.R.layout.simple_spinner_item, ArrayList<String>())
+                    binding.actChord.setAdapter(adapterOfChords)
+                    viewModel.uiState.collectLatest { state ->
+                        state.chordList.also { list ->
+                            adapterOfChords.clear()
+                            adapterOfChords.addAll(list.map { it.name })
+                            adapterOfChords.notifyDataSetChanged()
+                        }
+                        binding.actChord.setText(state.selectedChord?.name, false)
+                    }
+                }
+                launch {
+                    viewModel.uiState.collectLatest { state ->
+                        state.selectedPosition.also { pos ->
+                            binding.tvPositionData.text = pos.plus(1).toString()
+                            binding.chordTableView.setPitchList(
+                                state.tuningPitches,
+                                state.selectedChordTable?.pitchPos ?: emptyList()
+                            )
+                            binding.chordTableView.invalidate()
                         }
                     }
                 }
             }
         }
+
     }
 
     override fun onDestroyView() {

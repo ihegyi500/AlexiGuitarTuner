@@ -77,20 +77,16 @@ class TunerFragment : Fragment() {
 
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    tunerViewModel.detectedHz.collectLatest {
-                        binding.tvFrequency.text = it.toString()
-                    }
-                }
 
                 launch {
                     tunerViewModel.detectedPitch.collectLatest {
-                        binding.tvPitch.text = it
+                        binding.tvPitch.text = it.name
+                        binding.tvFrequency.text = it.frequency.toString()
                     }
                 }
 
                 launch {
-                    tunerViewModel.getPitchesOfLastTuning().collect{
+                    tunerViewModel.getPitchesOfLastTuning().collect {
                         binding.llButtons.removeAllViews() // Clear existing buttons, if any
                         val buttonLayoutParams = LinearLayout.LayoutParams(
                             0,
@@ -110,30 +106,6 @@ class TunerFragment : Fragment() {
                 }
             }
         }
-
-        /*binding.btnE.setOnClickListener {
-            tunerViewModel.startPitchGeneration(82.41)
-        }
-
-        binding.btnA.setOnClickListener {
-            tunerViewModel.startPitchGeneration(110.00)
-        }
-
-        binding.btnD.setOnClickListener {
-            tunerViewModel.startPitchGeneration(146.83)
-        }
-
-        binding.btnG.setOnClickListener {
-            tunerViewModel.startPitchGeneration(196.00)
-        }
-
-        binding.btnB.setOnClickListener {
-            tunerViewModel.startPitchGeneration(246.94)
-        }
-
-        binding.btnE2.setOnClickListener {
-            tunerViewModel.startPitchGeneration(329.63)
-        }*/
     }
 
     override fun onPause() {

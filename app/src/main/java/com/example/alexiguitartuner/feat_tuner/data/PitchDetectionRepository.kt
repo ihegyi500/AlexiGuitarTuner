@@ -1,64 +1,81 @@
 package com.example.alexiguitartuner.feat_tuner.data
 
-import android.util.Log
 import be.tarsos.dsp.AudioDispatcher
 import be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone
 import be.tarsos.dsp.pitch.PitchProcessor
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
-import com.example.alexiguitartuner.feat_tuner.domain.AudioProcessingThread
+import com.example.alexiguitartuner.commons.domain.Pitch
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-
 class PitchDetectionRepository @Inject constructor(
     private val database: AppDatabase
 ) {
+    companion object {
+        const val SAMPLE_RATE = 44100
+        const val BUFFER_SIZE = 8192
+        const val OVERLAP = 3072
+        const val PITCH_DIFF = 0.4F
+        const val FAULT_DIFF = 0.2F
+    }
 
-    private var audioProcessThread: AudioProcessingThread? = null
     private var audioDispatcher: AudioDispatcher? = null
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)
 
-    private var _detectedHz = MutableStateFlow(0.0)
-    val detectedHz : StateFlow<Double> = _detectedHz.asStateFlow()
+    private var pitchList = mutableListOf<Pitch>()
 
-    @OptIn(DelicateCoroutinesApi::class)
+    private val _detectedPitch = MutableSharedFlow<Pitch>()
+    val detectedPitch: SharedFlow<Pitch> = _detectedPitch
+
     private val pitchProcessor = PitchProcessor(
         PitchProcessor.PitchEstimationAlgorithm.FFT_YIN,
-        44100F,
-        4096
+        SAMPLE_RATE.toFloat(),
+        BUFFER_SIZE
     ) { pitchDetectionResult, _ ->
-        GlobalScope.launch(Dispatchers.Default) {
-            val pitch = pitchDetectionResult.pitch.toDouble()
-            _detectedHz.value = (pitch * 100.0).roundToInt() / 100.0
-            //Log.d("HERTZ","Hertz is: ${_detectedHz.value}")
+        coroutineScope.launch {
+            val pitchFrequency = (pitchDetectionResult.pitch * 100.0).roundToInt() / 100.0
+            val pitchName = getPitchName(pitchFrequency)
+            _detectedPitch.emit(Pitch(pitchName, pitchFrequency))
         }
     }
 
-    fun startAudioProcessing() {
-        if (audioProcessThread == null) {
-            audioDispatcher = fromDefaultMicrophone(44100, 4096, 3072)
+    suspend fun initPitchList() {
+        pitchList = database.pitchDAO.getPitches().toMutableList()
+    }
+
+    fun startAudioProcessing() = coroutineScope.launch {
+        if (audioDispatcher == null) {
+            audioDispatcher = fromDefaultMicrophone(SAMPLE_RATE, BUFFER_SIZE, OVERLAP)
             audioDispatcher?.addAudioProcessor(pitchProcessor)
-            audioProcessThread = AudioProcessingThread(audioDispatcher)
-            audioProcessThread?.start()
-            Log.d("HERTZ",
-                "Thread is running: ${audioProcessThread?.isRunning}, , ${audioDispatcher?.isStopped}")
-            /*GlobalScope.launch(Dispatchers.IO) {
-                chordDAO.getChordWithChordTables()
-            }*/
+            audioDispatcher?.run()
         }
     }
 
     fun stopAudioProcessing() {
-        if (audioProcessThread?.isRunning == true) {
-            audioProcessThread?.interrupt()
-            audioProcessThread?.exit()
-            audioProcessThread = null
+        if (audioDispatcher != null) {
             audioDispatcher?.stop()
             audioDispatcher?.removeAudioProcessor(pitchProcessor)
             audioDispatcher = null
-            Log.d("HERTZ",
-                "Thread is stopped: ${audioProcessThread?.isRunning} , ${audioDispatcher?.isStopped}")
+            coroutineScope.coroutineContext.cancelChildren()
         }
     }
+
+    private fun getPitchName(frequency: Double): String {
+        var res = ""
+        for (pitch in pitchList) {
+            if(frequency > pitch.frequency - PITCH_DIFF
+                && frequency < pitch.frequency + PITCH_DIFF
+            ) {
+                res = when {
+                    frequency < pitch.frequency - FAULT_DIFF -> "Below " + pitch.name
+                    frequency > pitch.frequency + FAULT_DIFF -> "Above " + pitch.name
+                    else -> pitch.name
+                }
+            }
+        }
+        return res
+    }
+
 }

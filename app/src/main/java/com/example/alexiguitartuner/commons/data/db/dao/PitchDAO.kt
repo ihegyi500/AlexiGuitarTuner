@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PitchDAO {
     @Query("SELECT * FROM Pitch")
-    fun getPitches(): Flow<List<Pitch>>
+    suspend fun getPitches(): List<Pitch>
 
     @Query("SELECT * FROM Pitch WHERE name = :name")
     suspend fun getPitchByName(name: String): Pitch?
@@ -26,19 +26,12 @@ interface PitchDAO {
     suspend fun getFrequencyOfPitch(name: String) : Double
 
     @Query("SELECT * FROM Pitch p " +
-            "INNER JOIN PitchChordCrossRef cr ON p.name = cr.name " +
-            "INNER JOIN Chord c ON c.chordId = cr.chordId " +
-            "WHERE c.chordId = :chordId" )
-    fun getPitchesOfAChord(chordId: Int): Flow<List<Pitch>>
-
-    @Query("SELECT * FROM Pitch p " +
             "INNER JOIN PitchTuningCrossRef cr ON p.name = cr.name " +
-            "INNER JOIN Tuning t ON t.tuningId = cr.tuningId " +
-            "WHERE t.tuningId = :tuningId" )
-    fun getPitchesOfATuning(tuningId: Long): Flow<List<Pitch>>
+            "WHERE cr.tuningId = :tuningId" )
+    fun getPitchesByTuning(tuningId: Long): Flow<List<Pitch>>
 
     @Query("SELECT * FROM Pitch p " +
             "INNER JOIN PitchTuningCrossRef cr ON p.name = cr.name " +
             "INNER JOIN UserSettings u ON u.tuningId = cr.tuningId")
-    fun getPitchesOfLastTuning(): Flow<List<Pitch>>
+    fun getPitchesByLastTuning(): Flow<List<Pitch>>
 }

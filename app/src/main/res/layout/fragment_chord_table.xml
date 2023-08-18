@@ -12,7 +12,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select Instrument"
+        android:hint="@string/select_instrument"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,7 +30,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select tuning"
+        android:hint="@string/select_tuning"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilInstrument">
 
@@ -48,7 +48,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select chord"
+        android:hint="@string/select_chord"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilTuning">
 
@@ -65,7 +65,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Position: "
+        android:text="@string/position"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/chordTableView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         android:id="@+id/tvPositionData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
+        android:text=""
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/chordTableView"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -97,7 +97,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chordTableView" />
+        app:layout_constraintTop_toBottomOf="@+id/chordTableView"
+        android:contentDescription="@string/show_previous_position" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabIncrementPos"
@@ -106,6 +107,7 @@
         android:layout_margin="15dp"
         android:layout_marginEnd="321dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chordTableView" />
+        app:layout_constraintTop_toBottomOf="@+id/chordTableView"
+        android:contentDescription="@string/show_next_position" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

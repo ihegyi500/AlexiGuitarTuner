@@ -14,12 +14,9 @@ class PitchGenerationRepository {
     }
 
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
-
     private var audioTrack : AudioTrack? = null
-
     private var currentFrequency = 0.0
     private var previousFrequency = 0.0
-
     private var isPlaying: Boolean = false
 
     private val buffLength: Int = AudioTrack.getMinBufferSize(
@@ -86,9 +83,9 @@ class PitchGenerationRepository {
 
     fun stopPitchGeneration() {
         isPlaying = false
-        coroutineScope.coroutineContext.cancelChildren()
         audioTrack?.stop()
         audioTrack?.release()
         audioTrack = null
+        coroutineScope.coroutineContext.cancelChildren()
     }
 }

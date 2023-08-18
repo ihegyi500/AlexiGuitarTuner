@@ -6,42 +6,39 @@ import com.example.alexiguitartuner.commons.domain.Pitch
 import com.example.alexiguitartuner.feat_tuner.data.ButtonGenerationRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchDetectionRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchGenerationRepository
-import com.example.alexiguitartuner.feat_tuner.domain.FindPitchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class TunerViewModel @Inject constructor(
-    private val findPitchUseCase: FindPitchUseCase,
     private val pitchGenerationRepository: PitchGenerationRepository,
     private val pitchDetectionRepository: PitchDetectionRepository,
-    private val buttonGenerationRepository: ButtonGenerationRepository
+    private val buttonGenerationRepository: ButtonGenerationRepository,
     ) : ViewModel() {
 
-    private var _detectedHz = MutableStateFlow(0.0)
-    val detectedHz : StateFlow<Double> = _detectedHz.asStateFlow()
-
-    private var _detectedPitch = MutableStateFlow("-")
-    val detectedPitch : StateFlow<String> = _detectedPitch.asStateFlow()
+    val detectedPitch = pitchDetectionRepository.detectedPitch
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = Pitch("", 0.0)
+        )
 
     init {
         viewModelScope.launch {
-            pitchDetectionRepository.detectedHz.collectLatest {
-                _detectedHz.value = it
-                _detectedPitch.value = findPitchUseCase(it)
-            }
-
+            pitchDetectionRepository.initPitchList()
         }
     }
 
     fun startAudioProcessing() {
-        pitchDetectionRepository.startAudioProcessing()
+        viewModelScope.launch {
+            pitchDetectionRepository.startAudioProcessing()
+        }
     }
 
     fun stopAudioProcessing() {

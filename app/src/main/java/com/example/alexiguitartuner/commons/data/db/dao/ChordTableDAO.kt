@@ -6,11 +6,11 @@ import com.example.alexiguitartuner.commons.domain.ChordTable
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ChordTableDao {
+interface ChordTableDAO {
 
     @Query("SELECT position FROM ChordTable WHERE chordTableId = :chordTableId")
     suspend fun getPositionOfChordTable(chordTableId : Long): Int
 
-    @Query("SELECT * FROM ChordTable ct INNER JOIN Chord c ON ct.chordId = c.chordId WHERE c.chordId = :chordId")
-    fun getChordTablesOfAChord(chordId: Int): Flow<List<ChordTable>>
+    @Query("SELECT * FROM ChordTable ct WHERE ct.chordId = :chordId")
+    fun getChordTablesByChord(chordId: Long?): Flow<List<ChordTable>>
 }

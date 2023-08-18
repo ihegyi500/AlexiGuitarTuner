@@ -8,5 +8,5 @@ import javax.inject.Inject
 class ButtonGenerationRepository @Inject constructor(
     private val database: AppDatabase
 ) {
-    fun getPitchesOfLastTuning(): Flow<List<Pitch>> = database.pitchDAO.getPitchesOfLastTuning()
+    fun getPitchesOfLastTuning(): Flow<List<Pitch>> = database.pitchDAO.getPitchesByLastTuning()
 }

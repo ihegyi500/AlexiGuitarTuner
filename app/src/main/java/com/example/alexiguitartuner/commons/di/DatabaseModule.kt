@@ -22,6 +22,7 @@ object DatabaseModule {
             AppDatabase.DATABASE_NAME,
         ).fallbackToDestructiveMigration()
          .createFromAsset("alexiGuitarTuner_db.db")
+         //.setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
          .build()
     }
 }

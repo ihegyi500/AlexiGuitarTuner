@@ -5,8 +5,6 @@ import com.example.alexiguitartuner.commons.data.db.AppDatabase
 import com.example.alexiguitartuner.feat_tuner.data.ButtonGenerationRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchDetectionRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchGenerationRepository
-import com.example.alexiguitartuner.feat_tuner.data.TunerDataSource
-import com.example.alexiguitartuner.feat_tuner.domain.FindPitchUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,14 +25,6 @@ object TunerModule {
 
     @Provides
     @Singleton
-    fun provideFindPitchUseCase(
-        tunerDataSource : TunerDataSource
-    ) : FindPitchUseCase {
-        return FindPitchUseCase(tunerDataSource)
-    }
-
-    @Provides
-    @Singleton
     fun providePitchGenerationRepository() : PitchGenerationRepository {
         return PitchGenerationRepository()
     }
@@ -45,12 +35,6 @@ object TunerModule {
         database:AppDatabase
     ) : ButtonGenerationRepository {
         return ButtonGenerationRepository(database)
-    }
-
-    @Provides
-    @Singleton
-    fun provideTunerDataSource() : TunerDataSource {
-        return TunerDataSource()
     }
 
 }

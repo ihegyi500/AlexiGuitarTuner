@@ -20,7 +20,6 @@ import javax.inject.Inject
 class ChordTableViewModel @Inject constructor(
     private val chordTableRepository: ChordTableRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(
         ChordTableUIState(
             instrumentList = emptyList(),
@@ -77,7 +76,7 @@ class ChordTableViewModel @Inject constructor(
         val selectedChordTable = chordTableList.firstOrNull()
         _uiState.value = _uiState.value.copy(
             selectedChord = chord,
-            chordTableList = chordTableList,
+            chordTableList = chordTableList
         )
         selectChordTable(selectedChordTable)
     }
@@ -103,5 +102,4 @@ class ChordTableViewModel @Inject constructor(
             selectChordTable(_uiState.value.chordTableList[newPosition])
         }
     }
-
 }

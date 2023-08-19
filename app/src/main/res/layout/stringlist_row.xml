@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
@@ -70,8 +70,9 @@
                 android:id="@+id/tvGaugeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="String gauge: "
+                android:layout_marginTop="10dp"
+                android:text="@string/string_gauge"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvNumber" />
 
@@ -80,17 +81,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@id/tvGaugeText"
                 app:layout_constraintTop_toBottomOf="@+id/tvNumber" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabDelete"
+                style="@style/Widget.Material3.FloatingActionButton.Surface"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_delete_outline_24"
-                app:fabSize="mini"
+                app:fabCustomSize="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabCalculate"
+                style="@style/Widget.Material3.FloatingActionButton.Surface"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_update_24"
+                android:layout_marginEnd="5dp"
+                app:fabCustomSize="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fabDelete"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

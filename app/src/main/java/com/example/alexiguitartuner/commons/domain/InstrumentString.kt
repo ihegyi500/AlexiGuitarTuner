@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class InstrumentString (
     @PrimaryKey(autoGenerate = false) var stringNumber : Int,
-    var name : String,
+    var frequency : Double,
     var scaleLength : Double,
     var tension : Double
 )

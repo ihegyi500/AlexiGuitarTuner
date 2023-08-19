@@ -56,7 +56,10 @@ class SGCFragment : Fragment() {
         }
 
         binding.fabShowInfo.setOnClickListener {
-            SGCInfoDialog().show(childFragmentManager,DIALOG_TAG)
+            SGCInfoDialog().show(
+                childFragmentManager,
+                DIALOG_TAG
+            )
         }
     }
 

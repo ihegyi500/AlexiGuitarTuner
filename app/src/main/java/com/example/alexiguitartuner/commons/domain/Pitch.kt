@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Pitch (
-    @PrimaryKey var name: String,
-    var frequency: Double
+    @PrimaryKey val frequency: Double,
+    var name: String
 )

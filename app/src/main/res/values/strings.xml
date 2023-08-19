@@ -31,4 +31,20 @@
     <!-- SGC Info-->
     <string name="info">This String Gauge Calculator helps You to select the best guitar strings for Your needs.</string>
     <string name="accept">GOT IT</string>
+    <string name="select_instrument">Select Instrument</string>
+    <string name="select_tuning">Select tuning</string>
+    <string name="select_chord">Select chord</string>
+    <string name="position">Position:</string>
+    <string name="show_previous_position">Show previous position</string>
+    <string name="show_next_position">Show next position</string>
+    <string name="half_note_display">Half note display:</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="sharp">Sharp (#)</string>
+    <string name="flat_b">Flat (b)</string>
+    <string name="string_gauge">String gauge:</string>
+    <string name="notation_system">Notation system:</string>
+    <string name="german">German</string>
+    <string name="english">English</string>
+    <string name="select_tuning_settings">Select tuning</string>
+    <string name="create_custom_tuning">Create custom tuning</string>
 </resources>

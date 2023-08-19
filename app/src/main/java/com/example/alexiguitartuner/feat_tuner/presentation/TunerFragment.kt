@@ -30,9 +30,7 @@ class TunerFragment : Fragment() {
     }
 
     private val tunerViewModel : TunerViewModel by viewModels()
-
     private lateinit var permissionLauncher : ActivityResultLauncher<String>
-
     private var _binding: FragmentTunerBinding? = null
     private val binding get() = _binding!!
 
@@ -72,36 +70,31 @@ class TunerFragment : Fragment() {
     }
 
     private fun renderFragment() {
-
         tunerViewModel.startAudioProcessing()
-
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-
                 launch {
-                    tunerViewModel.detectedPitch.collectLatest {
-                        binding.tvPitch.text = it.name
-                        binding.tvFrequency.text = it.frequency.toString()
+                    tunerViewModel.detectedPitch.collectLatest { pitch ->
+                        binding.tvPitch.text = pitch.name
+                        binding.tvFrequency.text = pitch.frequency.toString()
                     }
                 }
-
                 launch {
-                    tunerViewModel.getPitchesOfLastTuning().collect {
-                        binding.llButtons.removeAllViews() // Clear existing buttons, if any
-                        val buttonLayoutParams = LinearLayout.LayoutParams(
-                            0,
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            1.0f
-                        )
-                        for (i in it) {
-                            val button = Button(requireContext())
-                            button.text = i.name
-                            button.setOnClickListener {
-                                tunerViewModel.startPitchGeneration(i.frequency)
-                            }
-                            button.layoutParams = buttonLayoutParams
-                            binding.llButtons.addView(button)
+                    val pitchesOfSelectedTuning = tunerViewModel.getPitchesOfLastTuning()
+                    binding.llButtons.removeAllViews()
+                    val buttonLayoutParams = LinearLayout.LayoutParams(
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1.0f
+                    )
+                    for (i in pitchesOfSelectedTuning) {
+                        val button = Button(requireContext())
+                        button.text = i.name
+                        button.setOnClickListener {
+                            tunerViewModel.startPitchGeneration(i.frequency)
                         }
+                        button.layoutParams = buttonLayoutParams
+                        binding.llButtons.addView(button)
                     }
                 }
             }

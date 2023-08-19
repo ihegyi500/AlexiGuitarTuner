@@ -7,14 +7,11 @@ import com.example.alexiguitartuner.feat_tuner.data.ButtonGenerationRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchDetectionRepository
 import com.example.alexiguitartuner.feat_tuner.data.PitchGenerationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class)
 @HiltViewModel
 class TunerViewModel @Inject constructor(
     private val pitchGenerationRepository: PitchGenerationRepository,
@@ -26,7 +23,7 @@ class TunerViewModel @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
-            initialValue = Pitch("", 0.0)
+            initialValue = Pitch( 0.0,"")
         )
 
     init {
@@ -53,6 +50,6 @@ class TunerViewModel @Inject constructor(
         pitchGenerationRepository.stopPitchGeneration()
     }
 
-    fun getPitchesOfLastTuning() : Flow<List<Pitch>> = buttonGenerationRepository.getPitchesOfLastTuning()
+    suspend fun getPitchesOfLastTuning() : List<Pitch> = buttonGenerationRepository.getPitchesOfLastTuning()
 
 }

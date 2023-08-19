@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_settings_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="25dp"
+    tools:context=".commons.presentation.UserSettingsFragment">
+
+    <TextView
+        android:id="@+id/tvHalfNoteDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/half_note_display"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tbHalfNoteDisplay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tbHalfNoteDisplay"/>
+
+    <ToggleButton
+        android:id="@+id/tbHalfNoteDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOn="@string/sharp"
+        android:textOff="@string/flat_b"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvHalfNoteDisplay"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbHalfNoteDisplay" />
+
+
+    <TextView
+        android:id="@+id/tvNotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notation_system"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tbNotation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tbNotation" />
+
+    <ToggleButton
+        android:id="@+id/tbNotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOff="@string/german"
+        android:textOn="@string/english"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNotation"
+        app:layout_constraintTop_toBottomOf="@+id/md1" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbNotation" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSelectTuning"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/select_tuning_settings"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/md2" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSelectTuning" />
+
+    <Button
+        android:id="@+id/btnCreateTuning"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="@string/create_custom_tuning"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/md3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

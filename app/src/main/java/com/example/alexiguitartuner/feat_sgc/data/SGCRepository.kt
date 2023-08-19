@@ -2,6 +2,7 @@ package com.example.alexiguitartuner.feat_sgc.data
 
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
 import com.example.alexiguitartuner.commons.domain.InstrumentString
+import com.example.alexiguitartuner.commons.domain.Pitch
 import javax.inject.Inject
 
 
@@ -19,25 +20,21 @@ class SGCRepository @Inject constructor(
         appDatabase.stringDAO.insertString(
             InstrumentString(
                 stringNumber,
-                "E4",
+                440.0,
                 25.5,
                 18.0
             )
         )
     }
-
-    suspend fun getFrequencyOfPitch(name : String) : Double {
-        return appDatabase.pitchDAO.getFrequencyOfPitch(name)
-    }
+    suspend fun getPitch(frequency:  Double) : Pitch? = appDatabase.pitchDAO.getPitch(frequency)
+    suspend fun getPitchByName(name: String) : Pitch? = appDatabase.pitchDAO.getPitchByName(name)
 
     suspend fun updateString(string: InstrumentString) {
         appDatabase.stringDAO.updateString(string)
     }
-
     suspend fun deleteString(string:InstrumentString) {
         val stringNumber = string.stringNumber
         appDatabase.stringDAO.deleteString(string)
         appDatabase.stringDAO.decrementRemainingStringNumbers(stringNumber)
     }
-
 }

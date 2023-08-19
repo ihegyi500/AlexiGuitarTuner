@@ -11,5 +11,4 @@ interface TuningDAO {
     suspend fun getTuningById(tuningId: Long?): Tuning
     @Query("SELECT * FROM Tuning WHERE instrumentId = :instrumentId")
     fun getTuningsByInstrument(instrumentId: Long?): Flow<List<Tuning>>
-
 }

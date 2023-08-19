@@ -4,8 +4,8 @@ import androidx.room.TypeConverter
 import com.example.alexiguitartuner.feat_metronome.domain.Rhythm
 
 class Converters {
-    //@TypeConverter
-    //fun fromListIntToString(intList: List<Int>): String = intList.toString()
+    @TypeConverter
+    fun fromListIntToString(intList: List<Int>): String = intList.toString()
     @TypeConverter
     fun toListIntFromString(stringList: String): List<Int> {
         val result = ArrayList<Int>()

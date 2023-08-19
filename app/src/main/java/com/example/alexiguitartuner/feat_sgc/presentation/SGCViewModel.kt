@@ -7,7 +7,6 @@ import com.example.alexiguitartuner.feat_sgc.data.SGCRepository
 import com.example.alexiguitartuner.feat_sgc.domain.CalculateStringGaugeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,37 +16,23 @@ class SGCViewModel @Inject constructor(
     private val stringGaugeUseCase: CalculateStringGaugeUseCase,
     private val sgcRepository: SGCRepository
 ): ViewModel() {
-
-    private var getInstrumentStringJob: Job? = null
-
-    private var _listOfStrings = MutableStateFlow<List<InstrumentString>>(emptyList())
-    val listOfStrings: StateFlow<List<InstrumentString>> = _listOfStrings.asStateFlow()
-
-    init {
-        getInstrumentString()
-    }
-
+    val listOfStrings = sgcRepository.getInstrumentStrings()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = emptyList()
+        )
+    suspend fun getPitch(frequency:  Double) = sgcRepository.getPitch(frequency)
+    suspend fun getPitchByName(name: String) = sgcRepository.getPitchByName(name)
     fun insertString() {
         viewModelScope.launch(Dispatchers.IO) { sgcRepository.insertString() }
     }
-
     fun updateString(string: InstrumentString) {
         viewModelScope.launch(Dispatchers.IO) { sgcRepository.updateString(string) }
     }
-
     fun deleteString(string:InstrumentString) {
         viewModelScope.launch(Dispatchers.IO) { sgcRepository.deleteString(string) }
     }
-
-    suspend fun calculateStringGauge(string: InstrumentString) : String = stringGaugeUseCase(string)
-
-    private fun getInstrumentString() {
-        getInstrumentStringJob?.cancel()
-        getInstrumentStringJob = sgcRepository.getInstrumentStrings()
-            .onEach {
-                _listOfStrings.value = it
-            }
-            .launchIn(viewModelScope)
-    }
+    fun calculateStringGauge(string: InstrumentString) = stringGaugeUseCase(string)
 
 }

@@ -13,7 +13,6 @@ import java.util.TreeSet
 @AndroidEntryPoint
 class ChordTableView (context: Context?, attrs: AttributeSet?)
     : View(context, attrs) {
-
     companion object {
         private const val PITCH_R = 30
         private const val MARGIN = 50

@@ -37,7 +37,7 @@ class PitchDetectionRepository @Inject constructor(
         coroutineScope.launch {
             val pitchFrequency = (pitchDetectionResult.pitch * 100.0).roundToInt() / 100.0
             val pitchName = getPitchName(pitchFrequency)
-            _detectedPitch.emit(Pitch(pitchName, pitchFrequency))
+            _detectedPitch.emit(Pitch(pitchFrequency,pitchName))
         }
     }
 

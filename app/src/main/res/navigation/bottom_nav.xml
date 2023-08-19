@@ -31,8 +31,8 @@
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.alexiguitartuner.commons.presentation.SettingsFragment"
+        android:name="com.example.alexiguitartuner.commons.presentation.UserSettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@xml/root_preferences" />
+        tools:layout="@layout/fragment_user_settings" />
 
 </navigation>

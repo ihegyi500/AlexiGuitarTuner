@@ -3,14 +3,13 @@ package com.example.alexiguitartuner.feat_sgc.presentation.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alexiguitartuner.commons.domain.InstrumentString
 import com.example.alexiguitartuner.databinding.StringlistRowBinding
 import com.example.alexiguitartuner.feat_sgc.presentation.SGCViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class StringListAdapter(
@@ -35,68 +34,35 @@ class StringListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(instrumentString: InstrumentString) {
-            var bufferString = instrumentString
-            binding.tvNumber.text = instrumentString.stringNumber.toString()
-            binding.etName.setText(instrumentString.name)
-            binding.etScaleLength.setText(instrumentString.scaleLength.toString())
-            binding.etTension.setText(instrumentString.tension.toString())
-
-            CoroutineScope(Dispatchers.Main).launch {
-                binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+            sgcViewModel.viewModelScope.launch {
+                binding.tvNumber.text = instrumentString.stringNumber.toString()
+                binding.etScaleLength.setText(instrumentString.scaleLength.toString())
+                binding.etTension.setText(instrumentString.tension.toString())
+                binding.etName.setText(sgcViewModel.getPitch(instrumentString.frequency)?.name)
+                binding.tvGauge.text = sgcViewModel.calculateStringGauge(instrumentString)
+            }
+            binding.fabCalculate.setOnClickListener {
+                sgcViewModel.viewModelScope.launch {
+                    val bufferFrequency = sgcViewModel.getPitchByName(binding.etName.text.toString())?.frequency ?: 0.0
+                    val bufferString = InstrumentString(
+                        instrumentString.stringNumber,
+                        bufferFrequency,
+                        binding.etScaleLength.text.toString().toDouble(),
+                        binding.etTension.text.toString().toDouble()
+                    )
+                    binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+                    if (bufferFrequency != 0.0) {
+                        sgcViewModel.updateString(bufferString)
+                    } else {
+                        binding.etName.error = "Invalid pitch name"
+                    }
+                }
             }
 
             binding.fabDelete.setOnClickListener {
                 sgcViewModel.deleteString(instrumentString)
             }
-
-            binding.etName.setOnFocusChangeListener { _, hasFocus ->
-                if(!hasFocus) {
-                    val currentName = binding.etName.text.toString()
-                    if (validateString(binding) && currentName != instrumentString.name) {
-                        bufferString = instrumentString.copy(name = currentName)
-                        CoroutineScope(Dispatchers.Main).launch {
-                            binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
-                        }
-                        sgcViewModel.updateString(bufferString)
-                    }
-                }
-            }
-
-            binding.etScaleLength.setOnFocusChangeListener { _, hasFocus ->
-                if(!hasFocus) {
-                    val currentScaleLength = binding.etScaleLength.text.toString().toDouble()
-                    if (validateString(binding) && currentScaleLength != instrumentString.scaleLength) {
-                        bufferString = instrumentString.copy(scaleLength = currentScaleLength)
-                        CoroutineScope(Dispatchers.Main).launch {
-                            binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
-                        }
-                        sgcViewModel.updateString(bufferString)
-                    }
-                }
-            }
-
-            binding.etTension.setOnFocusChangeListener { _, hasFocus ->
-                if(!hasFocus) {
-                    val currentTension = binding.etTension.text.toString().toDouble()
-                    if (validateString(binding) && currentTension != instrumentString.tension) {
-                        bufferString = instrumentString.copy(tension = currentTension)
-                        CoroutineScope(Dispatchers.Main).launch {
-                            binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
-                        }
-                        sgcViewModel.updateString(bufferString)
-                    }
-                }
-            }
         }
-    }
-
-    fun validateString(binding : StringlistRowBinding) : Boolean {
-        val doublePattern = Regex("^[1-9]?[0-9](.[0-9])?$")
-        val namePattern = Regex("^[A-H][b#]?[0-8]$")
-
-        return namePattern.containsMatchIn(binding.etName.text.toString()) &&
-            doublePattern.containsMatchIn(binding.etScaleLength.text.toString()) &&
-            doublePattern.containsMatchIn(binding.etTension.text.toString())
     }
 }
 

@@ -1,8 +1,8 @@
 package com.example.alexiguitartuner.feat_sgc.data
 
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
-import com.example.alexiguitartuner.commons.domain.InstrumentString
-import com.example.alexiguitartuner.commons.domain.Pitch
+import com.example.alexiguitartuner.commons.domain.entities.InstrumentString
+import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import javax.inject.Inject
 
 
@@ -32,7 +32,7 @@ class SGCRepository @Inject constructor(
     suspend fun updateString(string: InstrumentString) {
         appDatabase.stringDAO.updateString(string)
     }
-    suspend fun deleteString(string:InstrumentString) {
+    suspend fun deleteString(string: InstrumentString) {
         val stringNumber = string.stringNumber
         appDatabase.stringDAO.deleteString(string)
         appDatabase.stringDAO.decrementRemainingStringNumbers(stringNumber)

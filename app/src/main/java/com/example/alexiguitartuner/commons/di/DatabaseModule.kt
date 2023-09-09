@@ -2,7 +2,6 @@ package com.example.alexiguitartuner.commons.di
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -22,8 +21,8 @@ object DatabaseModule {
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME,
         ).fallbackToDestructiveMigration()
-         //.createFromAsset("alexiGuitarTuner_db.db")
-         .setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
+         .createFromAsset("alexiGuitarTuner_db.db")
+         //.setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
          .build()
     }
 }

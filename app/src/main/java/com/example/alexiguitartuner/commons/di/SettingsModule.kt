@@ -1,7 +1,7 @@
 package com.example.alexiguitartuner.commons.di
 
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
-import com.example.alexiguitartuner.commons.data.db.UserSettingsRepository
+import com.example.alexiguitartuner.commons.data.UserSettingsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

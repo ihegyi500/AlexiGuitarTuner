@@ -3,17 +3,20 @@ package com.example.alexiguitartuner.feat_sgc.presentation.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.alexiguitartuner.commons.domain.InstrumentString
+import com.example.alexiguitartuner.commons.domain.entities.InstrumentString
 import com.example.alexiguitartuner.databinding.StringlistRowBinding
-import com.example.alexiguitartuner.feat_sgc.presentation.SGCViewModel
+import com.example.alexiguitartuner.feat_sgc.presentation.viewmodel.SGCViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class StringListAdapter(
-    private val sgcViewModel : SGCViewModel
+    private val sgcViewModel: SGCViewModel,
+    private val lifecycleScope: LifecycleCoroutineScope
 ) : ListAdapter<InstrumentString, StringListAdapter.ViewHolder>(InstrumentStringDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,15 +37,19 @@ class StringListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(instrumentString: InstrumentString) {
-            sgcViewModel.viewModelScope.launch {
-                binding.tvNumber.text = instrumentString.stringNumber.toString()
-                binding.etScaleLength.setText(instrumentString.scaleLength.toString())
-                binding.etTension.setText(instrumentString.tension.toString())
-                binding.etName.setText(sgcViewModel.getPitch(instrumentString.frequency)?.name)
-                binding.tvGauge.text = sgcViewModel.calculateStringGauge(instrumentString)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val pitchName = sgcViewModel.getPitch(instrumentString.frequency)?.name
+                val gauge = sgcViewModel.calculateStringGauge(instrumentString)
+                withContext(Dispatchers.Main) {
+                    binding.tvNumber.text = instrumentString.stringNumber.toString()
+                    binding.etScaleLength.setText(instrumentString.scaleLength.toString())
+                    binding.etTension.setText(instrumentString.tension.toString())
+                    binding.etName.setText(pitchName)
+                    binding.tvGauge.text = gauge
+                }
             }
             binding.fabCalculate.setOnClickListener {
-                sgcViewModel.viewModelScope.launch {
+                lifecycleScope.launch(Dispatchers.IO) {
                     val bufferFrequency = sgcViewModel.getPitchByName(binding.etName.text.toString())?.frequency ?: 0.0
                     val bufferString = InstrumentString(
                         instrumentString.stringNumber,
@@ -50,11 +57,15 @@ class StringListAdapter(
                         binding.etScaleLength.text.toString().toDouble(),
                         binding.etTension.text.toString().toDouble()
                     )
-                    binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+                    withContext(Dispatchers.Main) {
+                        binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+                    }
                     if (bufferFrequency != 0.0) {
                         sgcViewModel.updateString(bufferString)
                     } else {
-                        binding.etName.error = "Invalid pitch name"
+                        withContext(Dispatchers.Main) {
+                            binding.etName.error = "Invalid pitch name!"
+                        }
                     }
                 }
             }

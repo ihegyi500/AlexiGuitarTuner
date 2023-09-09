@@ -1,7 +1,7 @@
 package com.example.alexiguitartuner.commons.data.db.dao
 
 import androidx.room.*
-import com.example.alexiguitartuner.commons.domain.InstrumentString
+import com.example.alexiguitartuner.commons.domain.entities.InstrumentString
 import kotlinx.coroutines.flow.Flow
 
 @Dao

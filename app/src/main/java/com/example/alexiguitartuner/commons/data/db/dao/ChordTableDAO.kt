@@ -2,7 +2,7 @@ package com.example.alexiguitartuner.commons.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.example.alexiguitartuner.commons.domain.ChordTable
+import com.example.alexiguitartuner.commons.domain.entities.ChordTable
 import kotlinx.coroutines.flow.Flow
 
 @Dao

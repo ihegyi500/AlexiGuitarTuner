@@ -10,6 +10,5 @@ class ChordTableRepository @Inject constructor(
     fun getTuningsByInstrument(id: Long?) = appDatabase.tuningDAO.getTuningsByInstrument(id)
     fun getChordsByTuning(tuningId: Long?) = appDatabase.chordDAO.getChordsByTuning(tuningId)
     fun getChordTablesByChord(chordId: Long?) = appDatabase.chordTableDAO.getChordTablesByChord(chordId)
-
     fun getPitchesByTuning(tuningId: Long) = appDatabase.pitchDAO.getPitchesByTuning(tuningId)
 }

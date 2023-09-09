@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="25dp"
-    tools:context=".commons.presentation.UserSettingsFragment">
+    tools:context=".commons.presentation.ui.UserSettingsFragment">
 
     <TextView
         android:id="@+id/tvHalfNoteDisplay"
@@ -77,6 +77,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/select_tuning_settings"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/md2" />
 
@@ -94,9 +95,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textSize="20sp"
         android:text="@string/create_custom_tuning"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/md3" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCreateTuning" />
+
+    <Button
+        android:id="@+id/btnDeleteTuning"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/delete_all_custom_tunings"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/md4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

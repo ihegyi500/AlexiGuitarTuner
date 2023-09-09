@@ -47,4 +47,10 @@
     <string name="english">English</string>
     <string name="select_tuning_settings">Select tuning</string>
     <string name="create_custom_tuning">Create custom tuning</string>
+    <string name="select_default_tuning_for_the_tuner">Select default tuning for the tuner:</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="name_of_the_new_tuning"><![CDATA[<Name of the new tuning>]]></string>
+    <string name="hertz"> Hertz:</string>
+    <string name="delete_all_custom_tunings">Delete all custom tunings</string>
 </resources>

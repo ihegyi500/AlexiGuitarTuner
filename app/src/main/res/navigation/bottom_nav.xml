@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/navigation_tuner"
-        android:name="com.example.alexiguitartuner.feat_tuner.presentation.TunerFragment"
+        android:name="com.example.alexiguitartuner.feat_tuner.presentation.ui.TunerFragment"
         android:label="@string/title_tuner"
         tools:layout="@layout/fragment_tuner" />
 
     <fragment
         android:id="@+id/navigation_metronome"
-        android:name="com.example.alexiguitartuner.feat_metronome.presentation.MetronomeFragment"
+        android:name="com.example.alexiguitartuner.feat_metronome.presentation.ui.MetronomeFragment"
         android:label="@string/title_metronome"
         tools:layout="@layout/fragment_metronome" />
 
     <fragment
         android:id="@+id/navigation_chords"
-        android:name="com.example.alexiguitartuner.feat_chordtable.presentation.ChordTableFragment"
+        android:name="com.example.alexiguitartuner.feat_chordtable.presentation.ui.ChordTableFragment"
         android:label="@string/title_chords"
         tools:layout="@layout/fragment_chord_table" />
 
     <fragment
         android:id="@+id/navigation_sgc"
-        android:name="com.example.alexiguitartuner.feat_sgc.presentation.SGCFragment"
+        android:name="com.example.alexiguitartuner.feat_sgc.presentation.ui.SGCFragment"
         android:label="@string/title_sgc"
         tools:layout="@layout/fragment_s_g_c" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.alexiguitartuner.commons.presentation.UserSettingsFragment"
+        android:name="com.example.alexiguitartuner.commons.presentation.ui.UserSettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_user_settings" />
 

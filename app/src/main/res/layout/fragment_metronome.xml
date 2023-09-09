@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".feat_metronome.presentation.MetronomeFragment">
+    tools:context=".feat_metronome.presentation.ui.MetronomeFragment">
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/sbBPM"
@@ -95,7 +95,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBPMData" />
 
-    <com.example.alexiguitartuner.feat_metronome.presentation.RhythmView
+    <com.example.alexiguitartuner.feat_metronome.presentation.ui.RhythmView
         android:id="@+id/rhythmView"
         android:layout_width="300dp"
         android:layout_height="50dp"

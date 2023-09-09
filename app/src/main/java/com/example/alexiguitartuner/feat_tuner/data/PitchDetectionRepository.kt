@@ -4,7 +4,7 @@ import be.tarsos.dsp.AudioDispatcher
 import be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone
 import be.tarsos.dsp.pitch.PitchProcessor
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
-import com.example.alexiguitartuner.commons.domain.Pitch
+import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -26,20 +26,21 @@ class PitchDetectionRepository @Inject constructor(
 
     private var pitchList = mutableListOf<Pitch>()
 
-    private val _detectedPitch = MutableSharedFlow<Pitch>()
-    val detectedPitch: SharedFlow<Pitch> = _detectedPitch
+    private val _detectedPitch = MutableStateFlow(Pitch(440.0,"A4"))
+    val detectedPitch: StateFlow<Pitch> = _detectedPitch
 
     private val pitchProcessor = PitchProcessor(
         PitchProcessor.PitchEstimationAlgorithm.FFT_YIN,
         SAMPLE_RATE.toFloat(),
         BUFFER_SIZE
     ) { pitchDetectionResult, _ ->
-        coroutineScope.launch {
-            val pitchFrequency = (pitchDetectionResult.pitch * 100.0).roundToInt() / 100.0
-            val pitchName = getPitchName(pitchFrequency)
-            _detectedPitch.emit(Pitch(pitchFrequency,pitchName))
+        val pitchFrequency = (pitchDetectionResult.pitch * 100.0).roundToInt() / 100.0
+        val pitchName = getPitchName(pitchFrequency)
+        _detectedPitch.update {
+            Pitch(pitchFrequency,pitchName)
         }
     }
+
 
     suspend fun initPitchList() {
         pitchList = database.pitchDAO.getPitches().toMutableList()

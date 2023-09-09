@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".feat_metronome.data.MetronomeService"
+        <service android:name=".feat_metronome.data.service.MetronomeService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback"/>

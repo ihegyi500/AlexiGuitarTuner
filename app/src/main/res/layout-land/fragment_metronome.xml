@@ -17,8 +17,8 @@
         android:thumbTint="@color/colorPrimary"
         android:progressTint="@color/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBPMData" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/rhythmView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnStart"
@@ -27,11 +27,10 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/start"
         android:src="@drawable/ic_baseline_play_arrow_24"
-        app:layout_constraintBottom_toTopOf="@+id/ivNoteBackground"
-        app:layout_constraintEnd_toStartOf="@+id/btnStop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sbBPM"
-        app:tint="@color/colorOnPrimary" />
+        app:layout_constraintBottom_toTopOf="@+id/sbBPM"
+        app:layout_constraintStart_toStartOf="@+id/sbBPM"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnStop"
@@ -40,33 +39,32 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/stop"
         android:src="@drawable/ic_baseline_stop_24"
-        app:layout_constraintBottom_toTopOf="@+id/ivNoteBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnStart"
-        app:layout_constraintTop_toBottomOf="@+id/sbBPM"
-        app:tint="@color/colorOnPrimary" />
+        app:layout_constraintBottom_toTopOf="@+id/sbBPM"
+        app:layout_constraintEnd_toEndOf="@+id/sbBPM"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/tvBPMData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="30dp"
         android:text=""
         android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/btnMinus" />
+        app:layout_constraintBottom_toTopOf="@+id/sbBPM"
+        app:layout_constraintEnd_toStartOf="@+id/tvBPM"
+        app:layout_constraintStart_toEndOf="@+id/btnStart"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvBPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="30dp"
         android:text="@string/bpm"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlus" />
+        app:layout_constraintBottom_toTopOf="@+id/sbBPM"
+        app:layout_constraintEnd_toStartOf="@+id/btnStop"
+        app:layout_constraintStart_toStartOf="@+id/ivNoteBackground"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -81,10 +79,9 @@
         android:layout_height="100dp"
         android:contentDescription="@string/image_of_all_rhythm"
         android:src="@drawable/ic_notes_background"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBPMData" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/sbBPM" />
 
     <ImageView
         android:id="@+id/ivNoteForeground"
@@ -92,24 +89,24 @@
         android:layout_height="50dp"
         android:contentDescription="@string/image_of_current_rhythm"
         android:src="@drawable/ic_quarter_note"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/ivNoteBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBPMData"
-        app:tint="@color/colorOnPrimary" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/sbBPM"
+        app:tint="@color/colorOnPrimary"/>
 
     <com.example.alexiguitartuner.feat_metronome.presentation.ui.RhythmView
         android:id="@+id/rhythmView"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_margin="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPlus"
-        style="@style/Widget.Theme.AlexiGuitarTuner.ButtonStyle"
+        style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -117,20 +114,18 @@
         android:textSize="12sp"
         app:icon="@drawable/ic_baseline_add_24"
         app:layout_constraintEnd_toEndOf="@+id/rhythmView"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/rhythmView"
         tools:ignore="SmallSp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMinus"
-        style="@style/Widget.Theme.AlexiGuitarTuner.ButtonStyle"
+        style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="@string/remove_note"
         android:textSize="12sp"
         app:icon="@drawable/ic_baseline_remove_24"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/rhythmView"
         app:layout_constraintTop_toBottomOf="@+id/rhythmView"
         tools:ignore="SmallSp" />

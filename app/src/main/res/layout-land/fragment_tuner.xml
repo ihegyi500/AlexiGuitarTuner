@@ -6,15 +6,22 @@
     android:id="@+id/tuner_fragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feat_tuner.presentation.ui.TunerFragment"
+    android:padding="15dp"
     android:theme="@style/Theme.AlexiGuitarTuner.LayoutStyle">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
 
     <TextView
         android:id="@+id/tvPitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="60sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvFrequency"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,10 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gl"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPitch" />
 
     <TextView
         android:id="@+id/tvSelectedTuning"
@@ -36,8 +42,8 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/llButtons"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFrequency" />
+        app:layout_constraintStart_toStartOf="@+id/gl"
+        app:layout_constraintTop_toTopOf="@+id/tvPitch" />
 
     <TextView
         android:id="@+id/tvTuning"
@@ -46,20 +52,19 @@
         android:text=""
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gl"
         app:layout_constraintTop_toBottomOf="@+id/tvSelectedTuning" />
 
     <LinearLayout
         android:id="@+id/llButtons"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="15dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFrequency">
 
     </LinearLayout>
 

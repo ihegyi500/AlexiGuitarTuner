@@ -9,14 +9,18 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.*
+import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.feat_metronome.domain.Beat
 import com.example.alexiguitartuner.feat_metronome.domain.MetronomeState
 import com.example.alexiguitartuner.feat_metronome.presentation.viewmodel.MetronomeViewModel
+import com.google.android.material.color.MaterialColors
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
+@SuppressLint("ResourceType")
 @AndroidEntryPoint
 class RhythmView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
@@ -35,15 +39,15 @@ class RhythmView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     private var paintCurrentNote:Paint = Paint()
 
     init {
-        paintBackground.color = Color.DKGRAY
+        paintBackground.color = context!!.getColor(R.color.colorPrimary)
         paintBackground.style = Paint.Style.STROKE
         paintBackground.strokeWidth = 10f
 
-        paintDefaultNote.color = Color.argb(100,55,0,179)//Color.GRAY
+        paintDefaultNote.color = context.getColor(R.color.colorPrimary)
         paintDefaultNote.style = Paint.Style.STROKE
         paintDefaultNote.strokeWidth = 5f
 
-        paintCurrentNote.color = Color.argb(100,55,0,179)//Color.GRAY
+        paintCurrentNote.color = context.getColor(R.color.colorOnPrimary)
         paintCurrentNote.style = Paint.Style.FILL
         paintCurrentNote.strokeWidth = 5f
     }

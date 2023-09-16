@@ -2,6 +2,7 @@ package com.example.alexiguitartuner.feat_tuner.presentation.ui
 
 import android.Manifest
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -17,6 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.databinding.FragmentTunerBinding
 import com.example.alexiguitartuner.feat_tuner.presentation.viewmodel.TunerViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -95,11 +98,13 @@ class TunerFragment : Fragment() {
                         )
                         for (i in state.pitchList) {
                             val button = Button(requireContext())
-                            button.text = i.name.dropLast(1)
-                            button.setOnClickListener {
-                                tunerViewModel.startPitchGeneration(i.frequency)
-                            }
-                            button.layoutParams = buttonLayoutParams
+                                .apply {
+                                    text = i.name.dropLast(1)
+                                    setOnClickListener {
+                                        tunerViewModel.startPitchGeneration(i.frequency)
+                                    }
+                                    layoutParams = buttonLayoutParams
+                                }
                             binding.llButtons.addView(button)
                         }
                     }

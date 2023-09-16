@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@color/colorPrimaryVariant">
 
     <TextView
         android:id="@+id/tvDialogTitle"
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/select_default_tuning_for_the_tuner"
         android:textSize="20sp"
+        android:textColor="@color/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +21,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilInstrument"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/select_instrument"
@@ -32,13 +34,14 @@
             android:id="@+id/actInstrument"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:inputType="none"
+            android:textColor="@color/colorOnPrimary"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTuning"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/select_tuning"
@@ -50,13 +53,14 @@
             android:id="@+id/actTuning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:inputType="none"
+            android:textColor="@color/colorOnPrimary"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnOk"
-        style="@style/Widget.Material3.Button"
+        style="@style/Widget.Theme.AlexiGuitarTuner.ButtonStyle"
         android:text="@string/ok"
         android:textSize="20sp"
         android:layout_width="wrap_content"
@@ -67,7 +71,7 @@
 
     <Button
         android:id="@+id/btnCancel"
-        style="@style/Widget.Material3.Button"
+        style="@style/Widget.Theme.AlexiGuitarTuner.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"

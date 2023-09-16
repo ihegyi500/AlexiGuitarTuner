@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.TreeSet
@@ -33,21 +34,19 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
     private var neckWidth : Float = 0f
 
     init {
-        paintBackground.color = Color.BLACK
+        paintBackground.color = context!!.getColor(R.color.colorPrimary)
         paintBackground.style = Paint.Style.STROKE
         paintBackground.strokeWidth = 10f
 
-        //paintPitch.color = Color.argb(100,55,0,179)
-        paintPitch.color = Color.GREEN
+        paintPitch.color = context.getColor(R.color.colorOnPrimary)
         paintPitch.style = Paint.Style.FILL_AND_STROKE
         paintPitch.strokeWidth = 5f
 
-        //paintPitchOpenString.color = Color.argb(100,55,0,179)
-        paintPitchOpenString.color = Color.GREEN
+        paintPitchOpenString.color = context.getColor(R.color.colorOnPrimary)
         paintPitchOpenString.style = Paint.Style.STROKE
         paintPitchOpenString.strokeWidth = 5f
         
-        paintText.color = Color.BLACK
+        paintText.color = context.getColor(R.color.colorOnPrimary)
         paintText.style = Paint.Style.FILL_AND_STROKE
         paintText.textSize = 70f
     }

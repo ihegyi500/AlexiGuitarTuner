@@ -35,6 +35,7 @@
                 android:textSize="18sp"
                 android:padding="10dp"
                 android:backgroundTint="@color/colorPrimary"
+                android:layout_marginStart="30dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,11 +76,12 @@
                 android:id="@+id/tvGaugeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="@string/string_gauge"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvNumber" />
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etTension"
+                app:layout_constraintStart_toEndOf="@+id/etTension"
+                app:layout_constraintTop_toTopOf="@+id/etTension" />
 
             <TextView
                 android:id="@+id/tvGauge"
@@ -87,8 +89,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@id/tvGaugeText"
-                app:layout_constraintTop_toBottomOf="@+id/tvNumber" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvGaugeText"
+                app:layout_constraintStart_toEndOf="@+id/tvGaugeText"
+                app:layout_constraintTop_toTopOf="@+id/tvGaugeText" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabDelete"
@@ -96,11 +99,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_delete_outline_24"
-                android:layout_marginEnd="30dp"
                 app:fabCustomSize="40dp"
+                android:layout_marginEnd="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fabCalculate" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabCalculate"
@@ -108,9 +111,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_update_24"
-                android:layout_marginEnd="30dp"
                 app:fabCustomSize="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fabDelete"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

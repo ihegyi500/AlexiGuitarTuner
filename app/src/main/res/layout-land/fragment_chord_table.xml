@@ -7,20 +7,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feat_chordtable.presentation.ui.ChordTableFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilInstrument"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/select_instrument"
+        app:layout_constraintEnd_toEndOf="@id/gl"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/actInstrument"
-            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="none"
             android:textColor="@color/colorOnPrimary"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -28,9 +37,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTuning"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.5"
         android:layout_height="wrap_content"
         android:hint="@string/select_tuning"
+        app:layout_constraintEnd_toEndOf="@id/gl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilInstrument">
 
@@ -46,9 +57,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilChord"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.5"
         android:layout_height="wrap_content"
         android:hint="@string/select_chord"
+        app:layout_constraintEnd_toEndOf="@id/gl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilTuning">
 
@@ -68,10 +81,9 @@
         android:text="@string/position"
         android:textSize="20sp"
         android:textColor="@color/colorOnPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/chordTableView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilChord" />
+        app:layout_constraintStart_toStartOf="@+id/gl"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvPositionData"
@@ -80,44 +92,45 @@
         android:text=""
         android:textSize="20sp"
         android:textColor="@color/colorOnPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/chordTableView"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/tilChord" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.alexiguitartuner.feat_chordtable.presentation.ui.ChordTableView
         android:id="@+id/chordTableView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.40"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilChord" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintStart_toStartOf="@+id/gl"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintWidth_percent="0.5" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabDecrementPos"
         style="@style/Widget.Theme.AlexiGuitarTuner.ButtonStyle"
+        app:fabCustomSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:maxImageSize="40dp"
-        android:src="@drawable/baseline_keyboard_arrow_left_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chordTableView"
         android:contentDescription="@string/show_previous_position"
+        android:src="@drawable/baseline_keyboard_arrow_left_24"
+        app:layout_constraintStart_toStartOf="@+id/gl"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="30dp"
         app:tint="@color/colorOnPrimary"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabIncrementPos"
         style="@style/Widget.Theme.AlexiGuitarTuner.ButtonStyle"
+        app:fabCustomSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_marginEnd="321dp"
-        app:maxImageSize="40dp"
+        android:contentDescription="@string/show_next_position"
         android:src="@drawable/baseline_keyboard_arrow_right_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chordTableView"
-        android:contentDescription="@string/show_next_position"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="30dp"
         app:tint="@color/colorOnPrimary"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

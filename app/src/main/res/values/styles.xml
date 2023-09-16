@@ -4,4 +4,26 @@
         <item name="android:background">@color/gray_400</item>
         <item name="exampleColor">@color/light_blue_400</item>
     </style>
+    <style name="Widget.Theme.AlexiGuitarTuner.BottomNavStyle" parent="">
+        <item name="itemBackground">@color/colorPrimaryVariant</item>
+        <item name="itemIconTint">@color/colorOnPrimary</item>
+        <item name="itemTextColor">@color/colorOnPrimary</item>
+    </style>
+    <style name="Widget.Theme.AlexiGuitarTuner.ButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+    <style name="Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:textColor">@color/text_input_box_stroke_color</item>
+        <item name="android:textColorHint">@color/text_input_box_stroke_color</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke_color</item>
+        <item name="endIconTint">@color/text_input_box_stroke_color</item>
+    </style>
+    <style name="Widget.Theme.AlexiGuitarTuner.CardViewStyle" parent="">
+        <item name="cardBackgroundColor">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/colorOnPrimary</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
+
+
 </resources>

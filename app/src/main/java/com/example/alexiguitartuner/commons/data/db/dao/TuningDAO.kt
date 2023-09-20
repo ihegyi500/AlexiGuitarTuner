@@ -22,6 +22,6 @@ interface TuningDAO {
     @Query("SELECT tuningId FROM Tuning ORDER BY tuningId DESC LIMIT 1")
     suspend fun getLastTuningId(): Long
 
-    @Query("DELETE FROM Tuning WHERE tuningId > 8")
+    @Query("DELETE FROM Tuning WHERE tuningId > 9")
     suspend fun deleteAllCustomTunings()
 }

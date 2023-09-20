@@ -16,10 +16,6 @@ class UserSettingsRepository @Inject constructor(
         val initial_user_setting =  UserSettings(
             1,
             1,
-            1,
-            4,
-            100,
-            Rhythm.QUARTER,
             useSharp = true,
             useEnglish = true
         )

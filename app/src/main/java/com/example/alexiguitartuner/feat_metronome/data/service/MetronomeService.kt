@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDeepLinkBuilder
 import com.example.alexiguitartuner.MainActivity
 import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepository
@@ -75,15 +76,11 @@ class MetronomeService : LifecycleService() {
 
         createNotificationChannel()
 
-        val pendingIntent: PendingIntent = Intent(
-            this,
-            MainActivity::class.java).let { notificationIntent ->
-            PendingIntent.getActivity(
-                this,
-                0,
-                notificationIntent,
-                PendingIntent.FLAG_MUTABLE)
-        }
+        val pendingIntent = NavDeepLinkBuilder(this)
+            .setComponentName(MainActivity::class.java)
+            .setGraph(R.navigation.bottom_nav)
+            .setDestination(R.id.navigation_metronome)
+            .createPendingIntent()
 
         val stopSelf = Intent(this, MetronomeService::class.java)
         stopSelf.action = Actions.STOP.toString()
@@ -107,8 +104,9 @@ class MetronomeService : LifecycleService() {
         val notification: Notification = Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("Metronome")
             .setContentText("Metronome notification")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setLargeIcon(Icon.createWithResource(this, R.drawable.ic_launcher_background))
+            .setSmallIcon(R.mipmap.ic_launcher_round)
+            .setLargeIcon(Icon.createWithResource(this, R.mipmap.ic_launcher_round))
+            .setColor(resources.getColor(R.color.colorPrimary, null))
             .setContentIntent(pendingIntent)
             .addAction(stopAction)
             .setDeleteIntent(pStopSelf)

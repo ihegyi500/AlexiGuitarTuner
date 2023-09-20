@@ -32,7 +32,6 @@ class MetronomeRepository {
     private var _metronomeState = MutableStateFlow(initial_state)
     val metronomeState : StateFlow<MetronomeState> = _metronomeState.asStateFlow()
 
-
     fun setRhythm() {
         _metronomeState.update {
             it.copy(
@@ -42,8 +41,6 @@ class MetronomeRepository {
         setBPM(_metronomeState.value.bpm)
     }
 
-
-
     fun setBPM(value : Int) {
         _metronomeState.update {
             it.copy(
@@ -52,7 +49,6 @@ class MetronomeRepository {
             )
         }
     }
-
 
     suspend fun playMetronome() {
         if (!_metronomeState.value.isPlaying) {

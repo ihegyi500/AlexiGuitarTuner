@@ -9,6 +9,6 @@ import com.example.alexiguitartuner.commons.domain.entities.PitchTuningCrossRef
 interface PitchTuningCrossRefDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPitchTuningCrossRef(pitchTuningCrossRef: PitchTuningCrossRef)
-    @Query("DELETE FROM PitchTuningCrossRef WHERE tuningId > 8")
+    @Query("DELETE FROM PitchTuningCrossRef WHERE tuningId > 9")
     suspend fun deleteAllCustomTunings()
 }

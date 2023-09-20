@@ -1,10 +1,15 @@
 package com.example.alexiguitartuner
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.commit
+import androidx.navigation.NavDeepLink
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.alexiguitartuner.databinding.ActivityMainBinding
+import com.example.alexiguitartuner.feat_metronome.presentation.ui.MetronomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 

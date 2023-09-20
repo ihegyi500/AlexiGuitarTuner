@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MetronomeViewModel @Inject constructor(
     private val metronomeRepository: MetronomeRepository
-    ) : ViewModel() {
+) : ViewModel() {
 
     fun startService(context: Context) {
         context.startService(

@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
     companion object {
-        const val SPLASH_TIME = 3000L
+        const val SPLASH_TIME = 2000L
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

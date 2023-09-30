@@ -1,6 +1,7 @@
 package com.example.alexiguitartuner.commons.data
 
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
+import com.example.alexiguitartuner.commons.domain.IUserSettingsRepository
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import com.example.alexiguitartuner.commons.domain.entities.PitchTuningCrossRef
 import com.example.alexiguitartuner.commons.domain.entities.Tuning
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 class UserSettingsRepository @Inject constructor(
     private val appDatabase: AppDatabase
-) {
+): IUserSettingsRepository {
     companion object {
         val initial_user_setting =  UserSettings(
             1,
@@ -21,18 +22,18 @@ class UserSettingsRepository @Inject constructor(
         )
     }
 
-    fun getUserSettings(): Flow<UserSettings> = appDatabase.userSettingsDAO.getUserSettings()
-    suspend fun updateUserSettings(userSettings: UserSettings) = appDatabase.userSettingsDAO.updateUserSettings(userSettings)
-    suspend fun getPitches(): List<Pitch> = appDatabase.pitchDAO.getPitches()
-    suspend fun updatePitches(pitchList: List<Pitch>) = appDatabase.pitchDAO.updatePitches(pitchList)
-    fun getInstruments() = appDatabase.instrumentDAO.getInstruments()
-    fun getTuningsByInstrument(id: Long?) = appDatabase.tuningDAO.getTuningsByInstrument(id)
-    suspend fun getInstrumentByTuning(tuningId: Long?) = appDatabase.instrumentDAO.getInstrumentByTuningId(tuningId)
-    suspend fun getTuningById(tuningId: Long?) = appDatabase.tuningDAO.getTuningById(tuningId)
-    suspend fun insertTuning(tuning: Tuning) = appDatabase.tuningDAO.insertTuning(tuning)
-    suspend fun insertPitchTuningCrossRef(pitchTuningCrossRef: PitchTuningCrossRef) = appDatabase.pitchTuningCrossRefDAO.insertPitchTuningCrossRef(pitchTuningCrossRef)
-    suspend fun getLastTuningId() = appDatabase.tuningDAO.getLastTuningId()
-    suspend fun deleteAllCustomTunings() {
+    override fun getUserSettings(): Flow<UserSettings> = appDatabase.userSettingsDAO.getUserSettings()
+    override suspend fun updateUserSettings(userSettings: UserSettings) = appDatabase.userSettingsDAO.updateUserSettings(userSettings)
+    override suspend fun getPitches(): List<Pitch> = appDatabase.pitchDAO.getPitches()
+    override suspend fun updatePitches(pitchList: List<Pitch>) = appDatabase.pitchDAO.updatePitches(pitchList)
+    override fun getInstruments() = appDatabase.instrumentDAO.getInstruments()
+    override fun getTuningsByInstrument(id: Long?) = appDatabase.tuningDAO.getTuningsByInstrument(id)
+    override suspend fun getInstrumentByTuning(tuningId: Long?) = appDatabase.instrumentDAO.getInstrumentByTuningId(tuningId)
+    override suspend fun getTuningById(tuningId: Long?) = appDatabase.tuningDAO.getTuningById(tuningId)
+    override suspend fun insertTuning(tuning: Tuning) = appDatabase.tuningDAO.insertTuning(tuning)
+    override suspend fun insertPitchTuningCrossRef(pitchTuningCrossRef: PitchTuningCrossRef) = appDatabase.pitchTuningCrossRefDAO.insertPitchTuningCrossRef(pitchTuningCrossRef)
+    override suspend fun getLastTuningId() = appDatabase.tuningDAO.getLastTuningId()
+    override suspend fun deleteAllCustomTunings() {
         appDatabase.tuningDAO.deleteAllCustomTunings()
         appDatabase.pitchTuningCrossRefDAO.deleteAllCustomTunings()
     }

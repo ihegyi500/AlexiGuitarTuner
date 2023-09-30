@@ -5,6 +5,7 @@ import be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone
 import be.tarsos.dsp.pitch.PitchProcessor
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
+import com.example.alexiguitartuner.feat_tuner.domain.IPitchDetectionRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -12,7 +13,7 @@ import kotlin.math.roundToInt
 
 class PitchDetectionRepository @Inject constructor(
     private val database: AppDatabase
-) {
+) : IPitchDetectionRepository {
     companion object {
         const val SAMPLE_RATE = 44100
         const val BUFFER_SIZE = 8192
@@ -63,7 +64,7 @@ class PitchDetectionRepository @Inject constructor(
         }
     }
 
-    private fun getPitchName(frequency: Double): String {
+    override fun getPitchName(frequency: Double): String {
         var res = ""
         for (pitch in pitchList) {
             if(frequency > pitch.frequency - PITCH_DIFF

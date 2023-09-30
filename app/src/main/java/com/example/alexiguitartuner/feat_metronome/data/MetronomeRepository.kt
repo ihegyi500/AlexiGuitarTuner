@@ -3,6 +3,7 @@ package com.example.alexiguitartuner.feat_metronome.data
 import android.media.AudioManager
 import android.media.ToneGenerator
 import com.example.alexiguitartuner.feat_metronome.domain.Beat
+import com.example.alexiguitartuner.feat_metronome.domain.IMetronomeRepository
 import com.example.alexiguitartuner.feat_metronome.domain.MetronomeState
 import com.example.alexiguitartuner.feat_metronome.domain.MetronomeState.Companion.initial_state
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
 
 
-class MetronomeRepository {
+class MetronomeRepository : IMetronomeRepository {
     
     companion object {
         private const val TONE_LENGTH = 50
@@ -32,7 +33,7 @@ class MetronomeRepository {
     private var _metronomeState = MutableStateFlow(initial_state)
     val metronomeState : StateFlow<MetronomeState> = _metronomeState.asStateFlow()
 
-    fun setRhythm() {
+    override fun setRhythm() {
         _metronomeState.update {
             it.copy(
                 rhythm = it.rhythm.getNextRhythm()
@@ -41,7 +42,7 @@ class MetronomeRepository {
         setBPM(_metronomeState.value.bpm)
     }
 
-    fun setBPM(value : Int) {
+    override fun setBPM(value : Int) {
         _metronomeState.update {
             it.copy(
                 bpm = value,
@@ -83,7 +84,7 @@ class MetronomeRepository {
         }
     }
 
-    fun insertNote() {
+    override fun insertNote() {
         if (_metronomeState.value.beatList.size < MAX_NOTE) {
             _metronomeState.update {
                 it.copy(
@@ -98,7 +99,7 @@ class MetronomeRepository {
         }
     }
 
-    fun removeNote() {
+    override fun removeNote() {
         if (_metronomeState.value.beatList.size > MIN_NOTE ) {
             _metronomeState.update {
                 it.copy(
@@ -113,7 +114,7 @@ class MetronomeRepository {
         }
     }
 
-    fun setToneByIndex(index : Int) {
+    override fun setToneByIndex(index : Int) {
         _metronomeState.update {
             it.copy(
                 beatList = _metronomeState.value.beatList.apply {

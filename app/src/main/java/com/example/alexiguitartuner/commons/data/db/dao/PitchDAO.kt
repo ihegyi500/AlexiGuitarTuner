@@ -1,6 +1,7 @@
 package com.example.alexiguitartuner.commons.data.db.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
@@ -15,7 +16,7 @@ interface PitchDAO {
     suspend fun getPitch(frequency: Double): Pitch?
     @Query("SELECT * FROM Pitch WHERE name = :name")
     suspend fun getPitchByName(name: String): Pitch?
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updatePitches(pitchList: List<Pitch>)
     @Query("SELECT * FROM Pitch p " +
             "INNER JOIN PitchTuningCrossRef cr ON p.frequency = cr.frequency " +

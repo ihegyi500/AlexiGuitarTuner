@@ -1,6 +1,8 @@
 package com.example.alexiguitartuner.commons.data.db.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.alexiguitartuner.commons.domain.entities.ChordTable
 import kotlinx.coroutines.flow.Flow
@@ -13,4 +15,7 @@ interface ChordTableDAO {
 
     @Query("SELECT * FROM ChordTable ct WHERE ct.chordId = :chordId")
     fun getChordTablesByChord(chordId: Long?): Flow<List<ChordTable>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertChordTable(chordTable: ChordTable)
 }

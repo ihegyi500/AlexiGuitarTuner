@@ -1,0 +1,60 @@
+package com.example.alexiguitartuner.feat_tuner.data
+
+import com.example.alexiguitartuner.commons.domain.entities.Pitch
+import com.example.alexiguitartuner.feat_tuner.data.fakes.FakePitchDetectionRepository
+import org.junit.Assert.*
+
+import org.junit.Before
+import org.junit.Test
+
+class PitchDetectionRepositoryTest {
+    private val fakePitchDetectionRepository = FakePitchDetectionRepository()
+    @Before
+    fun setUp() {
+        fakePitchDetectionRepository.pitchList = emptyList<Pitch>().toMutableList()
+        ('A'..'Z').forEachIndexed { index, c ->
+            fakePitchDetectionRepository.pitchList.add(
+                Pitch(
+                    index + 1.toDouble(),
+                    c.toString() + index
+                )
+            )
+        }
+    }
+
+    @Test
+    fun getPitchName_out_of_pitch_diff() {
+        val expectedPitchName = ""
+        var actualPitchName = fakePitchDetectionRepository.getPitchName(1.41)
+        assertEquals(expectedPitchName, actualPitchName)
+        actualPitchName = fakePitchDetectionRepository.getPitchName(1.59)
+        assertEquals(expectedPitchName, actualPitchName)
+    }
+
+    @Test
+    fun getPitchName_above_pitch_diff_below_fault_diff() {
+        val expectedPitchName = "Below B1"
+        var actualPitchName = fakePitchDetectionRepository.getPitchName(1.6)
+        assertEquals(expectedPitchName, actualPitchName)
+        actualPitchName = fakePitchDetectionRepository.getPitchName(1.79)
+        assertEquals(expectedPitchName, actualPitchName)
+    }
+
+    @Test
+    fun getPitchName_between_fault_diff() {
+        val expectedPitchName = "B1"
+        var actualPitchName = fakePitchDetectionRepository.getPitchName(1.8)
+        assertEquals(expectedPitchName, actualPitchName)
+        actualPitchName = fakePitchDetectionRepository.getPitchName(2.2)
+        assertEquals(expectedPitchName, actualPitchName)
+    }
+
+    @Test
+    fun getPitchName_above_fault_diff() {
+        val expectedPitchName = "Above B1"
+        var actualPitchName = fakePitchDetectionRepository.getPitchName(2.21)
+        assertEquals(expectedPitchName, actualPitchName)
+        actualPitchName = fakePitchDetectionRepository.getPitchName(2.4)
+        assertEquals(expectedPitchName, actualPitchName)
+    }
+}

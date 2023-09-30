@@ -50,9 +50,11 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
         paintText.style = Paint.Style.FILL_AND_STROKE
         paintText.textSize = 70f
     }
-    override fun onDraw(canvas: Canvas?) {
+
+
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas?.drawRect(0F,0F, width.toFloat(), height.toFloat(),paintBackground)
+        canvas.drawRect(0F,0F, width.toFloat(), height.toFloat(),paintBackground)
         if (pitchPositions.isNotEmpty()) {
             fretHeight = (4 * height / 5).toFloat()
             neckWidth = (4 * width / 5 - MARGIN).toFloat()

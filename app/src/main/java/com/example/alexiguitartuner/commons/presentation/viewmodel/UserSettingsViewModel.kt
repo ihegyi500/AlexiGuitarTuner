@@ -2,8 +2,8 @@ package com.example.alexiguitartuner.commons.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.alexiguitartuner.commons.data.UserSettingsRepository
-import com.example.alexiguitartuner.commons.data.UserSettingsRepository.Companion.initial_user_setting
+import com.example.alexiguitartuner.commons.data.UserSettingsRepositoryImpl.Companion.initial_user_setting
+import com.example.alexiguitartuner.commons.domain.UserSettingsRepository
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import com.example.alexiguitartuner.commons.domain.entities.UserSettings
 import dagger.hilt.android.lifecycle.HiltViewModel

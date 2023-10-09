@@ -2,7 +2,7 @@ package com.example.alexiguitartuner.commons.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.alexiguitartuner.commons.data.UserSettingsRepository
+import com.example.alexiguitartuner.commons.domain.UserSettingsRepository
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import com.example.alexiguitartuner.commons.domain.entities.PitchTuningCrossRef
 import com.example.alexiguitartuner.commons.domain.entities.Tuning

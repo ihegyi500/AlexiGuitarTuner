@@ -17,7 +17,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.alexiguitartuner.MainActivity
 import com.example.alexiguitartuner.R
-import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepository
+import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepositoryImpl
+import com.example.alexiguitartuner.feat_metronome.domain.MetronomeRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject

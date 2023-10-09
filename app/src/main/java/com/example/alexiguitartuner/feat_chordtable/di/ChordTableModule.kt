@@ -1,7 +1,8 @@
 package com.example.alexiguitartuner.feat_chordtable.di
 
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
-import com.example.alexiguitartuner.feat_chordtable.data.ChordTableRepository
+import com.example.alexiguitartuner.feat_chordtable.data.ChordTableRepositoryImpl
+import com.example.alexiguitartuner.feat_chordtable.domain.ChordTableRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +17,8 @@ object ChordTableModule {
     @Singleton
     fun provideChordTableRepository(
         appDatabase: AppDatabase
-    ) : ChordTableRepository{
-        return ChordTableRepository(appDatabase)
+    ) : ChordTableRepository {
+        return ChordTableRepositoryImpl(appDatabase)
     }
 
 

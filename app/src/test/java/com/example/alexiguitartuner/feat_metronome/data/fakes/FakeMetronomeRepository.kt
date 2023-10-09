@@ -1,51 +1,103 @@
 package com.example.alexiguitartuner.feat_metronome.data.fakes
 
-import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepository
+import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepositoryImpl
 import com.example.alexiguitartuner.feat_metronome.domain.Beat
-import com.example.alexiguitartuner.feat_metronome.domain.IMetronomeRepository
+import com.example.alexiguitartuner.feat_metronome.domain.MetronomeRepository
 import com.example.alexiguitartuner.feat_metronome.domain.MetronomeState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.updateAndGet
 
-class FakeMetronomeRepository : IMetronomeRepository {
+class FakeMetronomeRepository : MetronomeRepository {
     companion object {
-        private const val TONE_LENGTH = 50
         const val MIN_NOTE = 3
-        private const val MAX_NOTE = 8
+        const val MAX_NOTE = 8
         private const val MIN_IN_MILLIS = 60000
     }
 
-    lateinit var metronomeState : MetronomeState
+    private var _metronomeState : MutableStateFlow<MetronomeState> = MutableStateFlow(MetronomeState.initial_state)
+    override val metronomeState : StateFlow<MetronomeState> = _metronomeState.asStateFlow()
+
+    fun resetMetronomeState() {
+
+        _metronomeState.updateAndGet {
+            MetronomeState.initial_state
+        }
+    }
+
+    override suspend fun playMetronome() {
+        _metronomeState.update {
+            it.copy(
+                isPlaying = true
+            )
+        }
+    }
+
+    override fun pauseMetronome() {
+        _metronomeState.update {
+            it.copy(
+                isPlaying = false
+            )
+        }
+    }
 
     override fun setRhythm() {
-        metronomeState = metronomeState.copy(
-            rhythm = metronomeState.rhythm.getNextRhythm()
-        )
+        _metronomeState.update {
+            it.copy(
+                rhythm = it.rhythm.getNextRhythm()
+            )
+        }
+        setBPM(_metronomeState.value.bpm)
     }
 
     override fun setBPM(value: Int) {
-        metronomeState = metronomeState.copy(
-            bpm = value
-        )
+        _metronomeState.update {
+            it.copy(
+                bpm = value,
+                tempo = (MIN_IN_MILLIS / (value * it.rhythm.value)).toLong()
+            )
+        }
     }
 
     override fun insertNote() {
-        if (metronomeState.beatList.size < MAX_NOTE) {
-            metronomeState = metronomeState.copy(
-                beatList = metronomeState.beatList
-                    .apply {
-                        add(Beat.LOUD)
-                    }
-            )
+        if (_metronomeState.value.beatList.size < MAX_NOTE) {
+            _metronomeState.update {
+                it.copy(
+                    beatList = it.beatList
+                        .apply {
+                            add(Beat.LOUD)
+                        }
+                )
+            }
         } else {
             throw Exception("Only $MAX_NOTE notes are allowed!")
         }
     }
 
     override fun removeNote() {
-        TODO("Not yet implemented")
+        if (_metronomeState.value.beatList.size > MIN_NOTE) {
+            _metronomeState.update {
+                it.copy(
+                    beatList = it.beatList
+                        .apply {
+                            if (it.beatListIterator != this.size - 1) removeLast()
+                        }
+                )
+            }
+        } else {
+            throw Exception("At least $MIN_NOTE notes are necessary!")
+        }
     }
 
     override fun setToneByIndex(index: Int) {
-        TODO("Not yet implemented")
+        _metronomeState.update {
+            it.copy(
+                beatList = it.beatList.apply {
+                    this[index] = it.beatList[index].getNextTone()
+                }
+            )
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.example.alexiguitartuner.feat_metronome.data
 import android.media.AudioManager
 import android.media.ToneGenerator
 import com.example.alexiguitartuner.feat_metronome.domain.Beat
-import com.example.alexiguitartuner.feat_metronome.domain.IMetronomeRepository
+import com.example.alexiguitartuner.feat_metronome.domain.MetronomeRepository
 import com.example.alexiguitartuner.feat_metronome.domain.MetronomeState
 import com.example.alexiguitartuner.feat_metronome.domain.MetronomeState.Companion.initial_state
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
 
 
-class MetronomeRepository : IMetronomeRepository {
+class MetronomeRepositoryImpl : MetronomeRepository {
     
     companion object {
         private const val TONE_LENGTH = 50
@@ -31,7 +31,7 @@ class MetronomeRepository : IMetronomeRepository {
     private var metronomePlayerJob : Job? = null
 
     private var _metronomeState = MutableStateFlow(initial_state)
-    val metronomeState : StateFlow<MetronomeState> = _metronomeState.asStateFlow()
+    override val metronomeState : StateFlow<MetronomeState> = _metronomeState.asStateFlow()
 
     override fun setRhythm() {
         _metronomeState.update {
@@ -46,12 +46,12 @@ class MetronomeRepository : IMetronomeRepository {
         _metronomeState.update {
             it.copy(
                 bpm = value,
-                tempo = (MIN_IN_MILLIS / (it.bpm * it.rhythm.value)).toLong()
+                tempo = (MIN_IN_MILLIS / (value * it.rhythm.value)).toLong()
             )
         }
     }
 
-    suspend fun playMetronome() {
+    override suspend fun playMetronome() {
         if (!_metronomeState.value.isPlaying) {
                 _metronomeState.update { it.copy(isPlaying = true) }
                 metronomePlayerJob = CoroutineScope(Dispatchers.Default).launch {
@@ -74,13 +74,19 @@ class MetronomeRepository : IMetronomeRepository {
             }
     }
 
-    fun pauseMetronome(){
+    override fun pauseMetronome(){
         if (_metronomeState.value.isPlaying) {
             if (metronomePlayerJob != null) {
                 metronomePlayerJob?.cancel()
             }
-            _metronomeState.update { it.copy(isPlaying = false) }
-            _metronomeState.update { it.copy(beatListIterator = 0) }
+            _metronomeState.update {
+                it.copy(
+                    isPlaying = false,
+                    beatListIterator = 0
+                )
+            }
+
+            //_metronomeState.update { it.copy(beatListIterator = 0) }
         }
     }
 
@@ -105,7 +111,7 @@ class MetronomeRepository : IMetronomeRepository {
                 it.copy(
                     beatList = it.beatList
                         .apply {
-                            if (_metronomeState.value.beatListIterator != this.size - 1) removeLast()
+                            if (it.beatListIterator != this.size - 1) removeLast()
                         }
                 )
             }
@@ -117,8 +123,8 @@ class MetronomeRepository : IMetronomeRepository {
     override fun setToneByIndex(index : Int) {
         _metronomeState.update {
             it.copy(
-                beatList = _metronomeState.value.beatList.apply {
-                    this[index] = _metronomeState.value.beatList[index].getNextTone()
+                beatList = it.beatList.apply {
+                    this[index] = it.beatList[index].getNextTone()
                 }
             )
         }

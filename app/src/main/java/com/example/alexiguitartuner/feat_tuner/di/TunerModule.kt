@@ -2,9 +2,12 @@ package com.example.alexiguitartuner.feat_tuner.di
 
 import be.tarsos.dsp.io.android.AudioDispatcherFactory.*
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
-import com.example.alexiguitartuner.feat_tuner.data.ButtonGenerationRepository
-import com.example.alexiguitartuner.feat_tuner.data.PitchDetectionRepository
-import com.example.alexiguitartuner.feat_tuner.data.PitchGenerationRepository
+import com.example.alexiguitartuner.feat_tuner.data.ButtonGenerationRepositoryImpl
+import com.example.alexiguitartuner.feat_tuner.data.PitchDetectionRepositoryImpl
+import com.example.alexiguitartuner.feat_tuner.data.PitchGenerationRepositoryImpl
+import com.example.alexiguitartuner.feat_tuner.domain.ButtonGenerationRepository
+import com.example.alexiguitartuner.feat_tuner.domain.PitchDetectionRepository
+import com.example.alexiguitartuner.feat_tuner.domain.PitchGenerationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,13 +23,13 @@ object TunerModule {
     fun providePitchDetectionRepository(
         database:AppDatabase
     ) : PitchDetectionRepository {
-        return PitchDetectionRepository(database)
+        return PitchDetectionRepositoryImpl(database)
     }
 
     @Provides
     @Singleton
     fun providePitchGenerationRepository() : PitchGenerationRepository {
-        return PitchGenerationRepository()
+        return PitchGenerationRepositoryImpl()
     }
 
     @Provides
@@ -34,7 +37,7 @@ object TunerModule {
     fun provideButtonGenerationRepository(
         database:AppDatabase
     ) : ButtonGenerationRepository {
-        return ButtonGenerationRepository(database)
+        return ButtonGenerationRepositoryImpl(database)
     }
 
 }

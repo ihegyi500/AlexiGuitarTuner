@@ -1,18 +1,17 @@
 package com.example.alexiguitartuner.commons.data
 
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
-import com.example.alexiguitartuner.commons.domain.IUserSettingsRepository
+import com.example.alexiguitartuner.commons.domain.UserSettingsRepository
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import com.example.alexiguitartuner.commons.domain.entities.PitchTuningCrossRef
 import com.example.alexiguitartuner.commons.domain.entities.Tuning
 import com.example.alexiguitartuner.commons.domain.entities.UserSettings
-import com.example.alexiguitartuner.feat_metronome.domain.Rhythm
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class UserSettingsRepository @Inject constructor(
+class UserSettingsRepositoryImpl @Inject constructor(
     private val appDatabase: AppDatabase
-): IUserSettingsRepository {
+): UserSettingsRepository {
     companion object {
         val initial_user_setting =  UserSettings(
             1,

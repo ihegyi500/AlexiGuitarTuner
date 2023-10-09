@@ -3,8 +3,8 @@ package com.example.alexiguitartuner.feat_metronome.presentation.viewmodel
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
-import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepository
 import com.example.alexiguitartuner.feat_metronome.data.service.MetronomeService
+import com.example.alexiguitartuner.feat_metronome.domain.MetronomeRepository
 import com.example.alexiguitartuner.feat_metronome.domain.MetronomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow

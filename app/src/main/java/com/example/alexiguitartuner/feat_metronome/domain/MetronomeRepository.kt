@@ -1,6 +1,11 @@
 package com.example.alexiguitartuner.feat_metronome.domain
 
-interface IMetronomeRepository {
+import kotlinx.coroutines.flow.StateFlow
+
+interface MetronomeRepository {
+    val metronomeState : StateFlow<MetronomeState>
+    suspend fun playMetronome()
+    fun pauseMetronome()
     fun setRhythm()
     fun setBPM(value : Int)
     fun insertNote()

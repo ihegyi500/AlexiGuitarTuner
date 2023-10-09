@@ -68,8 +68,8 @@ class MetronomeFragment : Fragment() {
         binding.sbBPM.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener
         {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                metronomeViewModel.setBPM(binding.sbBPM.progress)
-                binding.tvBPMData.text = binding.sbBPM.progress.toString()
+                metronomeViewModel.setBPM(progress)
+                binding.tvBPMData.text = progress.toString()
                 binding.rhythmView.invalidate()
             }
 

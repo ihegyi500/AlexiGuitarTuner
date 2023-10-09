@@ -3,16 +3,17 @@ package com.example.alexiguitartuner.feat_sgc.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alexiguitartuner.commons.domain.entities.InstrumentString
-import com.example.alexiguitartuner.feat_sgc.data.SGCRepository
+import com.example.alexiguitartuner.feat_sgc.domain.SGCRepository
 import com.example.alexiguitartuner.feat_sgc.domain.usecase.CalculateStringGaugeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SGCViewModel @Inject constructor(
+    private val dispatcher: CoroutineDispatcher,
     private val stringGaugeUseCase: CalculateStringGaugeUseCase,
     private val sgcRepository: SGCRepository
 ): ViewModel() {
@@ -25,13 +26,13 @@ class SGCViewModel @Inject constructor(
     suspend fun getPitch(frequency:  Double) = sgcRepository.getPitch(frequency)
     suspend fun getPitchByName(name: String) = sgcRepository.getPitchByName(name)
     fun insertString() {
-        viewModelScope.launch(Dispatchers.IO) { sgcRepository.insertString() }
+        viewModelScope.launch(dispatcher) { sgcRepository.insertString() }
     }
     fun updateString(string: InstrumentString) {
-        viewModelScope.launch(Dispatchers.IO) { sgcRepository.updateString(string) }
+        viewModelScope.launch(dispatcher) { sgcRepository.updateString(string) }
     }
     fun deleteString(string: InstrumentString) {
-        viewModelScope.launch(Dispatchers.IO) { sgcRepository.deleteString(string) }
+        viewModelScope.launch(dispatcher) { sgcRepository.deleteString(string) }
     }
     fun calculateStringGauge(string: InstrumentString) = stringGaugeUseCase(string)
 

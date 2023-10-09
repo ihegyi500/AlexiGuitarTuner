@@ -1,10 +1,11 @@
 package com.example.alexiguitartuner.feat_tuner.data
 
 import android.media.*
+import com.example.alexiguitartuner.feat_tuner.domain.PitchGenerationRepository
 import kotlinx.coroutines.*
 import kotlin.math.sin
 
-class PitchGenerationRepository {
+class PitchGenerationRepositoryImpl() : PitchGenerationRepository {
 
     companion object {
         const val SAMPLE_RATE = 44100
@@ -25,7 +26,7 @@ class PitchGenerationRepository {
         AUDIO_FORMAT
     )
 
-    private fun initAudioTrack() {
+    override fun initAudioTrack() {
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_MEDIA)
             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -46,7 +47,7 @@ class PitchGenerationRepository {
         )
     }
 
-    private fun generateAudioTrack(frequency: Double) = coroutineScope.launch {
+    override fun generateAudioTrack(frequency: Double) = coroutineScope.launch {
         val frame = ShortArray(buffLength)
         val twoPi: Double = 2.0 * Math.PI
         var phase = 0.0
@@ -64,7 +65,7 @@ class PitchGenerationRepository {
         }
     }
 
-    fun startPitchGeneration(frequency: Double) {
+    override fun startPitchGeneration(frequency: Double) {
         previousFrequency = currentFrequency
         if(!isPlaying || frequency != previousFrequency) {
             if (frequency != previousFrequency) {
@@ -81,7 +82,7 @@ class PitchGenerationRepository {
         }
     }
 
-    fun stopPitchGeneration() {
+    override fun stopPitchGeneration() {
         isPlaying = false
         audioTrack?.stop()
         audioTrack?.release()

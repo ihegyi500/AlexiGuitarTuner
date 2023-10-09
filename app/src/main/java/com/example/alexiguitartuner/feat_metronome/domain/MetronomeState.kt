@@ -14,7 +14,7 @@ data class MetronomeState(
             bpm = 100,
             tempo = 600,
             rhythm = Rhythm.QUARTER,
-            beatList = MutableList(4) {Beat.LOUD},//mutableListOf(4) {Beat.LOUD},
+            beatList = MutableList(4) {Beat.LOUD},
             beatListIterator = 0
         )
     }

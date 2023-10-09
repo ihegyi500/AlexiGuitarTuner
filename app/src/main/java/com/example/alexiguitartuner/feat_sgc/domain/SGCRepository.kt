@@ -4,7 +4,7 @@ import com.example.alexiguitartuner.commons.domain.entities.InstrumentString
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import kotlinx.coroutines.flow.Flow
 
-interface ISGCRepository {
+interface SGCRepository {
     fun getInstrumentStrings() : Flow<List<InstrumentString>>
     suspend fun insertString()
     suspend fun getPitch(frequency:  Double) : Pitch?

@@ -5,15 +5,15 @@ import be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone
 import be.tarsos.dsp.pitch.PitchProcessor
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
-import com.example.alexiguitartuner.feat_tuner.domain.IPitchDetectionRepository
+import com.example.alexiguitartuner.feat_tuner.domain.PitchDetectionRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class PitchDetectionRepository @Inject constructor(
+class PitchDetectionRepositoryImpl @Inject constructor(
     private val database: AppDatabase
-) : IPitchDetectionRepository {
+) : PitchDetectionRepository {
     companion object {
         const val SAMPLE_RATE = 44100
         const val BUFFER_SIZE = 8192
@@ -28,7 +28,7 @@ class PitchDetectionRepository @Inject constructor(
     private var pitchList = mutableListOf<Pitch>()
 
     private val _detectedPitch = MutableStateFlow(Pitch(440.0,"A4"))
-    val detectedPitch: StateFlow<Pitch> = _detectedPitch
+    override val detectedPitch: StateFlow<Pitch> = _detectedPitch
 
     private val pitchProcessor = PitchProcessor(
         PitchProcessor.PitchEstimationAlgorithm.FFT_YIN,
@@ -42,12 +42,11 @@ class PitchDetectionRepository @Inject constructor(
         }
     }
 
-
-    suspend fun initPitchList() {
+    override suspend fun initPitchList() {
         pitchList = database.pitchDAO.getPitches().toMutableList()
     }
 
-    fun startAudioProcessing() = coroutineScope.launch {
+    override fun startAudioProcessing() = coroutineScope.launch {
         if (audioDispatcher == null) {
             audioDispatcher = fromDefaultMicrophone(SAMPLE_RATE, BUFFER_SIZE, OVERLAP)
             audioDispatcher?.addAudioProcessor(pitchProcessor)
@@ -55,7 +54,7 @@ class PitchDetectionRepository @Inject constructor(
         }
     }
 
-    fun stopAudioProcessing() {
+    override fun stopAudioProcessing() {
         if (audioDispatcher != null) {
             audioDispatcher?.stop()
             audioDispatcher?.removeAudioProcessor(pitchProcessor)

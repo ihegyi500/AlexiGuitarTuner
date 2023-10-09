@@ -7,7 +7,7 @@ import com.example.alexiguitartuner.commons.domain.entities.Tuning
 import com.example.alexiguitartuner.commons.domain.entities.UserSettings
 import kotlinx.coroutines.flow.Flow
 
-interface IUserSettingsRepository {
+interface UserSettingsRepository {
     fun getUserSettings(): Flow<UserSettings>
     suspend fun updateUserSettings(userSettings: UserSettings)
     suspend fun getPitches(): List<Pitch>

@@ -3,13 +3,13 @@ package com.example.alexiguitartuner.feat_sgc.data
 import com.example.alexiguitartuner.commons.data.db.AppDatabase
 import com.example.alexiguitartuner.commons.domain.entities.InstrumentString
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
-import com.example.alexiguitartuner.feat_sgc.domain.ISGCRepository
+import com.example.alexiguitartuner.feat_sgc.domain.SGCRepository
 import javax.inject.Inject
 
 
-class SGCRepository @Inject constructor(
+class SGCRepositoryImpl @Inject constructor(
     private val appDatabase: AppDatabase
-) : ISGCRepository {
+) : SGCRepository {
     override fun getInstrumentStrings() = appDatabase.stringDAO.getInstrumentStrings()
 
     override suspend fun insertString() {

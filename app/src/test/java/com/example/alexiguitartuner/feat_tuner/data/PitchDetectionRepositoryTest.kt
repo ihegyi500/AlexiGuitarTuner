@@ -1,24 +1,21 @@
 package com.example.alexiguitartuner.feat_tuner.data
 
-import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import com.example.alexiguitartuner.feat_tuner.data.fakes.FakePitchDetectionRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 
 import org.junit.Before
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class PitchDetectionRepositoryTest {
+    //SUT
     private val fakePitchDetectionRepository = FakePitchDetectionRepository()
     @Before
     fun setUp() {
-        fakePitchDetectionRepository.pitchList = emptyList<Pitch>().toMutableList()
-        ('A'..'Z').forEachIndexed { index, c ->
-            fakePitchDetectionRepository.pitchList.add(
-                Pitch(
-                    index + 1.toDouble(),
-                    c.toString() + index
-                )
-            )
+        runTest {
+            fakePitchDetectionRepository.initPitchList()
         }
     }
 

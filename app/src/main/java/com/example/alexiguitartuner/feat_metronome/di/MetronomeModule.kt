@@ -1,6 +1,7 @@
 package com.example.alexiguitartuner.feat_metronome.di
 
-import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepository
+import com.example.alexiguitartuner.feat_metronome.data.MetronomeRepositoryImpl
+import com.example.alexiguitartuner.feat_metronome.domain.MetronomeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +15,7 @@ object MetronomeModule {
     @Provides
     @Singleton
     fun provideMetronomeRepository() : MetronomeRepository {
-        return MetronomeRepository()
+        return MetronomeRepositoryImpl()
     }
 
 }

@@ -2,8 +2,8 @@ package com.example.alexiguitartuner.commons.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.alexiguitartuner.commons.data.UserSettingsRepository
-import com.example.alexiguitartuner.commons.domain.TuningSelectorViewModel
+import com.example.alexiguitartuner.commons.data.UserSettingsRepositoryImpl
+import com.example.alexiguitartuner.commons.domain.UserSettingsRepository
 import com.example.alexiguitartuner.commons.domain.entities.Instrument
 import com.example.alexiguitartuner.commons.domain.entities.Tuning
 import com.example.alexiguitartuner.commons.domain.entities.UserSettings
@@ -21,12 +21,12 @@ import javax.inject.Inject
 @HiltViewModel
 class SelectTuningViewModel @Inject constructor(
     private val userSettingsRepository: UserSettingsRepository
-) : ViewModel(), TuningSelectorViewModel {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SelectTuningUIState.initial_state)
-    override val uiState: StateFlow<SelectTuningUIState> = _uiState.asStateFlow()
+    val uiState: StateFlow<SelectTuningUIState> = _uiState.asStateFlow()
 
-    private val _userSettings = MutableStateFlow(UserSettingsRepository.initial_user_setting)
+    private val _userSettings = MutableStateFlow(UserSettingsRepositoryImpl.initial_user_setting)
     val userSettings: StateFlow<UserSettings> = _userSettings.asStateFlow()
 
     suspend fun initTuningList() {
@@ -49,7 +49,7 @@ class SelectTuningViewModel @Inject constructor(
         }
     }
 
-    override suspend fun selectInstrument(instrument: Instrument?) {
+    suspend fun selectInstrument(instrument: Instrument?) {
         val tuningList = userSettingsRepository.getTuningsByInstrument(instrument?.instrumentId ?: 0).firstOrNull() ?: emptyList()
         val selectedTuning = tuningList.firstOrNull()
         _uiState.value = _uiState.value.copy(
@@ -59,7 +59,7 @@ class SelectTuningViewModel @Inject constructor(
         selectTuning(selectedTuning)
     }
 
-    override suspend fun selectTuning(tuning: Tuning?) {
+    suspend fun selectTuning(tuning: Tuning?) {
         _uiState.value = _uiState.value.copy(
             selectedTuning = tuning
         )

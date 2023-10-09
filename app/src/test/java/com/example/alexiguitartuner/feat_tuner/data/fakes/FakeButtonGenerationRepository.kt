@@ -4,14 +4,37 @@ import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import com.example.alexiguitartuner.commons.domain.entities.PitchTuningCrossRef
 import com.example.alexiguitartuner.commons.domain.entities.Tuning
 import com.example.alexiguitartuner.commons.domain.entities.UserSettings
-import com.example.alexiguitartuner.feat_tuner.domain.IButtonGenerationRepository
+import com.example.alexiguitartuner.feat_tuner.domain.ButtonGenerationRepository
 
-class FakeButtonGenerationRepository : IButtonGenerationRepository {
+class FakeButtonGenerationRepository : ButtonGenerationRepository {
 
-    val userSettings = UserSettings(1,1,useSharp = true,useEnglish = true)
-    var pitches = mutableListOf<Pitch>()
-    var pitchTuningCrossRef = mutableListOf<PitchTuningCrossRef>()
-    var tunings = mutableListOf<Tuning>()
+    private val userSettings = UserSettings(1,1,useSharp = true,useEnglish = true)
+    private var pitches = mutableListOf<Pitch>()
+    private var pitchTuningCrossRef = mutableListOf<PitchTuningCrossRef>()
+    private var tunings = mutableListOf<Tuning>()
+
+    init {
+        ('A'..'H').forEachIndexed { index, c ->
+            pitches.add(
+                Pitch(index.toDouble(), c.toString() + index)
+            )
+            if (index < 4) {
+                pitchTuningCrossRef.add(
+                    PitchTuningCrossRef(
+                        userSettings.tuningId, index.toDouble()
+                    )
+                )
+            }
+            tunings.add(
+                index,
+                Tuning(
+                    index.toLong() + 1,
+                    "Tuning $c",
+                    index.toLong()
+                )
+            )
+        }
+    }
 
     override suspend fun getPitchesOfLastTuning(): List<Pitch> {
         return mutableListOf<Pitch>().apply {

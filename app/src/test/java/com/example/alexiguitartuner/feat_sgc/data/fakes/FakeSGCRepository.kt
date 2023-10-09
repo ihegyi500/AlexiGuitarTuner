@@ -2,11 +2,11 @@ package com.example.alexiguitartuner.feat_sgc.data.fakes
 
 import com.example.alexiguitartuner.commons.domain.entities.InstrumentString
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
-import com.example.alexiguitartuner.feat_sgc.domain.ISGCRepository
+import com.example.alexiguitartuner.feat_sgc.domain.SGCRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FakeSGCRepository : ISGCRepository {
+class FakeSGCRepository : SGCRepository {
     companion object {
         const val DEFAULT_SCALE_LENGTH = 25.5
         const val DEFAULT_TENSION = 18.0
@@ -44,10 +44,10 @@ class FakeSGCRepository : ISGCRepository {
     }
 
     override suspend fun deleteString(string: InstrumentString) {
-        val stringNumber = string.stringNumber
-        strings.removeAt(stringNumber)
-        for (i in stringNumber until strings.size) {
-            strings[i] = strings[i].copy(stringNumber = i - 1)
+        val index = string.stringNumber - 1
+        strings.removeAt(index)
+        for (i in index until strings.size) {
+            strings[i] = strings[i].copy(stringNumber = i + 1)
         }
     }
 }

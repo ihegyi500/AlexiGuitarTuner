@@ -7,7 +7,7 @@ import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import com.example.alexiguitartuner.commons.domain.entities.Tuning
 import kotlinx.coroutines.flow.Flow
 
-interface IChordTableRepository {
+interface ChordTableRepository {
     fun getInstruments(): Flow<List<Instrument>>
     fun getTuningsByInstrument(id: Long?):  Flow<List<Tuning>>
     fun getChordsByTuning(tuningId: Long?): Flow<List<Chord>>

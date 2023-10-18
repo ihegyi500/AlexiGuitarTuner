@@ -38,7 +38,7 @@ class TunerViewModelTest {
         fakePitchDetectionRepository = FakePitchDetectionRepository()
 
         tunerViewModel = TunerViewModel(
-            StandardTestDispatcher(),
+            UnconfinedTestDispatcher(),
             fakePitchGenerationRepository,
             fakePitchDetectionRepository,
             fakeButtonGenerationRepository

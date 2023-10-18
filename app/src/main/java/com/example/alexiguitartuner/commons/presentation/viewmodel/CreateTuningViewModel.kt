@@ -9,6 +9,7 @@ import com.example.alexiguitartuner.commons.domain.entities.Tuning
 import com.example.alexiguitartuner.commons.presentation.state.CreateTuningUIState
 import com.example.alexiguitartuner.commons.presentation.state.CreateTuningUIState.Companion.concert_pitch
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateTuningViewModel @Inject constructor(
+    private val dispatcher: CoroutineDispatcher,
     private val userSettingsRepository: UserSettingsRepository
 ) : ViewModel() {
 
@@ -29,7 +31,7 @@ class CreateTuningViewModel @Inject constructor(
     val pitchList get() = _pitchList
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             _pitchList = userSettingsRepository.getPitches()
             userSettingsRepository.getInstruments().collectLatest {
                 _uiState.value = _uiState.value.copy(
@@ -66,7 +68,7 @@ class CreateTuningViewModel @Inject constructor(
     }
 
     fun insertTuning(tuningName: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             if (tuningName.isNotBlank()) {
                 userSettingsRepository.insertTuning(
                     Tuning(

@@ -9,6 +9,7 @@ import com.example.alexiguitartuner.commons.domain.entities.Tuning
 import com.example.alexiguitartuner.feat_chordtable.domain.ChordTableRepository
 import com.example.alexiguitartuner.feat_chordtable.presentation.state.ChordTableUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,6 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChordTableViewModel @Inject constructor(
+    private val dispatcher: CoroutineDispatcher,
     private val chordTableRepository: ChordTableRepository
 ) : ViewModel() {
 
@@ -26,7 +28,7 @@ class ChordTableViewModel @Inject constructor(
     val uiState: StateFlow<ChordTableUIState> = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             chordTableRepository.getInstruments().collectLatest { instruments ->
                 val selectedInstrument = instruments.firstOrNull()
                 _uiState.value = _uiState.value.copy(

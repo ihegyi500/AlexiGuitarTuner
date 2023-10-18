@@ -1,6 +1,7 @@
 package com.example.alexiguitartuner.feat_metronome.presentation.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.example.alexiguitartuner.MainActivity
 import com.example.alexiguitartuner.R
 import com.example.alexiguitartuner.databinding.FragmentMetronomeBinding
 import com.example.alexiguitartuner.feat_metronome.domain.Rhythm
 import com.example.alexiguitartuner.feat_metronome.presentation.viewmodel.MetronomeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -103,6 +108,10 @@ class MetronomeFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onResume(owner: LifecycleOwner) {
+                super.onResume(owner)
+                (activity as MainActivity).setBottomNav()
+            }
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
                 _binding = null

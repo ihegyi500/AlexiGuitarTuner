@@ -9,6 +9,7 @@ import com.example.alexiguitartuner.commons.domain.entities.Tuning
 import com.example.alexiguitartuner.commons.domain.entities.UserSettings
 import com.example.alexiguitartuner.commons.presentation.state.SelectTuningUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,6 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SelectTuningViewModel @Inject constructor(
+    private val dispatcher: CoroutineDispatcher,
     private val userSettingsRepository: UserSettingsRepository
 ) : ViewModel() {
 
@@ -30,7 +32,7 @@ class SelectTuningViewModel @Inject constructor(
     val userSettings: StateFlow<UserSettings> = _userSettings.asStateFlow()
 
     suspend fun initTuningList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             userSettingsRepository.getUserSettings().collect{
                 _userSettings.value = it
                 val selectedTuningId = userSettings.value.tuningId
@@ -66,7 +68,7 @@ class SelectTuningViewModel @Inject constructor(
     }
 
     fun updateSelectedTuning() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             val userSettings = userSettings.value.copy(
                 tuningId = _uiState.value.selectedTuning!!.tuningId
             )

@@ -9,13 +9,17 @@ import com.example.alexiguitartuner.feat_tuner.data.fakes.FakeButtonGenerationRe
 import com.example.alexiguitartuner.feat_tuner.data.fakes.FakePitchDetectionRepository
 import com.example.alexiguitartuner.feat_tuner.data.fakes.FakePitchGenerationRepository
 import com.example.alexiguitartuner.feat_tuner.presentation.viewmodel.TunerViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.*
 
 import org.junit.Before
@@ -37,7 +41,7 @@ class SGCViewModelTest {
     fun setUp() {
         fakeSGCRepository = FakeSGCRepository()
         sgcViewModel = SGCViewModel(
-            StandardTestDispatcher(),
+            UnconfinedTestDispatcher(),
             CalculateStringGaugeUseCase(),
             fakeSGCRepository
         )
@@ -57,6 +61,12 @@ class SGCViewModelTest {
                 )
             )
         }
+        Dispatchers.setMain(StandardTestDispatcher())
+    }
+
+    @After
+    fun tearDown(){
+        Dispatchers.resetMain()
     }
 
     @Test

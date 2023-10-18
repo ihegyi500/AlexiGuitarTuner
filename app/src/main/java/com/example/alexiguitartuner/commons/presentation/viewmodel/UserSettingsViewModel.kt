@@ -7,6 +7,7 @@ import com.example.alexiguitartuner.commons.domain.UserSettingsRepository
 import com.example.alexiguitartuner.commons.domain.entities.Pitch
 import com.example.alexiguitartuner.commons.domain.entities.UserSettings
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,6 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserSettingsViewModel @Inject constructor(
+    private val dispatcher: CoroutineDispatcher,
     private val userSettingsRepository: UserSettingsRepository
 ) : ViewModel() {
 
@@ -25,7 +27,7 @@ class UserSettingsViewModel @Inject constructor(
     val userSettings: StateFlow<UserSettings> = _userSettings.asStateFlow()
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             userSettingsRepository.getUserSettings().collectLatest { userSettings ->
                 _userSettings.update {
                     userSettings
@@ -47,7 +49,7 @@ class UserSettingsViewModel @Inject constructor(
     }
 
     fun deleteAllCustomTunings() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             val updatedUserSettings = _userSettings.value.copy(
                 tuningId = 1
             )
@@ -57,7 +59,7 @@ class UserSettingsViewModel @Inject constructor(
     }
 
     fun updateUserSettings() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             userSettingsRepository.getUserSettings().collectLatest { oldUserSettings ->
                 if(oldUserSettings.useSharp != _userSettings.value.useSharp
                     || oldUserSettings.useEnglish != _userSettings.value.useEnglish

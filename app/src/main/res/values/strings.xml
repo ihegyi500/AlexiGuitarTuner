@@ -5,8 +5,6 @@
     <string name="title_chords">Chord Table</string>
     <string name="title_sgc">String Gauge Calculator</string>
     <string name="title_settings">Settings</string>
-
-    <!-- Metronome string resources -->
     <string name="remove_note">Remove note</string>
     <string name="add_note">Add note</string>
     <string name="image_of_current_rhythm">image_of_current_rhythm</string>
@@ -14,8 +12,7 @@
     <string name="bpm">BPM</string>
     <string name="stop">stop</string>
     <string name="start">start</string>
-    <!-- SGC Info-->
-    <string name="info">This String Gauge Calculator helps You to select the best guitar strings for Your needs.</string>
+    <string name="info">This String Gauge Calculator estimates the string gauge (suggesting D\'Addario plain steel strings) based on \n - the frequency of the pitch (in hertz),\n - the scale length (in inch),\n - and the tension (in pounds).\n\nThe app calculates the string gauge with the unit weight of the string (unit weight = (tension x 386.4) / (2 x length x frequency)^2) and the following formula:\n2.1242 * unit weight ^ 0.5\n\nSimply enter these parameters, click the refresh button, and the app will provide you with an estimated string gauge, making it easier to select the right strings for your guitar.</string>
     <string name="accept">GOT IT</string>
     <string name="select_instrument">Select Instrument</string>
     <string name="select_tuning">Select tuning</string>
@@ -39,4 +36,7 @@
     <string name="name_of_the_new_tuning"><![CDATA[<Name of the new tuning>]]></string>
     <string name="hertz"> Hertz:</string>
     <string name="delete_all_custom_tunings">Delete all custom tunings</string>
+    <string name="alexi_guitar_tuner">Alexi Guitar Tuner</string>
+    <string name="created_by_istvan_hegyi">Created by: Istvan Hegyi</string>
+    <string name="selected_tuning">Selected tuning:</string>
 </resources>

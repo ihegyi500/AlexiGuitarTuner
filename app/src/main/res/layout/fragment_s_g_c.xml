@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_height="match_parent"
 android:layout_width="match_parent"
-tools:context=".feat_sgc.presentation.ui.SGCFragment"
+tools:context="com.ihegyi.alexiguitartuner.feat_sgc.presentation.ui.SGCFragment"
     android:theme="@style/Theme.AlexiGuitarTuner.LayoutStyle">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -25,7 +25,8 @@ tools:context=".feat_sgc.presentation.ui.SGCFragment"
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="@color/colorOnPrimary"
         app:backgroundTint="@color/colorOnPrimary"
-        app:srcCompat="@drawable/ic_baseline_question_mark_24" />
+        app:srcCompat="@drawable/ic_baseline_question_mark_24"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddString"
@@ -35,6 +36,7 @@ tools:context=".feat_sgc.presentation.ui.SGCFragment"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/colorOnPrimary"
         app:backgroundTint="@color/colorOnPrimary"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

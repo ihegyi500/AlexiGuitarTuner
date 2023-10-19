@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".feat_metronome.presentation.ui.MetronomeFragment"
+    tools:context="com.ihegyi.alexiguitartuner.feat_metronome.presentation.ui.MetronomeFragment"
     android:theme="@style/Theme.AlexiGuitarTuner.LayoutStyle">
 
     <androidx.appcompat.widget.AppCompatSeekBar
@@ -98,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvBPMData"
         app:tint="@color/colorOnPrimary" />
 
-    <com.example.alexiguitartuner.feat_metronome.presentation.ui.RhythmView
+    <com.ihegyi.alexiguitartuner.feat_metronome.presentation.ui.RhythmView
         android:id="@+id/rhythmView"
         android:layout_width="300dp"
         android:layout_height="50dp"

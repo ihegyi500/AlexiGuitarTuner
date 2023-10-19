@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="25dp"
-    tools:context=".commons.presentation.ui.UserSettingsFragment"
+    tools:context="com.ihegyi.alexiguitartuner.commons.presentation.ui.UserSettingsFragment"
     android:theme="@style/Theme.AlexiGuitarTuner.LayoutStyle">
 
     <TextView

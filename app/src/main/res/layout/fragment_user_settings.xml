@@ -21,15 +21,14 @@
 
     <ToggleButton
         android:id="@+id/tbHalfNoteDisplay"
-        android:backgroundTint="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:textOn="@string/sharp"
-        android:textOff="@string/flat_b"
         android:layout_margin="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:checked="true"
+        android:textOff="@string/flat_b"
+        android:textOn="@string/sharp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvHalfNoteDisplay"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.divider.MaterialDivider
@@ -54,15 +53,14 @@
 
     <ToggleButton
         android:id="@+id/tbNotation"
-        android:backgroundTint="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/colorPrimary"
         android:checked="true"
         android:textOff="@string/german"
         android:textOn="@string/english"
-        android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvNotation"
         app:layout_constraintTop_toBottomOf="@+id/md1" />
 
     <com.google.android.material.divider.MaterialDivider

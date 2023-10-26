@@ -50,21 +50,33 @@ class StringListAdapter(
             }
             binding.fabCalculate.setOnClickListener {
                 lifecycleScope.launch(Dispatchers.IO) {
-                    val bufferFrequency = sgcViewModel.getPitchByName(binding.etName.text.toString())?.frequency ?: 0.0
-                    val bufferString = InstrumentString(
-                        instrumentString.stringNumber,
-                        bufferFrequency,
-                        binding.etScaleLength.text.toString().toDouble(),
-                        binding.etTension.text.toString().toDouble()
-                    )
-                    withContext(Dispatchers.Main) {
-                        binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
-                    }
-                    if (bufferFrequency != 0.0) {
-                        sgcViewModel.updateString(bufferString)
-                    } else {
+                    val scaleLength = binding.etScaleLength.text.toString().toDoubleOrNull()
+                    val tension = binding.etTension.text.toString().toDoubleOrNull()
+                    if (scaleLength == null) {
                         withContext(Dispatchers.Main) {
-                            binding.etName.error = "Invalid pitch name!"
+                            binding.etScaleLength.error = "Invalid scale length!"
+                        }
+                    } else if (tension == null) {
+                        withContext(Dispatchers.Main) {
+                            binding.etTension.error = "Invalid tension!"
+                        }
+                    } else {
+                        val bufferFrequency = sgcViewModel.getPitchByName(binding.etName.text.toString())?.frequency ?: 0.0
+                        val bufferString = InstrumentString(
+                            instrumentString.stringNumber,
+                            bufferFrequency,
+                            scaleLength,
+                            tension
+                        )
+                        withContext(Dispatchers.Main) {
+                            binding.tvGauge.text = sgcViewModel.calculateStringGauge(bufferString)
+                        }
+                        if (bufferFrequency != 0.0) {
+                            sgcViewModel.updateString(bufferString)
+                        } else {
+                            withContext(Dispatchers.Main) {
+                                binding.etName.error = "Invalid pitch name!"
+                            }
                         }
                     }
                 }

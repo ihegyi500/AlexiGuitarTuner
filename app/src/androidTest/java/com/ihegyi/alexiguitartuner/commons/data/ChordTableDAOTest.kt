@@ -18,7 +18,6 @@ import org.junit.Test
 import javax.inject.Inject
 import javax.inject.Named
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @SmallTest
 @HiltAndroidTest
 class ChordTableDAOTest {

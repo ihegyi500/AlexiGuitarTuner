@@ -8,7 +8,6 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class PitchDetectionRepositoryTest {
     //SUT
     private val fakePitchDetectionRepository = FakePitchDetectionRepository()

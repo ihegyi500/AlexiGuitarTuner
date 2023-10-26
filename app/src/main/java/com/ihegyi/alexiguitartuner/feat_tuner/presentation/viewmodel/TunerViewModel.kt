@@ -50,11 +50,6 @@ class TunerViewModel @Inject constructor(
                     pitchList = buttonGenerationRepository.getPitchesOfLastTuning()
                 )
             }
-            /*
-            _pitchButtonsUIState.value = _pitchButtonsUIState.value.copy(
-                tuningName = buttonGenerationRepository.getTuningNameBySettings(),
-                pitchList = buttonGenerationRepository.getPitchesOfLastTuning()
-            )*/
         }
     }
 

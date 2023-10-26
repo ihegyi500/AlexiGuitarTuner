@@ -22,7 +22,6 @@ import javax.inject.Inject
 import javax.inject.Named
 import kotlin.math.pow
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @SmallTest
 @HiltAndroidTest
 class PitchDAOTest {

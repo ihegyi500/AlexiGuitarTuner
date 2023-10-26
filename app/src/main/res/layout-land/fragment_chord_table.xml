@@ -14,22 +14,29 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"/>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilInstrument"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/select_instrument"
-        app:layout_constraintEnd_toEndOf="@id/gl"
+        app:layout_constraintEnd_toEndOf="@id/gl2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/actInstrument"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
+            android:importantForAccessibility="no"
             android:textColor="@color/colorOnPrimary"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,10 +45,9 @@
         android:id="@+id/tilTuning"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.5"
         android:layout_height="wrap_content"
         android:hint="@string/select_tuning"
-        app:layout_constraintEnd_toEndOf="@id/gl"
+        app:layout_constraintEnd_toEndOf="@id/gl2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilInstrument">
 
@@ -50,6 +56,7 @@
             android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
             android:textColor="@color/colorOnPrimary"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,10 +65,9 @@
         android:id="@+id/tilChord"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.5"
         android:layout_height="wrap_content"
         android:hint="@string/select_chord"
-        app:layout_constraintEnd_toEndOf="@id/gl"
+        app:layout_constraintEnd_toEndOf="@id/gl2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilTuning">
 
@@ -70,6 +76,7 @@
             android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
             android:textColor="@color/colorOnPrimary"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -110,27 +117,29 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabDecrementPos"
         style="@style/Widget.Theme.AlexiGuitarTuner.ButtonStyle"
-        app:fabCustomSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/show_previous_position"
         android:src="@drawable/baseline_keyboard_arrow_left_24"
-        app:layout_constraintStart_toStartOf="@+id/gl"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chordTableView"
+        app:layout_constraintStart_toStartOf="@+id/gl2"
+        app:layout_constraintTop_toTopOf="@+id/chordTableView"
         app:maxImageSize="30dp"
-        app:tint="@color/colorOnPrimary"/>
+        app:tint="@color/colorOnPrimary" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabIncrementPos"
         style="@style/Widget.Theme.AlexiGuitarTuner.ButtonStyle"
-        app:fabCustomSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/show_next_position"
         android:src="@drawable/baseline_keyboard_arrow_right_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chordTableView"
+        app:layout_constraintEnd_toStartOf="@+id/gl"
+        app:layout_constraintTop_toTopOf="@+id/chordTableView"
         app:maxImageSize="30dp"
-        app:tint="@color/colorOnPrimary"/>
+        app:tint="@color/colorOnPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

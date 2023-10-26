@@ -39,4 +39,6 @@
     <string name="alexi_guitar_tuner">Alexi Guitar Tuner</string>
     <string name="created_by_istvan_hegyi">Created by: Istvan Hegyi</string>
     <string name="selected_tuning">Selected tuning:</string>
+    <string name="hint">hint</string>
+    <string name="_1">1</string>
 </resources>

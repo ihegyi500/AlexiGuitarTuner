@@ -7,57 +7,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.ihegyi.alexiguitartuner.feat_chordtable.presentation.ui.ChordTableFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilInstrument"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/select_instrument"
+        app:layout_constraintEnd_toStartOf="@+id/gl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/actInstrument"
-            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorOnPrimary"/>
+            android:importantForAccessibility="no"
+            android:inputType="none"
+            android:textColor="@color/colorOnPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTuning"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/select_tuning"
+        app:layout_constraintEnd_toStartOf="@+id/gl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilInstrument">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/actTuning"
-            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorOnPrimary"/>
+            android:importantForAccessibility="no"
+            android:inputType="none"
+            android:textColor="@color/colorOnPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilChord"
         style="@style/Widget.Theme.AlexiGuitarTuner.TextInputLayoutStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/select_chord"
+        app:layout_constraintEnd_toStartOf="@+id/gl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilTuning">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/actChord"
-            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorOnPrimary"/>
+            android:importantForAccessibility="no"
+            android:inputType="none"
+            android:textColor="@color/colorOnPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

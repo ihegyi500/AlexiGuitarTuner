@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,10 +32,12 @@ class ChordTableViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             chordTableRepository.getInstruments().collectLatest { instruments ->
                 val selectedInstrument = instruments.firstOrNull()
-                _uiState.value = _uiState.value.copy(
-                    instrumentList = instruments,
-                    selectedInstrument = selectedInstrument
-                )
+                _uiState.update {
+                    _uiState.value.copy(
+                        instrumentList = instruments,
+                        selectedInstrument = selectedInstrument
+                    )
+                }
                 selectInstrument(selectedInstrument)
             }
         }
@@ -43,10 +46,12 @@ class ChordTableViewModel @Inject constructor(
     suspend fun selectInstrument(instrument: Instrument?) {
         val tuningList = chordTableRepository.getTuningsByInstrument(instrument?.instrumentId ?: 0).firstOrNull() ?: emptyList()
         val selectedTuning = tuningList.firstOrNull()
-        _uiState.value = _uiState.value.copy(
-            selectedInstrument = instrument,
-            tuningList = tuningList
-        )
+        _uiState.update {
+            _uiState.value.copy(
+                selectedInstrument = instrument,
+                tuningList = tuningList
+            )
+        }
         selectTuning(selectedTuning)
     }
 
@@ -54,30 +59,36 @@ class ChordTableViewModel @Inject constructor(
         val chordList = chordTableRepository.getChordsByTuning(tuning?.tuningId ?: 0).firstOrNull() ?: emptyList()
         val selectedChord = chordList.firstOrNull()
         val tuningPitches = chordTableRepository.getPitchesByTuning(tuning?.tuningId ?: 0).firstOrNull() ?: emptyList()
-        _uiState.value = _uiState.value.copy(
-            selectedTuning = tuning,
-            chordList = chordList,
-            tuningPitches = tuningPitches
-        )
+        _uiState.update {
+            _uiState.value.copy(
+                selectedTuning = tuning,
+                chordList = chordList,
+                tuningPitches = tuningPitches
+            )
+        }
         selectChord(selectedChord)
     }
 
     suspend fun selectChord(chord: Chord?) {
         val chordTableList = chordTableRepository.getChordTablesByChord(chord?.chordId ?: 0).firstOrNull() ?: emptyList()
         val selectedChordTable = chordTableList.firstOrNull()
-        _uiState.value = _uiState.value.copy(
-            selectedChord = chord,
-            chordTableList = chordTableList
-        )
+        _uiState.update {
+            _uiState.value.copy(
+                selectedChord = chord,
+                chordTableList = chordTableList
+            )
+        }
         selectChordTable(selectedChordTable)
     }
 
     private fun selectChordTable(chordTable: ChordTable?) {
         val selectedPosition = chordTable?.position ?: 0
-        _uiState.value = _uiState.value.copy(
-            selectedChordTable = chordTable,
-            selectedPosition = selectedPosition
-        )
+        _uiState.update {
+            _uiState.value.copy(
+                selectedChordTable = chordTable,
+                selectedPosition = selectedPosition
+            )
+        }
     }
 
     fun increaseChordTablePosition() {

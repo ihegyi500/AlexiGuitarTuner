@@ -14,8 +14,8 @@ import java.util.TreeSet
 class ChordTableView (context: Context?, attrs: AttributeSet?)
     : View(context, attrs) {
     companion object {
-        private const val PITCH_R = 30
-        private const val MARGIN = 50
+        private const val PITCH_R = 30.0F
+        private const val MARGIN = 50.0F
         private const val FRET_NUM = 5
     }
 
@@ -56,7 +56,7 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
         canvas.drawRect(0F,0F, width.toFloat(), height.toFloat(),paintBackground)
         if (pitchPositions.isNotEmpty()) {
             fretHeight = (4 * height / 5).toFloat()
-            neckWidth = (4 * width / 5 - MARGIN).toFloat()
+            neckWidth = (4 * width / 5 - MARGIN)
             drawGuitarNeck(canvas)
             drawPitches(canvas)
         }
@@ -86,7 +86,7 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
         for (i in 0 until FRET_NUM + 1) {
             canvas?.drawLine(
                 (width.toFloat() / 5) + i * neckWidth / FRET_NUM,
-                MARGIN.toFloat(),
+                MARGIN,
                 (width.toFloat() / 5) + i * neckWidth / FRET_NUM,
                 MARGIN + (numberOfStrings - 1) * fretHeight / numberOfStrings,
                 paintBackground
@@ -115,17 +115,17 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
                     pitchX = width.toFloat() / 5
                     pitchY = MARGIN + i * fretHeight / numberOfStrings
                     canvas?.drawLine(
-                        pitchX - PITCH_R.toFloat(),
-                        pitchY - PITCH_R.toFloat(),
-                        pitchX + PITCH_R.toFloat(),
-                        pitchY + PITCH_R.toFloat(),
+                        pitchX - PITCH_R,
+                        pitchY - PITCH_R,
+                        pitchX + PITCH_R,
+                        pitchY + PITCH_R,
                         paintPitch
                     )
                     canvas?.drawLine(
-                        pitchX + PITCH_R.toFloat(),
-                        pitchY - PITCH_R.toFloat(),
-                        pitchX - PITCH_R.toFloat(),
-                        pitchY + PITCH_R.toFloat(),
+                        pitchX + PITCH_R,
+                        pitchY - PITCH_R,
+                        pitchX - PITCH_R,
+                        pitchY + PITCH_R,
                         paintPitch
                     )
                 }
@@ -135,7 +135,7 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
                     canvas?.drawCircle(
                         pitchX,
                         pitchY,
-                        PITCH_R.toFloat(),
+                        PITCH_R,
                         paintPitchOpenString
                     )
                 }
@@ -147,7 +147,7 @@ class ChordTableView (context: Context?, attrs: AttributeSet?)
                     canvas?.drawCircle(
                         pitchX,
                         pitchY,
-                        PITCH_R.toFloat(),
+                        PITCH_R,
                         paintPitch
                     )
                 }

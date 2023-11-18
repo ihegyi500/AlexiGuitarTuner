@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,20 +33,24 @@ class CreateTuningViewModel @Inject constructor(
     init {
         viewModelScope.launch(dispatcher) {
             _pitchList = userSettingsRepository.getPitches()
-            userSettingsRepository.getInstruments().collectLatest {
-                _uiState.value = _uiState.value.copy(
-                    instrumentList = it,
-                    selectedInstrument = it.first()
-                )
+            userSettingsRepository.getInstruments().collectLatest { list ->
+                _uiState.update {
+                    _uiState.value.copy(
+                        instrumentList = list,
+                        selectedInstrument = list.first()
+                    )
+                }
             }
         }
     }
 
     fun changeSelectedInstrument(pos: Int) {
         val selectedInstrument = _uiState.value.instrumentList[pos]
-        _uiState.value = _uiState.value.copy(
-            selectedInstrument = selectedInstrument
-        )
+        _uiState.update {
+            _uiState.value.copy(
+                selectedInstrument = selectedInstrument
+            )
+        }
         if (selectedInstrument.numberOfStrings > _uiState.value.pitchesOfTuning.size) {
             while (_uiState.value.pitchesOfTuning.size < selectedInstrument.numberOfStrings) {
                 _uiState.value.pitchesOfTuning.add(
@@ -88,5 +93,4 @@ class CreateTuningViewModel @Inject constructor(
             }
         }
     }
-
 }

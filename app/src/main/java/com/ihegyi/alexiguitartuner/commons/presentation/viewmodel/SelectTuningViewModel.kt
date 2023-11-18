@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,12 +40,14 @@ class SelectTuningViewModel @Inject constructor(
                     val selectedInstrument = userSettingsRepository.getInstrumentByTuning(selectedTuningId)
                     val tuningList = userSettingsRepository.getTuningsByInstrument(selectedInstrument.instrumentId).firstOrNull() ?: emptyList()
                     val selectedTuning = userSettingsRepository.getTuningById(selectedTuningId)
-                    _uiState.value = _uiState.value.copy(
-                        instrumentList = instruments,
-                        selectedInstrument = selectedInstrument,
-                        tuningList = tuningList,
-                        selectedTuning = selectedTuning
-                    )
+                    _uiState.update {
+                        _uiState.value.copy(
+                            instrumentList = instruments,
+                            selectedInstrument = selectedInstrument,
+                            tuningList = tuningList,
+                            selectedTuning = selectedTuning
+                        )
+                    }
                 }
             }
         }
@@ -53,17 +56,21 @@ class SelectTuningViewModel @Inject constructor(
     suspend fun selectInstrument(instrument: Instrument?) {
         val tuningList = userSettingsRepository.getTuningsByInstrument(instrument?.instrumentId ?: 0).firstOrNull() ?: emptyList()
         val selectedTuning = tuningList.firstOrNull()
-        _uiState.value = _uiState.value.copy(
-            selectedInstrument = instrument,
-            tuningList = tuningList
-        )
+        _uiState.update {
+            _uiState.value.copy(
+                selectedInstrument = instrument,
+                tuningList = tuningList
+            )
+        }
         selectTuning(selectedTuning)
     }
 
     suspend fun selectTuning(tuning: Tuning?) {
-        _uiState.value = _uiState.value.copy(
-            selectedTuning = tuning
-        )
+        _uiState.update {
+            _uiState.value.copy(
+                selectedTuning = tuning
+            )
+        }
     }
 
     fun updateSelectedTuning() {

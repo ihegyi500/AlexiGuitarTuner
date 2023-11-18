@@ -8,7 +8,6 @@ import com.ihegyi.alexiguitartuner.commons.domain.entities.Instrument
 import com.ihegyi.alexiguitartuner.commons.domain.entities.Tuning
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After

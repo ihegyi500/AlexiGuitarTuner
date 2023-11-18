@@ -5,7 +5,7 @@ import com.ihegyi.alexiguitartuner.feat_tuner.domain.PitchGenerationRepository
 import kotlinx.coroutines.*
 import kotlin.math.sin
 
-class PitchGenerationRepositoryImpl() : PitchGenerationRepository {
+class PitchGenerationRepositoryImpl : PitchGenerationRepository {
 
     companion object {
         const val SAMPLE_RATE = 44100

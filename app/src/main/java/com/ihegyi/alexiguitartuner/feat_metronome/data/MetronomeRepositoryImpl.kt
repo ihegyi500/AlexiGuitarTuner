@@ -85,8 +85,6 @@ class MetronomeRepositoryImpl : MetronomeRepository {
                     beatListIterator = 0
                 )
             }
-
-            //_metronomeState.update { it.copy(beatListIterator = 0) }
         }
     }
 

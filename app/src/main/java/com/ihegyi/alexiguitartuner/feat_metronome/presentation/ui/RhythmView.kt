@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.*
@@ -56,7 +55,6 @@ class RhythmView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     }
 
     private fun drawNotes(canvas: Canvas) {
-        Log.d("custom_view","drawNotes called")
         val numberOfNotes = rhythmViewState.beatList.size
         val currentNote = if(rhythmViewState.beatListIterator == 0) numberOfNotes - 1 else rhythmViewState.beatListIterator - 1
         val noteHeight = (height / 2).toFloat()

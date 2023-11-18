@@ -1,7 +1,6 @@
 package com.ihegyi.alexiguitartuner.feat_tuner.data
 
 import com.ihegyi.alexiguitartuner.feat_tuner.data.fakes.FakePitchDetectionRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 

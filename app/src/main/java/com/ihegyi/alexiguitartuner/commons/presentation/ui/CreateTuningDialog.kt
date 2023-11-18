@@ -52,12 +52,6 @@ class CreateTuningDialog : DialogFragment() {
 
         binding.actInstrument.setOnItemClickListener { _, _, pos, _ ->
             viewModel.changeSelectedInstrument(pos)
-
-           /*lifecycleScope.launch {
-                withContext(Dispatchers.IO) {
-                    //viewModel.selectInstrument(viewModel.uiState.value.instrumentList[pos])
-                }
-            }*/
         }
 
         lifecycleScope.launch {

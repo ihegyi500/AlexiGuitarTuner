@@ -7,7 +7,6 @@ import com.ihegyi.alexiguitartuner.commons.data.db.dao.ChordTableDAO
 import com.ihegyi.alexiguitartuner.commons.domain.entities.ChordTable
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After

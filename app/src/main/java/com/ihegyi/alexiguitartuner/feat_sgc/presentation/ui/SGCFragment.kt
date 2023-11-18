@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.snackbar.Snackbar
 import com.ihegyi.alexiguitartuner.databinding.FragmentSGCBinding
 import com.ihegyi.alexiguitartuner.feat_sgc.presentation.viewmodel.SGCViewModel
 import com.ihegyi.alexiguitartuner.feat_sgc.presentation.adapter.StringListAdapter
@@ -59,6 +60,11 @@ class SGCFragment : Fragment() {
 
         binding.fabAddString.setOnClickListener {
             viewModel.insertString()
+            binding.stringListRecyclerView.postDelayed({
+                stringListAdapter.notifyItemInserted(stringListAdapter.itemCount)
+                Snackbar.make(binding.root,"New string added!",Snackbar.LENGTH_SHORT).show()
+                binding.stringListRecyclerView.scrollToPosition(stringListAdapter.itemCount - 1)
+            }, 100)
         }
 
         binding.fabShowInfo.setOnClickListener {

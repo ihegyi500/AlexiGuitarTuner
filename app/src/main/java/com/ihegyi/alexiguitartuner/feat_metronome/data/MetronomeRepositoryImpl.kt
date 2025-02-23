@@ -2,6 +2,7 @@ package com.ihegyi.alexiguitartuner.feat_metronome.data
 
 import android.media.AudioManager
 import android.media.ToneGenerator
+import android.util.Log
 import com.ihegyi.alexiguitartuner.feat_metronome.domain.Beat
 import com.ihegyi.alexiguitartuner.feat_metronome.domain.MetronomeRepository
 import com.ihegyi.alexiguitartuner.feat_metronome.domain.MetronomeState
@@ -62,6 +63,7 @@ class MetronomeRepositoryImpl : MetronomeRepository {
                                 TONE_LENGTH
                             )
                             toneGenerator.stopTone()
+                            Log.d("Metronome", "${_metronomeState.value.beatList[_metronomeState.value.beatListIterator].value} played!")
 
                             if (_metronomeState.value.beatListIterator == (_metronomeState.value.beatList.size - 1))
                                 _metronomeState.update { it.copy(beatListIterator = 0) }
@@ -109,7 +111,7 @@ class MetronomeRepositoryImpl : MetronomeRepository {
                 it.copy(
                     beatList = it.beatList
                         .apply {
-                            if (it.beatListIterator != this.size - 1) removeLast()
+                            if (it.beatListIterator != this.size - 1) removeAt(size - 1)
                         }
                 )
             }

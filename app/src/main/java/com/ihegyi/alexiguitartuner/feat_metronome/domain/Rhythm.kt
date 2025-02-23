@@ -5,6 +5,6 @@ enum class Rhythm(val value : Int) {
     EIGHTH(2),
     SIXTEENTH(4);
 
-    fun getNextRhythm() : Rhythm = values()[(this.ordinal + 1) % values().size]
+    fun getNextRhythm() : Rhythm = entries[(this.ordinal + 1) % entries.size]
 
 }

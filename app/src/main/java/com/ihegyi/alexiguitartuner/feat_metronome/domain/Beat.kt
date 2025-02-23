@@ -7,6 +7,6 @@ enum class Beat(val value : Int){
     LOUD(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE),
     LOUDER(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD);
 
-    fun getNextTone() : Beat = values()[(this.ordinal + 1) % values().size]
+    fun getNextTone() : Beat = entries[(this.ordinal + 1) % entries.size]
 
 }

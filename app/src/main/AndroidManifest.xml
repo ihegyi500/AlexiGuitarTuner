@@ -18,17 +18,12 @@
         android:theme="@style/Theme.AlexiGuitarTuner"
         tools:targetApi="33">
         <activity
-            android:name="com.ihegyi.alexiguitartuner.SplashActivity"
+            android:name="com.ihegyi.alexiguitartuner.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.ihegyi.alexiguitartuner.MainActivity"
-            android:exported="true">
-
         </activity>
 
         <service

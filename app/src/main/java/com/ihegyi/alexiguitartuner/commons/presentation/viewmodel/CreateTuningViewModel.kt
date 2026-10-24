@@ -60,7 +60,7 @@ class CreateTuningViewModel @Inject constructor(
         }
         else if (selectedInstrument.numberOfStrings < _uiState.value.pitchesOfTuning.size) {
             while (_uiState.value.pitchesOfTuning.size > selectedInstrument.numberOfStrings) {
-                _uiState.value.pitchesOfTuning.removeLast()
+                _uiState.value.pitchesOfTuning.removeAt(_uiState.value.pitchesOfTuning.lastIndex)
             }
         }
     }

@@ -1,28 +1,37 @@
 package com.ihegyi.alexiguitartuner
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-import com.ihegyi.alexiguitartuner.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.content.Intent
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.ihegyi.alexiguitartuner.R.id
+import com.ihegyi.alexiguitartuner.commons.presentation.ui.AlexiApp
+import com.ihegyi.alexiguitartuner.commons.presentation.ui.AlexiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-
+class MainActivity : ComponentActivity() {
+    private var navigationRequest by mutableStateOf<Pair<Int, String>?>(null)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setBottomNav()
+        enableEdgeToEdge()
+        handleNavigationIntent(intent)
+        setContent { AlexiTheme { AlexiApp(navigationRequest) } }
     }
 
-    fun setBottomNav() {
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        navView.setupWithNavController(navController)
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleNavigationIntent(intent)
+    }
+
+    private fun handleNavigationIntent(intent: Intent) {
+        if (intent.getIntArrayExtra("android-support-nav:controller:deepLinkIds")?.contains(id.navigation_metronome) == true) {
+            navigationRequest = Pair((navigationRequest?.first ?: 0) + 1, "metronome")
+        }
     }
 }

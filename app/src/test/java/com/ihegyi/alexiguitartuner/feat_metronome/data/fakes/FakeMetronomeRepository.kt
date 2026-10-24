@@ -81,7 +81,7 @@ class FakeMetronomeRepository : MetronomeRepository {
                 it.copy(
                     beatList = it.beatList
                         .apply {
-                            if (it.beatListIterator != this.size - 1) removeLast()
+                            if (it.beatListIterator != this.size - 1) removeAt(size - 1)
                         }
                 )
             }

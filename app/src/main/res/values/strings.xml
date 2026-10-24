@@ -1,5 +1,25 @@
 <resources>
     <string name="app_name">AlexiGuitarTuner</string>
+    <string name="select_option">Choose an option</string>
+    <string name="tuning_name">Tuning name</string>
+    <string name="string_number">String %1$d</string>
+    <string name="delete_tunings_warning">Delete all custom tunings? This action cannot be undone.</string>
+    <string name="delete">Delete</string>
+    <string name="microphone_explanation">Allow microphone access to detect pitch. Reference tones are available without microphone access.</string>
+    <string name="grant_microphone">Allow microphone</string>
+    <string name="frequency_hz">%1$.2f Hz</string>
+    <string name="beat_description">Beat %1$d: %2$s</string>
+    <string name="rhythm_value">Rhythm: %1$s</string>
+    <string name="position_value">Position: %1$d</string>
+    <string name="no_chord_positions">No chord positions for this tuning.</string>
+    <string name="chord_diagram_description">Fret positions by string: %1$s</string>
+    <string name="add_string">Add string</string>
+    <string name="about_calculator">About calculator</string>
+    <string name="pitch_name">Pitch name (e.g. E2)</string>
+    <string name="scale_length">Scale length (inches)</string>
+    <string name="tension">Tension (pounds)</string>
+    <string name="calculate">Calculate</string>
+    <string name="invalid_string_input">Enter a valid pitch name and positive scale length and tension.</string>
     <string name="title_tuner">Tuner</string>
     <string name="title_metronome">Metronome</string>
     <string name="title_chords">Chord Table</string>

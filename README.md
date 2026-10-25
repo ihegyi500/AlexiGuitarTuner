@@ -33,4 +33,6 @@ Instrumented tests require an awake, unlocked device or emulator. They include t
 
 Set `ANDROID_SERIAL` to select one device when several are connected. Test reports are under `app/build/reports/tests/testDebugUnitTest/` and `app/build/reports/androidTests/connected/debug/`.
 
-The small `res/navigation/bottom_nav.xml` resource remains solely for the unchanged metronome service notification's `NavDeepLinkBuilder`. It contains activity targets, not fragment UI; `MainActivity` translates its intent to the Compose metronome route. See `COMPOSE_MIGRATION.md` for the replacement map and toolchain rationale.
+The small `res/navigation/bottom_nav.xml` resource remains solely for the unchanged metronome service notification's `NavDeepLinkBuilder`. It contains activity targets, not fragment UI; `MainActivity` translates its intent to the Compose metronome route. See [.codex/COMPOSE_MIGRATION.md](.codex/COMPOSE_MIGRATION.md) for the replacement map and toolchain rationale.
+
+The repository guide is in [.codex/AGENTS.md](.codex/AGENTS.md). Planned bug-fix requirements and the implementation checklist are maintained in [.codex/requirements.md](.codex/requirements.md) and [.codex/tasks.md](.codex/tasks.md); these describe future work, not completed fixes.

@@ -1,5 +1,7 @@
 # Compose migration
 
+> Historical record: this document describes the completed Compose UI migration and its validation. Subsequent bug-fix requirements and the implementation checklist are maintained in [requirements.md](requirements.md) and [tasks.md](tasks.md); the backend-preservation statements below refer to the earlier migration scope.
+
 ## Scope and replacement map
 
 ViewModels, UI state models, domain, data, DI, services, and database remain unchanged. A single ComponentActivity hosts Compose; Android still requires an Activity entry point.

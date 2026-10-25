@@ -1,0 +1,810 @@
+{
+  "captured_at_utc": "2026-10-25T19:22:39+00:00",
+  "user_date": "2026-10-25",
+  "git_head": "6f2d206ae0e6229babfa15830e34db0568550043",
+  "worktree_before_phase_artifacts": "clean (git status --short at phase start)",
+  "read_only_database_inspection": true,
+  "room_schema_export_created": false,
+  "migration_fixture_created": false,
+  "database": {
+    "path": "app/src/main/assets/alexiGuitarTuner_db.db",
+    "size_bytes": 61440,
+    "sha256": "54a3c2bbeb290a933bcd6e00a3d9e56aa45a9139b237a60cd7741a3a9b81c9fd",
+    "pragma_user_version": 1,
+    "integrity_check": [
+      "ok"
+    ],
+    "room_identity": [
+      {
+        "id": 42,
+        "identity_hash": "7ac2b80da346916dce14eb93d02793a7"
+      }
+    ],
+    "sqlite_sequence": [
+      {
+        "name": "Chord",
+        "seq": 72
+      },
+      {
+        "name": "ChordTable",
+        "seq": 108
+      },
+      {
+        "name": "Instrument",
+        "seq": 6
+      },
+      {
+        "name": "Tuning",
+        "seq": 9
+      },
+      {
+        "name": "UserSettings",
+        "seq": 1
+      }
+    ],
+    "tables": {
+      "Chord": {
+        "row_count": 72,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "chordId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "name",
+            "type": "TEXT",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 2,
+            "name": "tuningId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "68a4d7873e0d4fea01a0a074dab908e469e2aba064496c4840a5b1d0bbd084fd"
+      },
+      "ChordTable": {
+        "row_count": 108,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "chordTableId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "chordId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 2,
+            "name": "position",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 3,
+            "name": "pitchPos",
+            "type": "TEXT",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "ffdd6db483fc89d3723ab6ec1368cf4def61be800580130151dc761715b15263"
+      },
+      "Instrument": {
+        "row_count": 6,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "instrumentId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "name",
+            "type": "TEXT",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 2,
+            "name": "numberOfStrings",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "fa456435daa842d22b3337cab69ae1df9bfe3c6b2713b92044438dafa0046fc3"
+      },
+      "InstrumentString": {
+        "row_count": 6,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "stringNumber",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "frequency",
+            "type": "REAL",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 2,
+            "name": "scaleLength",
+            "type": "REAL",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 3,
+            "name": "tension",
+            "type": "REAL",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "b36705f038ecd4183d58b7ecd67bb83db634c24701eaf50b33183521c6c93f12"
+      },
+      "Pitch": {
+        "row_count": 108,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "frequency",
+            "type": "REAL",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "name",
+            "type": "TEXT",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "1913de03b3c84f378ab12afa3f09af02be4eb6f4fcc1529cc5596c523d03994d"
+      },
+      "PitchTuningCrossRef": {
+        "row_count": 52,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "tuningId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "frequency",
+            "type": "REAL",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 2
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "23b026aa6037acf55bcbe9996cc9a051aebe4685dd5148f065fb6345d5110ff6"
+      },
+      "Tuning": {
+        "row_count": 9,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "tuningId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "name",
+            "type": "TEXT",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 2,
+            "name": "instrumentId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "598ce8632caa1b7205b1bfcd8b44575abe3f013fb7cbc86eb1986eb2dcce6816"
+      },
+      "UserSettings": {
+        "row_count": 1,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "id",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "tuningId",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 2,
+            "name": "useSharp",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          },
+          {
+            "cid": 3,
+            "name": "useEnglish",
+            "type": "INTEGER",
+            "notnull": 1,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "cd70e78d8dd473f34642d0d329b15e21bc6120a551ed8a39978645363eb980c4"
+      },
+      "android_metadata": {
+        "row_count": 1,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "locale",
+            "type": "TEXT",
+            "notnull": 0,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "3210c7dda896d2a8322d98c7aeb6bffc30b133dd2b2d85fd91acd14968dd2139"
+      },
+      "room_master_table": {
+        "row_count": 1,
+        "columns": [
+          {
+            "cid": 0,
+            "name": "id",
+            "type": "INTEGER",
+            "notnull": 0,
+            "dflt_value": null,
+            "pk": 1
+          },
+          {
+            "cid": 1,
+            "name": "identity_hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "dflt_value": null,
+            "pk": 0
+          }
+        ],
+        "foreign_keys": [],
+        "canonical_rows_sha256": "923579978d8ede2da73343700448c020c36060f83917fa15fed31df6593ead13"
+      }
+    },
+    "sqlite_master": [
+      {
+        "type": "table",
+        "name": "Chord",
+        "tbl_name": "Chord",
+        "sql": "CREATE TABLE `Chord` (`chordId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `tuningId` INTEGER NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "ChordTable",
+        "tbl_name": "ChordTable",
+        "sql": "CREATE TABLE `ChordTable` (`chordTableId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `chordId` INTEGER NOT NULL, `position` INTEGER NOT NULL, `pitchPos` TEXT NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "Instrument",
+        "tbl_name": "Instrument",
+        "sql": "CREATE TABLE `Instrument` (`instrumentId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `numberOfStrings` INTEGER NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "InstrumentString",
+        "tbl_name": "InstrumentString",
+        "sql": "CREATE TABLE `InstrumentString` (`stringNumber` INTEGER NOT NULL, `frequency` REAL NOT NULL, `scaleLength` REAL NOT NULL, `tension` REAL NOT NULL, PRIMARY KEY(`stringNumber`))"
+      },
+      {
+        "type": "table",
+        "name": "Pitch",
+        "tbl_name": "Pitch",
+        "sql": "CREATE TABLE `Pitch` (`frequency` REAL NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`frequency`))"
+      },
+      {
+        "type": "table",
+        "name": "PitchTuningCrossRef",
+        "tbl_name": "PitchTuningCrossRef",
+        "sql": "CREATE TABLE `PitchTuningCrossRef` (`tuningId` INTEGER NOT NULL, `frequency` REAL NOT NULL, PRIMARY KEY(`tuningId`, `frequency`))"
+      },
+      {
+        "type": "table",
+        "name": "Tuning",
+        "tbl_name": "Tuning",
+        "sql": "CREATE TABLE `Tuning` (`tuningId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `instrumentId` INTEGER NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "UserSettings",
+        "tbl_name": "UserSettings",
+        "sql": "CREATE TABLE `UserSettings` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `tuningId` INTEGER NOT NULL, `useSharp` INTEGER NOT NULL, `useEnglish` INTEGER NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "android_metadata",
+        "tbl_name": "android_metadata",
+        "sql": "CREATE TABLE android_metadata (locale TEXT)"
+      },
+      {
+        "type": "table",
+        "name": "room_master_table",
+        "tbl_name": "room_master_table",
+        "sql": "CREATE TABLE room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)"
+      },
+      {
+        "type": "table",
+        "name": "sqlite_sequence",
+        "tbl_name": "sqlite_sequence",
+        "sql": "CREATE TABLE sqlite_sequence(name,seq)"
+      }
+    ],
+    "relation_orphan_counts": {
+      "Tuning_without_Instrument": 0,
+      "Chord_without_Tuning": 0,
+      "ChordTable_without_Chord": 0,
+      "PitchTuningCrossRef_without_Tuning": 0,
+      "PitchTuningCrossRef_without_Pitch": 0,
+      "UserSettings_without_Tuning": 0
+    },
+    "instruments": [
+      {
+        "instrumentId": 1,
+        "name": "6-string guitar",
+        "numberOfStrings": 6
+      },
+      {
+        "instrumentId": 2,
+        "name": "7-string guitar",
+        "numberOfStrings": 7
+      },
+      {
+        "instrumentId": 3,
+        "name": "8-string guitar",
+        "numberOfStrings": 8
+      },
+      {
+        "instrumentId": 4,
+        "name": "4-string bass",
+        "numberOfStrings": 4
+      },
+      {
+        "instrumentId": 5,
+        "name": "5-string bass",
+        "numberOfStrings": 5
+      },
+      {
+        "instrumentId": 6,
+        "name": "Ukulele",
+        "numberOfStrings": 4
+      }
+    ],
+    "tunings": [
+      {
+        "tuningId": 1,
+        "name": "Standard E",
+        "instrumentId": 1
+      },
+      {
+        "tuningId": 2,
+        "name": "Standard D",
+        "instrumentId": 1
+      },
+      {
+        "tuningId": 3,
+        "name": "Drop D",
+        "instrumentId": 1
+      },
+      {
+        "tuningId": 4,
+        "name": "Drop C",
+        "instrumentId": 1
+      },
+      {
+        "tuningId": 5,
+        "name": "Standard B",
+        "instrumentId": 2
+      },
+      {
+        "tuningId": 6,
+        "name": "Standard F#",
+        "instrumentId": 3
+      },
+      {
+        "tuningId": 7,
+        "name": "Standard (EADG)",
+        "instrumentId": 4
+      },
+      {
+        "tuningId": 8,
+        "name": "Standard (BEADG)",
+        "instrumentId": 5
+      },
+      {
+        "tuningId": 9,
+        "name": "Standard (GCEA)",
+        "instrumentId": 6
+      }
+    ],
+    "settings": [
+      {
+        "id": 1,
+        "tuningId": 1,
+        "useSharp": 1,
+        "useEnglish": 1
+      }
+    ],
+    "instrument_strings": [
+      {
+        "stringNumber": 1,
+        "frequency": 329.62755691286986,
+        "scaleLength": 25.5,
+        "tension": 19.0
+      },
+      {
+        "stringNumber": 2,
+        "frequency": 246.94165062806198,
+        "scaleLength": 25.5,
+        "tension": 19.0
+      },
+      {
+        "stringNumber": 3,
+        "frequency": 195.99771799087452,
+        "scaleLength": 25.5,
+        "tension": 19.0
+      },
+      {
+        "stringNumber": 4,
+        "frequency": 146.83238395870364,
+        "scaleLength": 25.5,
+        "tension": 19.0
+      },
+      {
+        "stringNumber": 5,
+        "frequency": 109.99999999999989,
+        "scaleLength": 25.5,
+        "tension": 19.0
+      },
+      {
+        "stringNumber": 6,
+        "frequency": 82.40688922821738,
+        "scaleLength": 25.5,
+        "tension": 19.0
+      }
+    ],
+    "tuning_pitch_counts": [
+      {
+        "tuningId": 1,
+        "name": "Standard E",
+        "numberOfStrings": 6,
+        "stored_relationships": 6
+      },
+      {
+        "tuningId": 2,
+        "name": "Standard D",
+        "numberOfStrings": 6,
+        "stored_relationships": 6
+      },
+      {
+        "tuningId": 3,
+        "name": "Drop D",
+        "numberOfStrings": 6,
+        "stored_relationships": 6
+      },
+      {
+        "tuningId": 4,
+        "name": "Drop C",
+        "numberOfStrings": 6,
+        "stored_relationships": 6
+      },
+      {
+        "tuningId": 5,
+        "name": "Standard B",
+        "numberOfStrings": 7,
+        "stored_relationships": 7
+      },
+      {
+        "tuningId": 6,
+        "name": "Standard F#",
+        "numberOfStrings": 8,
+        "stored_relationships": 8
+      },
+      {
+        "tuningId": 7,
+        "name": "Standard (EADG)",
+        "numberOfStrings": 4,
+        "stored_relationships": 4
+      },
+      {
+        "tuningId": 8,
+        "name": "Standard (BEADG)",
+        "numberOfStrings": 5,
+        "stored_relationships": 5
+      },
+      {
+        "tuningId": 9,
+        "name": "Standard (GCEA)",
+        "numberOfStrings": 4,
+        "stored_relationships": 4
+      }
+    ],
+    "exact_A4_row": [
+      {
+        "frequency": 440.0,
+        "name": "A4"
+      }
+    ]
+  },
+  "sql_reproductions": {
+    "duplicate_strings": {
+      "mode": "in-memory SQLite copy, SQL-level reproduction; not a Room/Compose test",
+      "input_frequencies": [
+        440.0,
+        440.0,
+        440.0,
+        440.0,
+        440.0,
+        440.0
+      ],
+      "stored_relationship_count": 1,
+      "joined_pitch_count": 1,
+      "expected_after_fix": 6
+    },
+    "nonmonotonic_order": {
+      "mode": "in-memory SQLite copy with production DAO join, no ORDER BY; observed order is not a SQL guarantee",
+      "input_names": [
+        "A4",
+        "C4",
+        "E4",
+        "G4"
+      ],
+      "observed_names": [
+        "C4",
+        "E4",
+        "G4",
+        "A4"
+      ],
+      "expected_after_fix": [
+        "A4",
+        "C4",
+        "E4",
+        "G4"
+      ]
+    }
+  },
+  "protected_files_sha256": {
+    "app/.gitignore": "5c3174b74edc6f2b9e0743594b8bd3c7f31e4f4405758cc9872b3fe1de1d28b4",
+    "app/build.gradle": "ea8cf61b5c946f59eec81559222a1abb1a006d684e3de495fd10641ad5813e80",
+    "app/libs/TarsosDSP-Android.jar": "336a992df855543301701700557b5450bc211648f805fe980ecb6f9cd542e86d",
+    "app/proguard-rules.pro": "48c84bd2ac064ce2665b62a6e7c0e87f3b4fe259708a76e16625c2b43e1bc078",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/HiltTestRunner.kt": "bba6df99b45f1afed86462b65b8b880d5e8669dab362ee337c0a0012530053af",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/NavigationTest.kt": "513fac51ffe08beb71f89c765ca749afe9e14c870feaf71bbbe420be4a0fd470",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/commons/data/ChordDAOTest.kt": "b4e95f3589611d04dc3b58eb023726ff26ee8d8a6ad76be627bdb056c827dd9e",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/commons/data/ChordTableDAOTest.kt": "e55f12cceb006c82154c04733b264b2c2071d664b987df7d273573f2b1c8fd70",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/commons/data/InstrumentDAOTest.kt": "d7ed82b688d49122eeb74cba1999780858ccc9e6978318c7147afe3a07d92d11",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/commons/data/PitchDAOTest.kt": "b2c0ce164946dfea0e1d3b1aaa6e18dc4521a3f0bc17df00d0a5880da2fde68b",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/commons/data/PitchTuningCrossRefDAOTest.kt": "2815679b48a692472065e97a2299b2442150eeee4b431d5be73f8f612b69c53e",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/commons/data/StringDAOTest.kt": "6dea25ff6e93c776d0a8d1b2f19bbfeacefbc91c7e647046bce317bc3b0eca25",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/commons/data/TuningDAOTest.kt": "f807b4f598fff4754be1ee592b24b288cf55b932c34452a3551256836fa505f8",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/commons/data/UserSettingsDAOTest.kt": "eda0b3e7a1f69e88034c19582a96a82746341ece76f11666a5ed9751c7efab9d",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/compose/ChordTableScreenTest.kt": "d7d1d52170d7e9c0dc34b7675d63c3245d81c4700c20ab4462c8ffae2b213ee2",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/compose/MetronomeScreenTest.kt": "24dcb24bb180364281ce0295e37af680838a6990d27a2584e5633d2c3a7d89e3",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/compose/SGCScreenTest.kt": "987183d4829635d47462453cc24d12c7f813bdef564b5e59b64efb481f3d681c",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/compose/TunerScreenTest.kt": "80dc98c2f766a63e4b21a244c6131cde063a0faad23ea4276d897cad37a2167c",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/compose/UserSettingsScreenTest.kt": "cf09d88d2a081de14628e23334802d372dcd60e29812bf0bb06178290fd87f6d",
+    "app/src/androidTest/java/com/ihegyi/alexiguitartuner/di/TestAppModule.kt": "8a0e7849da668f059c821809e41732a49320374f7f36b463cae74add20fcd086",
+    "app/src/main/AndroidManifest.xml": "739e7e10d07606659314cf6480eac09233adfc110579b43c2637b1627ae4db5f",
+    "app/src/main/assets/alexiGuitarTuner_db.db": "54a3c2bbeb290a933bcd6e00a3d9e56aa45a9139b237a60cd7741a3a9b81c9fd",
+    "app/src/main/ic_launcher-playstore.png": "848791f14da0f30f4cb1f5cf6ba85d52a4210d1ccbef759488ae51b0b3d67c46",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/AlexiGuitarTunerApp.kt": "9c6c59f1a1d44aa90f6224d6cd03e7b78e4e5fd6a7b6de6bc7e133b8efc95c2b",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/MainActivity.kt": "49e8c3c05afbc062c82813a8b20a8a47996026940b0eb5ee0efe5e3692dce556",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/UserSettingsRepositoryImpl.kt": "34375fe010f6d32ff92c7627a20e06efb156190ee1627d4633752887359c98f5",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/AppDatabase.kt": "674bbbcc3f86fb0fbc7b505fe469b02bf184120dbf61110c76350e5743c73214",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/ChordDAO.kt": "b551f7dfa689e3d48ba798b770843a52399c5f3b7efd321dd68d57689997197b",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/ChordTableDAO.kt": "469d9abde2b205975668ee884e261061dbfb8e429ab94aab34c7ab12ddaa98ad",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/InstrumentDAO.kt": "364c819a2f88813f52b48e1649500f9088d13bbabcc88428d47e0af850f2dd26",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/PitchDAO.kt": "255eaf3dccac2ba84e0b46af451547357aad22b83f7c14cefc40138e1f23485c",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/PitchTuningCrossRefDAO.kt": "8b5a5b535ab2e700979cdd9bd118f3104324156f7b3e89a1f193e51d10d5cb80",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/StringDAO.kt": "d31682307c78c80d51f779fe6f07d04012f0e8ff22a45cb03c8a4e1d162df38b",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/TuningDAO.kt": "903b404e814a42696d8dd41330cf484214dd729c6ac9c76dbeddd60063351cfc",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/UserSettingsDAO.kt": "effdacdaf2093495cc6b04f98268f2453ef52514656f209507e28f6845f9ec65",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/di/DatabaseModule.kt": "eddc7ff2892ea5254888604f80c8540b6b2f79931703c073f3ea0958a3a8e42f",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/di/DispatcherModule.kt": "9183deea0bc171d68d6a8713c60eb415e2fafe238698d31d74cde93cb1f21173",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/di/SettingsModule.kt": "b9482117bcd8452e4a236fb75a486cbafe6688f66e99d5b8c857b0a679f141f9",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/UserSettingsRepository.kt": "124f3e35f8f1a290615c1d2b7d5c96770ce1dadb750e11679a297a10489819df",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/converter/Converters.kt": "defa9f8046667fa78ac3e1ee123208ab59d320713eb78dc76855e6e93dfeb8e3",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/entities/Chord.kt": "bcd2a87c68ce100edb3545d63f8aecf3634cc39d73f6e8cacdf68ff02409a30b",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/entities/ChordTable.kt": "24b701d0053004a669007f2f99d868eae8a3f9b64ad1bad904e3da6483b4d38e",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/entities/Instrument.kt": "cb9d2ea90bbe7e9451e7531b5bc8fe59ba4c0e2de6559728b8934b638c0d4e91",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/entities/InstrumentString.kt": "bb4bd205c220001826b48a0ee76903f49e3c5bbc4409ec6d08286f915af15d69",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/entities/Pitch.kt": "24fe406466bc709fefa062c163c76a1a81d58b55bfcbabfa0d5b12d423e583ee",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/entities/PitchTuningCrossRef.kt": "f57c978923aefbc54f7654f1e9614bdb6f703049c03418be3c977821d1a18df1",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/entities/Tuning.kt": "3a19799270d80a379fd5e8999d1e521cfbd62cb6298833e11f1d5e18eee22e15",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/domain/entities/UserSettings.kt": "1de2e3fffab298075c8dad1000af87f7ac7736bacc1104387a259557a837b614",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/state/CreateTuningUIState.kt": "0881eb13d637c8b6d43763f6d0d446791e75ec629aa231fd0defbf3f319c5d20",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/state/SelectTuningUIState.kt": "4fff6858370355ed309a1487b7217e8a89e137e6e8cf0376202747de14808327",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/ui/AlexiApp.kt": "0f3273ae84b75f7a2d40623feb0b356b616598f21c798eefee725b281f8b94af",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/ui/ComposeComponents.kt": "7f7a1c114f36ab418784d025b4c7317a7a84fcd46add1f453aa0a9177109a19d",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/ui/TuningDialogs.kt": "6a3608368ee9ab4c92fafaf66c3687d9ea167cbd1c2f15c9bb599acb6ade1e3e",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/ui/UserSettingsScreen.kt": "3d98766f9fe710e6703521d6b67d19faf18ab70cc0edf1094a9fc5840fd09913",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/viewmodel/CreateTuningViewModel.kt": "d33e387388e97e4dbd9e4e399bdd8d00c7c56c7037d6b96f6b5421545291e3fd",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/viewmodel/SelectTuningViewModel.kt": "e4396ed214e9aded9f273c62d37d0a90256a94942fff76bd6ca2cf1ce38c606f",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/commons/presentation/viewmodel/UserSettingsViewModel.kt": "f79cb73ef5635daf9e07f2532cd0c1ee483f90676bb029590e834a69eb74cc08",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_chordtable/data/ChordTableRepositoryImpl.kt": "df1f22319f3b3dca058deb3847797b1352e64e4e625558f15c0be8375fae5e68",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_chordtable/di/ChordTableModule.kt": "6373670327c53b5f76aec8282df2d43b930653168251f4d8ebdda56e7a74f791",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_chordtable/domain/ChordTableRepository.kt": "dc60f2ca1301fe35176359f6753b5af67aad7de62345a4c0c9959c80deacafcc",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_chordtable/presentation/state/ChordTableUIState.kt": "47ff1b684a6cafda744efab8f902b26fdc77ec25027bc5925b86e1f3071cdfaf",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_chordtable/presentation/ui/ChordTableScreen.kt": "92878ae546195bd6e29521453a032e9d8fbb6e29dc66308575afcbbd9b7cbf80",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_chordtable/presentation/viewmodel/ChordTableViewModel.kt": "1221b15ae3162967abaf5ab219dfaf4b7b41d580673e3cfd30f80310e918173e",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/data/MetronomeRepositoryImpl.kt": "0fafb6b1005be8d24f354e4e149d6ed79fe3e6ed7f4e62705e44c2f488336843",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/data/service/MetronomeService.kt": "d56924eb07ad06bcd43e0b310931934f478578843eaeef684cc50c7beee7b787",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/di/MetronomeModule.kt": "a2b9fcac763ba227bbaa663c83beb3970fb404d64ef53753e6167b82a0aa597a",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/domain/Beat.kt": "7516d99a5dd1fd2f4ea436a03b583ffbe03cb42c6c5338c5961f8c12d151f0e6",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/domain/MetronomeRepository.kt": "a57078939f44bf2b2891348a0567f69579533ff5e5b6965ae45c46ade5cb0f82",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/domain/MetronomeState.kt": "9265def3609ea5830b024b3ee54798b1381f081f86da182ab3627e298f81a9b2",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/domain/Rhythm.kt": "1fa50ae7967a38c98befa9b59de05f9cebef7e477316fcdd1d8fccce95384c80",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/presentation/ui/MetronomeScreen.kt": "9b59f7a90e04247cb50333ab6b2d717a6b06e7ae19c00665c155cb3c643d48a6",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_metronome/presentation/viewmodel/MetronomeViewModel.kt": "d4a17f6035f145b546bcba5bb12e6be8f7d841440c3b069459b180600e0d51eb",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_sgc/data/SGCRepositoryImpl.kt": "85d27ab0fad3fb51063cef5cabb63556bf3096f23ef4afbb701174461f156d41",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_sgc/di/SGCModule.kt": "ed68dd04fdbf1ca8e607e5f5f71ece20635f45d6470d003d93fff4a27ce017c3",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_sgc/domain/SGCRepository.kt": "3be2dc8652cba30ad3eb2a985a6f1ee3efeaec15da13edc30d3aeaca4b79b031",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_sgc/domain/usecase/CalculateStringGaugeUseCase.kt": "be1706fbe3ef251f353de432f39d125864d707e4cb194d61bb8b98ee65f08db7",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_sgc/presentation/ui/SGCScreen.kt": "b5eb10636ef21781465f42b441132ee37ef22bce952302cb0c899ad5358bc26f",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_sgc/presentation/viewmodel/SGCViewModel.kt": "bf56665cb68ae97c38f0a881d77f0ac8f4964c1d07526760f714e363d4279687",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/data/ButtonGenerationRepositoryImpl.kt": "234381200c8e532128c232378fb677daea34c9748d634807c8b668ed9886bb14",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/data/PitchDetectionRepositoryImpl.kt": "955a00e7a54bad29e5326e99c26b71fda37a5c24508dc2e9d976db3f759f58f7",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/data/PitchGenerationRepositoryImpl.kt": "c143fc155d374046cddeba4c5df9fd76ac964a300a19eebcb60a5f87bf72a363",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/di/TunerModule.kt": "da967b8e67f658a4b9c72d469c9929e994b43238d01ad9f2d6e3846e1f651c91",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/domain/ButtonGenerationRepository.kt": "999ed8064112a7a7bbf731f1172764c961661ded309b3bcf3e15e3d677337028",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/domain/PitchDetectionRepository.kt": "4a2ecb6b428b9098eb9ac8c9db68bdda1aa58a991ba7d9e3c6764a73a7ac7715",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/domain/PitchGenerationRepository.kt": "6f61f5010b634b351b25ad37b4a547b430191a5136afda100edf74fdcba381a4",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/presentation/state/PitchButtonsUIState.kt": "ef269690366ce57d1a48e54427fd5603469df600da33a4835e0bd51ee8cafa7d",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/presentation/ui/TunerScreen.kt": "df0b809914bc1f33b4426c4a39c35a05f1e19ae5ac2cfff64c5d4598b9ed798e",
+    "app/src/main/java/com/ihegyi/alexiguitartuner/feat_tuner/presentation/viewmodel/TunerViewModel.kt": "aba4cd052b5cf64d5b63d2c2314cf5bd34fca429ea5d2fc35855e9cd1964b73e",
+    "app/src/main/res/drawable-v24/ic_baseline_add_24.xml": "9c8a68ec600f42ceec11361e980c96011b72e2a1265789fd1ab1db8760cc9c8a",
+    "app/src/main/res/drawable-v24/ic_baseline_play_arrow_24.xml": "017d1d3146fbc930daa3d8cc0be7f1a3dd8de35626337c4638e58e8784a3e016",
+    "app/src/main/res/drawable-v24/ic_baseline_plus_one_24.xml": "eadfd2e6262fafa468fbc9ed8f81890522f3e4ce55e628d7dc62b945470405da",
+    "app/src/main/res/drawable-v24/ic_baseline_remove_24.xml": "0f1c0e8a199ed53adff0063fad794bbdb2bcfd896c3135cfaf1071a153d460f2",
+    "app/src/main/res/drawable-v24/ic_baseline_stop_24.xml": "45b31464abe1251a91fe4a15fce7d875fc46e38c01483466da47143c308704a3",
+    "app/src/main/res/drawable-v24/ic_eighth_note.xml": "fc197dd2349c2a9471b08871ea24a30181353727d2157b26491e89898ef79ae5",
+    "app/src/main/res/drawable-v24/ic_launcher_foreground.xml": "6e3c1bb64d9bec079cf0030d867c58b064d2fb19ca6c5a691543c43134f64a2a",
+    "app/src/main/res/drawable-v24/ic_notes_background.xml": "d3f3f01774eafbdaf61997a9b1b8bcc3c359e917cc92dda78c8ea59d88fc966d",
+    "app/src/main/res/drawable-v24/ic_quarter_note.xml": "6385085ac49aa7e426b3a56b45f5d182efcd29bc348fd0ca946c004ffe7a68c2",
+    "app/src/main/res/drawable-v24/ic_sixteenth_note.xml": "f1624a813921e1ab4ddd9a413c25e348b9e4b772f80fb7f4742043bdd085484d",
+    "app/src/main/res/drawable/background_et.xml": "ca7277cd3c507432794857145b374b059da90f9ff0f990067563fa8820dc5432",
+    "app/src/main/res/drawable/baseline_keyboard_arrow_left_24.xml": "0f6c4da9df221d8317f690d50a1bbd56eec0eebd5619180d069a1a2cde036019",
+    "app/src/main/res/drawable/baseline_keyboard_arrow_right_24.xml": "2af22bdfbb416e90d90ce37257d814808643eacf877b08d2f4d4c038811f55ee",
+    "app/src/main/res/drawable/baseline_update_24.xml": "f83453f21ea7848a9a716a19cbda2f9f514192990fcc4220cfab606059fac953",
+    "app/src/main/res/drawable/ic_baseline_calculate_24.xml": "63f072a36854e9541a7d7b5b1020b53a483cdbfa4eba56a84e8094af14aafa51",
+    "app/src/main/res/drawable/ic_baseline_delete_outline_24.xml": "2e58f8bb43a2e5a63013ccb3f97d1c871022ec39752b3ce17145092f20c28363",
+    "app/src/main/res/drawable/ic_baseline_music_note_24.xml": "38e3d9aaf6479048ba7f8c6623345ed6148f9c7843036f2fc8699d363a034bc7",
+    "app/src/main/res/drawable/ic_baseline_question_mark_24.xml": "edf80627ec022fca47e180fe52e589a0e919f506899d9f0af55f77bea00edd2a",
+    "app/src/main/res/drawable/ic_baseline_queue_music_24.xml": "4fa36d6e9228bd49f0a56253397614382ad9014586e6e5dbd1cdfa7d2f19c6d9",
+    "app/src/main/res/drawable/ic_baseline_save_24.xml": "8ba7f43d99d66116ab107a25ff393f14e4b71ba76e702c53a0d56c5d957c9833",
+    "app/src/main/res/drawable/ic_baseline_settings_24.xml": "d3dfc644d2883a741a6676b3928b4d7b92ea93f0cb8db1122f39b0e2cc763634",
+    "app/src/main/res/drawable/ic_baseline_speed_24.xml": "3ae0b4f480efdf51ed524e52666e36cdd84ca8cdda4dc36714a5301c7a453b40",
+    "app/src/main/res/drawable/ic_launcher_background.xml": "e32765639e1658427cb9821350571c37859d8a8f0a9d12c0d8f7c15913a20a93",
+    "app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml": "56e8f06fa62f9bcffbd4a5e2c594fc3926f07f3a5ecdba746a1c4fdf5d805a74",
+    "app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml": "56e8f06fa62f9bcffbd4a5e2c594fc3926f07f3a5ecdba746a1c4fdf5d805a74",
+    "app/src/main/res/mipmap-hdpi/ic_launcher.webp": "5b799ada2e14313aa41809e10a21bc7b3557d33b41b15b85b3d24c9d52f11d35",
+    "app/src/main/res/mipmap-hdpi/ic_launcher_logo.webp": "0a488d6f1c6199834ac64de1809347197aab70235c8d1982391085204b6a3ff1",
+    "app/src/main/res/mipmap-hdpi/ic_launcher_round.webp": "7270e604af478bfbf0318309efa485d32c2b078f52219f6d5e27f0330ad29630",
+    "app/src/main/res/mipmap-mdpi/ic_launcher.webp": "43c3fc1994d0a7d7d3855173a8f068054c1cb5f72623a2c51c37b4433c03141b",
+    "app/src/main/res/mipmap-mdpi/ic_launcher_logo.webp": "76ed8658fc115add11859058046f16ebfe43f2f529c8af39614e8aed3f9a5782",
+    "app/src/main/res/mipmap-mdpi/ic_launcher_round.webp": "578adc82b564e8b78f0bcb582f7ffa2917d1fd814614f9514195b4f3de3a115a",
+    "app/src/main/res/mipmap-xhdpi/ic_launcher.webp": "c142166ab13a48348c766ff4df8171b65d0e0225aa11f784335e28d778c2b1a6",
+    "app/src/main/res/mipmap-xhdpi/ic_launcher_logo.webp": "9fab26118ff889375888d5d63adc86d74cf9033cada4e1f5461f2b55853557df",
+    "app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp": "e8c261fb44e307bd67f6e9418ce9c1f98cd842cff1b4642d80d13b74e3e26883",
+    "app/src/main/res/mipmap-xxhdpi/ic_launcher.webp": "5ba81b1c0f561c33d36a54e19f8856bb376707983d044d18f768b1746979a8fa",
+    "app/src/main/res/mipmap-xxhdpi/ic_launcher_logo.webp": "acf9a026d4c08e98c2a5573f4ff99ae16d7b07c54380802001fd6f42c36eec5c",
+    "app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp": "458a75670d1643c994eea12021b3972d52b946a7844fdffaa762004c3db783a4",
+    "app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp": "32274179c1451a26a50ef2450adc27039efd7b75582c7450b2310088faf31fb1",
+    "app/src/main/res/mipmap-xxxhdpi/ic_launcher_logo.webp": "272fb5ae79d66c521181462ff5a62ad6ba72e21eae7d22907cb1701883e392c5",
+    "app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp": "42ea35b45d79dc3151dc7bd694ea3519b7ad378fa1fc849779b698b80391b873",
+    "app/src/main/res/navigation/bottom_nav.xml": "f2ee9b2b614becdf1ddf2915e5812a892850e73cffe0a513588c07aedd0d7d83",
+    "app/src/main/res/values-night/themes.xml": "ea1d10a92481dcfda6faae67414e4539965d7bcc4107acc376998d03528446ba",
+    "app/src/main/res/values/arrays.xml": "cd023f622967d844e4a41a5aec80fe35de2fce007059a7d29c556e2bb29350d3",
+    "app/src/main/res/values/colors.xml": "9896ef66451b18b466a371f978aef6c8b17013ae784113fff0338a199e03aaee",
+    "app/src/main/res/values/strings.xml": "852991d61b8f362dd30774376f64f236e42403d129f118c7b4fd221bbe2912a5",
+    "app/src/main/res/values/themes.xml": "335f6200c4d10f96d2029b9ac54626d47aa50d2073554a46c7d1ba32d6338be8",
+    "app/src/main/res/xml/backup_rules.xml": "cc110438452433dcf8c2c03608945c7f1138528737844f4a62570175fa42c606",
+    "app/src/main/res/xml/data_extraction_rules.xml": "940f48fb2ba4d9ec5a55671126796fefa71661c0a5d7b434dc1e9be23da41690",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/commons/data/fakes/FakeUserSettingsRepository.kt": "95f7782417021b9f631cb6ace7b54e9fdc101bba9e2773f6ff02dc4b175a1175",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/commons/presentation/viewmodel/CreateTuningViewModelTest.kt": "872c60b70497724ba09f53efbe0bafde6d30bf8f544284ba362d7d08a811164e",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/commons/presentation/viewmodel/SelectTuningViewModelTest.kt": "1db625e2c3a99c19ed4350eadb77440a4028c335e1657d868f1f7ae8df8d5355",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/commons/presentation/viewmodel/UserSettingsViewModelTest.kt": "29f3830649bd70a0259e13be82fef8273531d65eb41799dbcc1da0b1c289cb68",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_chordtable/data/fakes/FakeChordTableRepository.kt": "c34f3febfc544196b494b98131e9d100fbd4aa52c05f3f5d54ae3573d5383715",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_chordtable/presentation/viewmodel/ChordTableViewModelTest.kt": "0f3870b11b442eaad6df29736aa560fb48cc2e174a5b49aad466a4b3519187a9",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_metronome/data/fakes/FakeMetronomeRepository.kt": "8af79271a6764b933d45cc4d34308ffcf4bcd98568021278dcd473f41939975b",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_metronome/presentation/viewmodel/MetronomeViewModelTest.kt": "7f24bd98ecc76397fea8855584ae74814104e29bd654f551d0c43501449d6ae5",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_sgc/data/fakes/FakeSGCRepository.kt": "9e51ad5162e9b72d5b6abc3bdc421d81dab2fb76909a19f9db378fedeace1201",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_sgc/presentation/viewmodel/SGCViewModelTest.kt": "6d5fef30bb05ffc9660db6c6c2b025bbb5deb8a77df61f31af70655c7a6ae6ac",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_tuner/data/PitchDetectionRepositoryTest.kt": "dfc6cda589372ba2a832f40eb5d66f5cc5885a15422a71f89a28916247954040",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_tuner/data/fakes/FakeButtonGenerationRepository.kt": "d2f52f69345c2901b8f1481a3beb6c01edc6d2a6bf4c8365443bb6fd32502f5e",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_tuner/data/fakes/FakePitchDetectionRepository.kt": "bff78749b2248484bc8d0aaf04caafcee678a1907de34fce81d3d4fc28b60968",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_tuner/data/fakes/FakePitchGenerationRepository.kt": "c580646162f34ef10df8e6be3b338567692bed68929494a72fe49743cda5e9b4",
+    "app/src/test/java/com/ihegyi/alexiguitartuner/feat_tuner/presentation/viewmodel/TunerViewModelTest.kt": "41c0379e4052f3dc94eca404612165dfe18019e535362b94eb8ad51cecb72b55",
+    "build.gradle": "6cfeed6fc099a3c898ffab40b77624a0699521fa134ddef2f3f6eef206123bb6",
+    "gradle.properties": "6be638c3a197ef32778e965a1bba05b7bb06fd5adc30752ba55b02724bb56e25",
+    "gradle/wrapper/gradle-wrapper.jar": "e996d452d2645e70c01c11143ca2d3742734a28da2bf61f25c82bdc288c9e637",
+    "gradle/wrapper/gradle-wrapper.properties": "7737209507197c61a5a3848474f541fbe5ec295a69ad2e4108ad077bd4cad507",
+    "gradlew": "c15a47b60a4eeede9ffee33433fd990d8b6236607372b9bb1f6dc51b07b78c39",
+    "gradlew.bat": "af835f98787e9269af5a046edcb821a592fed372139df7b947b471a63cfc236b",
+    "settings.gradle": "2a2767a54cfb7c66e9c2920058abf568e6aaca1c5f45cf9b6b3de574c74fd3a1"
+  },
+  "instruction_documents_sha256_at_start": {
+    "AGENTS.md": "219c7565d553a88fd3f92e8edc46110b89cf09e709a65747bbbc31ffdfa721e3",
+    ".codex/AGENTS.md": "2a46af39b231a5fbc4eb735b9c5d166e95dfc1f7f6025a8c997424ba0c00d1be",
+    ".codex/requirements.md": "f586a67290c0a8723e7b82d60d951c37e5a42e3c3452198b99bbccce0bc24168",
+    ".codex/tasks.md": "4a99f28d3d3c3b96812a97645840952857ce4338c0e0ddc03a244d9dd758fe2e",
+    ".codex/COMPOSE_MIGRATION.md": "d167024d3b5254768f5371d6255494fe479a28fa4040d5199a96805580561532"
+  },
+  "asset_unchanged_by_inspection": true
+}

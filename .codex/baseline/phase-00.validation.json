@@ -1,0 +1,164 @@
+{
+  "recorded_at_utc": "2026-10-25T19:24:33+00:00",
+  "user_date": "2026-10-25",
+  "commands": [
+    ".\\gradlew.bat --version",
+    ".\\gradlew.bat :app:testDebugUnitTest :app:lintDebug --offline --rerun-tasks --console=plain"
+  ],
+  "build": {
+    "exit_code": 0,
+    "result": "BUILD SUCCESSFUL",
+    "duration": "2m 2s",
+    "actionable_tasks_executed": 41,
+    "forced_rerun": true,
+    "offline": true
+  },
+  "environment": {
+    "os": "Windows 11 amd64",
+    "jdk": "JetBrains JBR 17.0.14+1-b1367.22",
+    "gradle": "9.3.1",
+    "gradle_embedded_kotlin": "2.2.21",
+    "configured_agp": "9.1.1",
+    "configured_compose_compiler_plugin": "2.2.10",
+    "configured_ksp": "2.3.12",
+    "compile_sdk": "37.0",
+    "target_sdk": 35,
+    "min_sdk": 28
+  },
+  "unit": {
+    "tests": 39,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "name": "com.ihegyi.alexiguitartuner.commons.presentation.viewmodel.CreateTuningViewModelTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp_utc": "2026-10-25T19:21:43.432Z",
+        "xml_report": "app/build/test-results/testDebugUnitTest/TEST-com.ihegyi.alexiguitartuner.commons.presentation.viewmodel.CreateTuningViewModelTest.xml",
+        "report_sha256": "1c27ff17d040bf9bd5761311855345390f42b83a690337a13632f4e5be340c49"
+      },
+      {
+        "name": "com.ihegyi.alexiguitartuner.commons.presentation.viewmodel.SelectTuningViewModelTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp_utc": "2026-10-25T19:21:44.058Z",
+        "xml_report": "app/build/test-results/testDebugUnitTest/TEST-com.ihegyi.alexiguitartuner.commons.presentation.viewmodel.SelectTuningViewModelTest.xml",
+        "report_sha256": "271b6e6bd9cf2299f9e63d49b2f60fab8c249d24c4ee5cb98cbaf2cd6271d10c"
+      },
+      {
+        "name": "com.ihegyi.alexiguitartuner.commons.presentation.viewmodel.UserSettingsViewModelTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp_utc": "2026-10-25T19:21:44.097Z",
+        "xml_report": "app/build/test-results/testDebugUnitTest/TEST-com.ihegyi.alexiguitartuner.commons.presentation.viewmodel.UserSettingsViewModelTest.xml",
+        "report_sha256": "1e805d8ec759ae27b7d70d4282c5bb2e71e2b7c979447167956cebea5ff7b806"
+      },
+      {
+        "name": "com.ihegyi.alexiguitartuner.feat_chordtable.presentation.viewmodel.ChordTableViewModelTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp_utc": "2026-10-25T19:21:44.166Z",
+        "xml_report": "app/build/test-results/testDebugUnitTest/TEST-com.ihegyi.alexiguitartuner.feat_chordtable.presentation.viewmodel.ChordTableViewModelTest.xml",
+        "report_sha256": "d47c40cf48a32af6a891f4f7528060e0aa00ad26b8ac1230d36c70164abf2520"
+      },
+      {
+        "name": "com.ihegyi.alexiguitartuner.feat_metronome.presentation.viewmodel.MetronomeViewModelTest",
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp_utc": "2026-10-25T19:21:44.219Z",
+        "xml_report": "app/build/test-results/testDebugUnitTest/TEST-com.ihegyi.alexiguitartuner.feat_metronome.presentation.viewmodel.MetronomeViewModelTest.xml",
+        "report_sha256": "b2eaa58db7efffa16544bdac6e4c912531672ade85a5688e855c62c8373db8f3"
+      },
+      {
+        "name": "com.ihegyi.alexiguitartuner.feat_sgc.presentation.viewmodel.SGCViewModelTest",
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp_utc": "2026-10-25T19:21:44.265Z",
+        "xml_report": "app/build/test-results/testDebugUnitTest/TEST-com.ihegyi.alexiguitartuner.feat_sgc.presentation.viewmodel.SGCViewModelTest.xml",
+        "report_sha256": "7257646cc924bfc3e79a96f5c75ca57e14eea5df803c6a8abed4365de98b95fe"
+      },
+      {
+        "name": "com.ihegyi.alexiguitartuner.feat_tuner.data.PitchDetectionRepositoryTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp_utc": "2026-10-25T19:21:44.390Z",
+        "xml_report": "app/build/test-results/testDebugUnitTest/TEST-com.ihegyi.alexiguitartuner.feat_tuner.data.PitchDetectionRepositoryTest.xml",
+        "report_sha256": "8047dc992c7ad860dac7a60698ec51fa80cf531ac652a664956542f601b0bdf4"
+      },
+      {
+        "name": "com.ihegyi.alexiguitartuner.feat_tuner.presentation.viewmodel.TunerViewModelTest",
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp_utc": "2026-10-25T19:21:44.416Z",
+        "xml_report": "app/build/test-results/testDebugUnitTest/TEST-com.ihegyi.alexiguitartuner.feat_tuner.presentation.viewmodel.TunerViewModelTest.xml",
+        "report_sha256": "dda62e92ee1df4d80bd482cdf5041dbed25255f768f4dadc95635626bfd5ae50"
+      }
+    ],
+    "html_report": "app/build/reports/tests/testDebugUnitTest/index.html"
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 61,
+    "by_id": {
+      "DefaultLocale": 1,
+      "GradleDependency": 5,
+      "MonochromeLauncherIcon": 2,
+      "NewerVersionAvailable": 8,
+      "ObsoleteSdkInt": 2,
+      "OldTargetApi": 1,
+      "UnusedResources": 42
+    },
+    "xml_report": "app/build/reports/lint-results-debug.xml",
+    "xml_report_sha256": "2bbf3641b8f7f55bf01aec2f62ac7dd2a0857fd023fd88af898e8e474aae06b9",
+    "html_report": "app/build/reports/lint-results-debug.html"
+  },
+  "comparison_to_analysis": {
+    "unit_tests_delta": 0,
+    "lint_warnings_delta": 0,
+    "explanation": "Same 39 successful unit tests and 61 lint warnings; no source/build configuration changes."
+  },
+  "existing_non_lint_build_warnings": [
+    "Room QUERY_MISMATCH in both PitchDAO joins",
+    "Deprecated fallbackToDestructiveMigration() overload",
+    "Deprecated Gradle features incompatible with Gradle 10"
+  ],
+  "not_run": [
+    "assembleDebug as a standalone APK task",
+    "connectedDebugAndroidTest",
+    "physical device audio measurements",
+    "new production regression tests from later phases"
+  ],
+  "normalised_gradle_log": "phase-00-gradle.log",
+  "normalised_gradle_log_sha256": "e7eda286272d3420b52d3bdfa6ccce86aaa4da608dc650813501564233489afb",
+  "phase_00_completion": {
+    "checked_at_utc": "2026-10-25T19:28:44+00:00",
+    "protected_files_verified": 158,
+    "protected_files_changed": [],
+    "asset_sha256_unchanged": true,
+    "regression_cases_recorded": 7,
+    "audio_risk_scenarios_recorded": 4,
+    "audio_risk_scenarios_executed": 0,
+    "local_links_checked_before_task_update": 35,
+    "application_source_or_build_configuration_changed": false,
+    "room_schema_export_created": false,
+    "migration_fixture_created": false
+  }
+}

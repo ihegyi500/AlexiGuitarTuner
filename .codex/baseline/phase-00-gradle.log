@@ -1,0 +1,85 @@
+
+------------------------------------------------------------
+Gradle 9.3.1
+------------------------------------------------------------
+
+Build time:    2026-01-29 14:15:01 UTC
+Revision:      44f4e8d3122ee6e7cbf5a248d7e20b4ca666bda3
+
+Kotlin:        2.2.21
+Groovy:        4.0.29
+Ant:           Apache Ant(TM) version 1.10.15 compiled on August 25 2024
+Launcher JVM:  17.0.14 (JetBrains s.r.o. 17.0.14+1-b1367.22)
+Daemon JVM:    <JDK17> (no Daemon JVM specified, using current Java home)
+OS:            Windows 11 10.0 amd64
+
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:processDebugNavigationResources
+> Task :app:parseDebugLocalResources
+> Task :app:mapDebugSourceSetPaths
+> Task :app:checkDebugAarMetadata
+> Task :app:javaPreCompileDebug
+> Task :app:generateDebugRFile
+> Task :app:compileDebugNavigationResources
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:extractProguardFiles
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+
+> Task :app:kspDebugKotlin
+w: [ksp] <WORKSPACE>/app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/PitchDAO.kt:23: The query returns some columns [tuningId] which are not used by com.ihegyi.alexiguitartuner.commons.domain.entities.Pitch. You can use @ColumnInfo annotation on the properties to specify the mapping. You can annotate the function with @RewriteQueriesToDropUnusedColumns to direct Room to rewrite your query to avoid fetching unused columns.  You can suppress this warning by annotating the function with @SuppressWarnings(RoomWarnings.QUERY_MISMATCH). Columns returned by the query: frequency, name, tuningId, frequency.
+w: [ksp] <WORKSPACE>/app/src/main/java/com/ihegyi/alexiguitartuner/commons/data/db/dao/PitchDAO.kt:27: The query returns some columns [tuningId, id, tuningId, useSharp, useEnglish] which are not used by com.ihegyi.alexiguitartuner.commons.domain.entities.Pitch. You can use @ColumnInfo annotation on the properties to specify the mapping. You can annotate the function with @RewriteQueriesToDropUnusedColumns to direct Room to rewrite your query to avoid fetching unused columns.  You can suppress this warning by annotating the function with @SuppressWarnings(RoomWarnings.QUERY_MISMATCH). Columns returned by the query: frequency, name, tuningId, frequency, id, tuningId, useSharp, useEnglish.
+
+> Task :app:compileDebugKotlin
+w: file:///<WORKSPACE>/app/src/main/java/com/ihegyi/alexiguitartuner/commons/di/DatabaseModule.kt:23:11 'fun fallbackToDestructiveMigration(): RoomDatabase.Builder<AppDatabase>' is deprecated. Replace by overloaded version with parameter to indicate if all tables should be dropped or not.
+
+> Task :app:compileDebugJavaWithJavac
+> Task :app:hiltCollectClassesDebug
+> Task :app:hiltAggregateDepsDebug
+> Task :app:processDebugJavaRes
+> Task :app:hiltJavaCompileDebug
+> Task :app:generateDebugLintReportModel
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:kspDebugUnitTestKotlin
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:transformDebugClassesWithAsm
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:hiltCollectClassesDebugUnitTest
+> Task :app:hiltAggregateDepsDebugUnitTest
+> Task :app:hiltJavaCompileDebugUnitTest NO-SOURCE
+> Task :app:transformDebugUnitTestClassesWithAsm
+> Task :app:testDebugUnitTest
+> Task :app:lintAnalyzeDebug
+> Task :app:lintAnalyzeDebugAndroidTest
+> Task :app:lintAnalyzeDebugUnitTest
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///<WORKSPACE>/app/build/reports/lint-results-debug.html
+
+> Task :app:lintDebug
+
+[Incubating] Problems report is available at: file:///<WORKSPACE>/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 2m 2s
+41 actionable tasks: 41 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html

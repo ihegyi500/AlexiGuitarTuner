@@ -1,6 +1,6 @@
 # AlexiGuitarTuner – lépésenkénti hibajavítási terv
 
-Dátum: 2026-10-25. Állapot: megtervezve, az implementáció még nem kezdődött el.
+Dátum: 2026-10-25. Állapot: a 00. előkészítő fázis teljesítve; a 01–11. fázis még nem kezdődött el.
 
 A feladatok a [requirements.md](requirements.md) követelményeit hajtják végre. Minden implementációs lépés kezdetben `- [ ]`; csak elkészült és a leírt módon ellenőrzött lépés állítható `- [x]` állapotúra. Sikertelen vagy eszköz hiányában nem futtatott ellenőrzés maradjon üres. A feladat mellé rövid eredmény/hivatkozás írható; a részletes futási adatok a dokumentum végén rögzíthetők.
 
@@ -19,11 +19,11 @@ A feladatok a [requirements.md](requirements.md) követelményeit hajtják végr
 
 Követelmények: REQ-01–REQ-10. Ezt a fázist az implementáció elején kell végrehajtani; a dokumentumok létrehozása önmagában nem teljesíti.
 
-- [ ] T00.01 – Olvasd el a gyökér `AGENTS.md` fájlt, majd a `.codex/AGENTS.md`, `requirements.md`, `tasks.md` és `COMPOSE_MIGRATION.md` dokumentumokat; ellenőrizd a munkafa állapotát és őrizd meg az esetleges felhasználói változtatásokat.
-- [ ] T00.02 – Ellenőrizd a JDK 17, Android SDK és Gradle wrapper használhatóságát; egyszer futtasd az aktuális unit/lint alapellenőrzést és rögzítsd a tényleges eredményt. Hasonlítsd a követelményekben szereplő 39 tesztes/61 lintfigyelmeztetéses analízisállapothoz, az eltéréseket magyarázd meg.
-- [ ] T00.03 – Készíts regressziós esetlistát a frekvenciakétszerezésről, a 120 BPM/negyed és 200 BPM/tizenhatod időzítéséről, a hat azonos hangú húrról, a sorrendről, a dialógus újranyitásáról és a vesszős számbevitelről.
-- [ ] T00.04 – Az audio-életciklus kockázatait külön reprodukciós feladatként rögzítsd: gyors start/stop, indítás közbeni kilépés, engedélyvesztés és szolgáltatásleállítás. Ne állítsd, hogy eszközön már igazolt hibák, amíg nincs ilyen eredmény.
-- [ ] T00.05 – Rögzítsd az adatbázis v1 verzióját, az asset rekorddarabszámait és a megőrzendő adatok körét. A séma/export/fixture létrehozása előtt ne módosíts adatbázis-entitást vagy assetet.
+- [x] T00.01 – Olvasd el a gyökér `AGENTS.md` fájlt, majd a `.codex/AGENTS.md`, `requirements.md`, `tasks.md` és `COMPOSE_MIGRATION.md` dokumentumokat; ellenőrizd a munkafa állapotát és őrizd meg az esetleges felhasználói változtatásokat.
+- [x] T00.02 – Ellenőrizd a JDK 17, Android SDK és Gradle wrapper használhatóságát; egyszer futtasd az aktuális unit/lint alapellenőrzést és rögzítsd a tényleges eredményt. Hasonlítsd a követelményekben szereplő 39 tesztes/61 lintfigyelmeztetéses analízisállapothoz, az eltéréseket magyarázd meg.
+- [x] T00.03 – Készíts regressziós esetlistát a frekvenciakétszerezésről, a 120 BPM/negyed és 200 BPM/tizenhatod időzítéséről, a hat azonos hangú húrról, a sorrendről, a dialógus újranyitásáról és a vesszős számbevitelről.
+- [x] T00.04 – Az audio-életciklus kockázatait külön reprodukciós feladatként rögzítsd: gyors start/stop, indítás közbeni kilépés, engedélyvesztés és szolgáltatásleállítás. Ne állítsd, hogy eszközön már igazolt hibák, amíg nincs ilyen eredmény.
+- [x] T00.05 – Rögzítsd az adatbázis v1 verzióját, az asset rekorddarabszámait és a megőrzendő adatok körét. A séma/export/fixture létrehozása előtt ne módosíts adatbázis-entitást vagy assetet.
 
 ## 01 – Az éles logika teszteléséhez szükséges alapok
 
@@ -178,6 +178,15 @@ Követelmények: REQ-01–REQ-10. Függőség: a 00–10. fázis szükséges jav
 
 ## Eredménynapló
 
-Implementációs eredmény még nincs. Az analízis kiindulási futásai a requirements.md elején szerepelnek; nem helyettesítik a javítások utáni ellenőrzést.
+A 00. előkészítő fázis 2026-10-25-én teljesült; alkalmazáskód, buildkonfiguráció és adatbázisasset nem változott. A későbbi javítások ellenőrzése továbbra is külön feladat.
 
 Minden tényleges ellenőrzéshez rögzítendő: dátum, feladatazonosító, parancs vagy mérési módszer, környezet/eszköz/API/locale, eredmény, riport útvonala és esetleges korlát. Környezeti hiba vagy hiányzó eszköz esetén az érintett feladat maradjon nyitott.
+
+### 2026-10-25 – 00. fázis lezárása
+
+- Teljesítve: T00.01–T00.05. Részletes eredmények és reprodukciós esetek: [00. fázis jegyzőkönyve](baseline/phase-00.md).
+- Alapcommit: `6f2d206ae0e6229babfa15830e34db0568550043`; a kezdő munkafa tiszta volt. A dokumentumok elolvasása és a 158 védett projektfájl változatlansága ellenőrizve.
+- Parancs: `.\gradlew.bat :app:testDebugUnitTest :app:lintDebug --offline --rerun-tasks --console=plain`; sikeres, 39 unit teszt, 0 hiba/kihagyás; lint 0 hiba, 61 figyelmeztetés. A korábbi analízishez képest nincs darabszámeltérés. [Futási napló](baseline/phase-00-gradle.log), [eredményadatok](baseline/phase-00.validation.json).
+- Hét regressziós eset és négy még végrehajtandó audio-életciklus reprodukciós forgatókönyv rögzítve. A két adatmodellezési hiba memóriabeli SQL-másolaton újra ellenőrizve; fizikai hangmérés és új regressziós teszt nem futott.
+- Adatbázis v1, integritásellenőrzés rendben; rekorddarabszámok, SQL-leltár, megőrzendő adatok és SHA-256 értékek: [kiindulási snapshot](baseline/phase-00.snapshot.json). Room-sémaexport, migrációs fixture és sémamódosítás még nem készült; ezek a 04. fázis feladatai.
+- `connectedDebugAndroidTest` nem futott; a későbbi eszközös ellenőrzések és a 01–11. fázis minden lépése nyitva maradt.
